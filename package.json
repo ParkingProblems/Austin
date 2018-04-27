@@ -1,0 +1,19 @@
+{
+  "name": "austin",
+  "version": "1.0.0",
+  "description": "Team TBD 1.00 Final Project",
+  "main": "ParseParkingData.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParkingProblems/Austin.git"
+  },
+  "author": "Jocelyn Lorrey, Deanna Delgado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ParkingProblems/Austin/issues"
+  },
+  "homepage": "https://github.com/ParkingProblems/Austin#readme"
+}
