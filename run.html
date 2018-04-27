@@ -5,29 +5,29 @@ Objective: interact w/database (in this case, display data in an html page)
  -->
 <!DOCTYPE html>
 <html>
-<!-- <head>
+<head>
 
 <style> 
 body {
-	animation: colorchange 20s infinite;
+	animation: colorchange 15s infinite;
 }
 @keyframes colorchange
 {
-	0%   {background: maroon;}
-	10%  {background: red;}
-	20%  {background: orange;}
+	0%   {background: aqua;}
+	10%  {background: cyan;}
+	20%  {background: lightcyan;}
 	30%  {background: yellow;}
 	40% {background: green;}
 	50%   {background: teal;}
-	60%  {background: blue;}
+	60%  {background: turquoise;}
 	70%  {background: aqua;}
-	80%  {background: fuchsia;}
+	80%  {background: cadetblue;}
 	90%  {background: purple;}
-	100% {background: maroon;}
+	100% {background: aqua;}
 }
 </style>
 
-</head> -->
+</head>
 
 <body>
 
@@ -45,7 +45,7 @@ function loadDoc1() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("Acessing Data").innerHTML = this.responseText;
+			document.getElementById("Parsing Data").innerHTML = this.responseText;
 		}
 	};
 	xhttp.open("GET", "https://data.austintexas.gov/resource/t6bu-kybx.json", true);
@@ -57,15 +57,13 @@ function loadDoc2() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("Acessing Data").innerHTML = this.responseText;
+			document.getElementById("Parsing Data").innerHTML = this.responseText;
 		}
 	};
 	xhttp.open("GET", "https://data.austintexas.gov/resource/y5cf-fbh5.json", true);
 	xhttp.send();
 }
 </script>
-
-<br>
 <br>
 
 <div id="Parsing Data">
@@ -80,29 +78,21 @@ function loadDoc3() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			// document.getElementById("Acessing Data").innerHTML = this.responseText;
-			var austin15_data = [this.responseText];
-			
-			// console.log(austin15_data);
-			console.log(typeof austin15_data);
-			console.log(austin15_data.length);
-			
-			
-			// var dummy_data = [{"offense_case_type": "PK", "date": "Jan 2017"},
-			// 				  {"offense_case_type": "TR", "date": "April 2017"},
-			// 				  {"offense_case_type": "PK", "date": "Nov 2017"}];
-			var i = 0;
-			[austin15_data].forEach(function(violation) {
-				console.log("Violation "+i+": "+violation);
-				i++;
+			var austin15_data = eval(this.responseText);
 
+			var i = 0;
+			var parking15_violations = [];
+			austin15_data.forEach(function(violation) {
+				if (violation.offense_case_type==="PK"){ 
+					console.log("Parking violation "+i+": "+ violation.offense_charge_description);
+					console.log(violation.offense_cross_street, violation.offense_street_name);
+					// parking15_violations.push(["Parking Violation "+i+": "+violation.offense_charge_description+" ("+ violation.offense_cross_street+
+					// 	+violation.offense_street_name+")"]);
+					i++;
+				}
 			});
-			console.log(i);
-			// austin15_data.forEach(function(violation){
-			// 	if (violation.offense_case_type==="PK"){
-			// 		console.log(violation);
-			// 	}
-			// });
+			document.getElementById("2015 data goes here").innerHTML = "Total 2015 Parking Violations: "+String(i);
+			console.log(parking15_violations);
 		}
 	};
 	xhttp.open("GET", "https://data.austintexas.gov/resource/t6bu-kybx.json", true);
@@ -115,16 +105,34 @@ function loadDoc4() {
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			// document.getElementById("Acessing Data").innerHTML = this.responseText;
-			var austin17_data = this.responseText;
-			console.log(austin17_data);
+			var austin17_data = eval(this.responseText);
 
-
+			var i = 0;
+			var parking17_violations = []
+			austin17_data.forEach(function(violation) {
+				if (violation.offense_case_type==="PK"){ 
+					console.log("Parking violation "+i+": "+ violation.offense_charge_description);
+					console.log(violation.offense_cross_street, violation.offense_street_name);
+					// parking17_violations.push(["Parking Violation "+i+": "+violation.offense_charge_description+" ("+ violation.offense_cross_street+
+					// 	+violation.offense_street_name+")"]);
+					i++;
+				}
+			});
+			document.getElementById("2017 data goes here").innerHTML = "Total 2017 Parking Violations: "+String(i);
+			// document.getElementById("Bottom of Page").innerHTML = parking17_violations;	
 		}
 	};
 	xhttp.open("GET", "https://data.austintexas.gov/resource/y5cf-fbh5.json", true);
 	xhttp.send();
 }
 </script>
+<br>
+
+<div id = "2015 data goes here">
+</div>
+
+<div id = "2017 data goes here">
+</div>
 
 </body>
 </html>
@@ -139,6 +147,7 @@ offense_charge_desciption = "PARKING - EXPIRED METER"
 							"TOW AWAY ZONE NO PARKING"
 							"Parking - Pay Station Receipt Not Displayed"
 							"Parking - Pay Station Receipt Expired" -->
+
 <!-- 			
 Sources/Tutorials:
 Background Animation: based on https://www.w3schools.com/css/css3_animations.asp 
