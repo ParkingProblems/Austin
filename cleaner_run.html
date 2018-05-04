@@ -1,0 +1,146 @@
+<!-- Parking Project - Cleaner Code
+	 Jocelyn Lorrey & Deanna Delgado -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<div id="Title">
+	<h1>Parking Problems - Team TBD</h1>
+	</div>
+<!-- 
+	<style> 
+		body {
+			animation: colorchange 10s infinite;
+		}
+		@keyframes colorchange
+		{
+			0%   {background: aqua;}
+			10%  {background: cyan;}
+			20%  {background: paleturquoise;}
+			30%  {background: turquoise;}
+			40% {background: mediumspringgreen;}
+			50%   {background: lightgreen;}
+			60%  {background: khaki;}
+			70%  {background: moccasin;}
+			80%  {background: peachpuff;}
+			90%  {background: lightyellow;}
+			100% {background: aqua;}
+		}
+	</style> -->
+
+</head>
+
+<body>
+
+	<div id="Accessing Data">
+	<h2>All Traffic Violations</h2>
+	<button type="button" 
+			onclick="getData(2015, 'Scrolling Text Box', 'display')">
+			Display 2015 Data
+	</button>
+	<button type="button" 
+			onclick="getData(2017, 'Scrolling Text Box', 'display')">
+			Display 2017 Data
+	</button>
+	</div>
+
+	<div id="Scrolling Text Box"
+	<div style="width:900px; height:200px; line-height:2em; overflow:scroll; padding:5px; background-color:black; color:green;"></div>
+	</div> 
+
+	<div id="Parsing Data">
+	<h2>Finding Parking Violations</h2>
+	<button type="button" 
+			onclick="getData(2015, 'Parking Violations 2015', 'count-parking')">
+			Display 2015 Parking Violations
+	</button>
+	<button type="button" 
+		onclick="getData(2017, 'Parking Violations 2017', 'count-parking')">
+		Display 2017 Parking Violations
+	</button>
+
+	<div id="Parking Violations 2015"></div>
+	<div id="Parking Violations 2017"></div>
+
+	<h2>Finding Meter Violations</h2>
+	<button type="button" 
+			onclick="getData(2015, 'Meter Violations 2015', 'count-meter')">
+			Display 2015 Meter Violations
+	</button>
+	<button type="button" 
+		onclick="getData(2017, 'Meter Violations 2017', 'count-meter')">
+		Display 2017 Meter Violations
+	</button>
+
+	<div id="Meter Violations 2015"></div>
+	<div id="Meter Violations 2017"></div>
+
+	<script>
+		function getData(year, displayDivID, task) {
+			console.log("Button clicked");
+			var dataDict = {2015:"https://data.austintexas.gov/resource/t6bu-kybx.json",
+							2017:"https://data.austintexas.gov/resource/y5cf-fbh5.json"};
+		
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var raw_data = this.responseText;
+					var data = eval(this.responseText);
+					if (task=='display'){
+						console.log("display");
+						displayData(raw_data, displayDivID);
+					}
+					else if (task=='count-parking') {  //count parking violations
+						console.log("count-parking");
+						count(data, displayDivID, 'parking');
+					}
+					else if (task=='count-meter') { //count meter violations
+						console.log("count-meter");
+						count(data, displayDivID, 'meter');
+					}
+					else {
+						console.log("Invalid input type");
+					}
+				}
+			};
+			xhttp.open("GET", dataDict[year], true);
+			xhttp.send();
+		}
+
+		function displayData(data, displayDivID) {
+			document.getElementById(displayDivID).innerHTML = data;
+		}
+
+		function count(data, displayDivID, type) {
+			console.log("counting "+type);
+
+			var i = 1;
+			var meter_violation_types = ["parking - expired meter", "parking-expired meter", "expired meter", "parking - pay station receipt not displayed", "parking-pay station receipt not displayed", "pay station receipt not displayed", "parking - expired pay station receipt", "parking-expired pay station receipt", "expired pay station receipt"];
+
+			data.forEach(function(violation) {
+				if (violation.offense_case_type==="PK") {
+					if (type==="parking") {
+						console.log("Parking violation "+i+": "+violation.offense_charge_description);
+						console.log(violation.offense_cross_street, violation.offense_street_name);
+						i++;
+					}
+					if (type==="meter") {
+						if (meter_violation_types.includes(violation.offense_charge_description.toLowerCase())) {
+							console.log("Meter violation "+i+": "+violation.offense_charge_description);
+							console.log(violation.offense_cross_street, violation.offense_street_name);
+							i++;
+						}
+					}
+				}
+
+				var year = displayDivID.slice(-4,);
+				document.getElementById(displayDivID).innerHTML = "Total "+year+" "+type+ " violations = "+i;
+			});
+		}
+	</script>
+
+</body>
+<!--  -->
+</html>
