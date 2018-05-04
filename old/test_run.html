@@ -7,9 +7,9 @@ Objective: interact w/database (in this case, display data in an html page)
 <html>
 <head>
 
-<style> 
+<!-- <style> 
 body {
-	animation: colorchange 15s infinite;
+	animation: colorchange 25s infinite;
 }
 @keyframes colorchange
 {
@@ -25,18 +25,31 @@ body {
 	90%  {background: lightyellow;}
 	100% {background: aqua;}
 }
-</style>
+</style> -->
 
 </head>
 
 <body>
 
-<div id="Acessing Data">
+<div id="Team Logo">
+<img src="logo_cropped.png" style="width:150px; height:100px;" alt="team logo"/>
+<!-- <img src="logo.png" style="position:absolute; left:500px; top:-10px; width: 250px; height:200px; border:none;" alt="team logo"/> -->
+</div>
+
+<div id="Title">
 <h1>Parking Problems - Team TBD</h1>
+</div>
+
+<div id="Accessing Data">
 <h2>Accessing Parking Data</h2>
 <button type="button" onclick="loadDoc1()">Display 2015 Data</button>
 <button type="button" onclick="loadDoc2()">Display 2017 Data</button>
 </div>
+
+<div id="Scrolling Text Box"
+<div style="width:900px; height:200px; line-height:2em; overflow:scroll; padding:5px; background-color:black; color:green;"></div>
+</div> 
+
 
 <script>
 
@@ -45,7 +58,7 @@ function loadDoc1() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("Parsing Data").innerHTML = this.responseText;
+			document.getElementById("Scrolling Text Box").innerHTML = this.responseText;
 		}
 	};
 	xhttp.open("GET", "https://data.austintexas.gov/resource/t6bu-kybx.json", true);
@@ -57,7 +70,7 @@ function loadDoc2() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("Parsing Data").innerHTML = this.responseText;
+			document.getElementById("Scrolling Text Box").innerHTML = this.responseText;
 		}
 	};
 	xhttp.open("GET", "https://data.austintexas.gov/resource/y5cf-fbh5.json", true);
@@ -127,18 +140,57 @@ function loadDoc4() {
 }
 </script>
 <br>
-
 <div id = "2015 data goes here">
 </div>
-
 <div id = "2017 data goes here">
+</div>
+
+<div id= "Meter Violations">
+<h2>Finding Meter Violations</h2>
+<button type="button" onclick="loadDoc5()">Display 2015 Meter Violations</button>
+<button type="button" onclick="loadDoc6()">Display 2017 Meter Violations</button>
+</div>
+
+<script>
+function loadDoc5() {
+	console.log("Button 5 clicked");
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			// document.getElementById("Acessing Data").innerHTML = this.responseText;
+			var austin15_data = eval(this.responseText);
+
+			var i = 0;
+			var meter_violation_types = ["parking - expired meter", "parking-expired meter", "expired meter", "parking - pay station receipt not displayed", "parking-pay station receipt not displayed", "pay station receipt not displayed", "parking - expired pay station receipt", "parking-expired pay station receipt", "expired pay station receipt"];
+			austin15_data.forEach(function(violation) {
+				if (violation.offense_case_type==="PK"){ 
+					if (meter_violation_types.includes(violation.offense_charge_description.toLowerCase())){
+						console.log("Meter violation "+i+": "+ violation.offense_charge_description);
+						console.log(violation.offense_cross_street, violation.offense_street_name);
+						i++;
+					}
+				}
+			});
+			document.getElementById("2017 data goes here").innerHTML = "Total 2015 Meter Violations: "+String(i);
+			// document.getElementById("Bottom of Page").innerHTML = parking17_violations;	
+		}
+	};
+	xhttp.open("GET", "https://data.austintexas.gov/resource/y5cf-fbh5.json", true);
+	xhttp.send();
+}
+</script>
+<br>
+
+<div id = "2015 meter data goes here">
+</div>
+<div id = "2017 meter data goes here">
 </div>
 
 </body>
 </html>
 
 <!-- Data Fields:
-agency (STR) case closed (Y/N), construction zone (Y/N), 
+agency (STR), case closed (Y/N), construction zone (Y/N), 
 offense_case_type, offense_charge_description, offense_cross_street,
 offense_date, offense_street_name, offense_time, officer code -->
 
@@ -150,4 +202,5 @@ offense_charge_desciption = "PARKING - EXPIRED METER"
 
 <!-- 			
 Sources/Tutorials:
-Background Animation: based on https://www.w3schools.com/css/css3_animations.asp 
+Background Animation: https://www.w3schools.com/css/css3_animations.asp 
+Scrolling Text Box: http://www.html.am/html-codes/scrollboxes/html-scrollbox.cfm

@@ -31,25 +31,24 @@ body {
 
 <body>
 
-<div id="Team Logo">
-<img src="logo_cropped.png" style="width:150px; height:100px;" alt="team logo"/>
-<!-- <img src="logo.png" style="position:absolute; left:500px; top:-10px; width: 250px; height:200px; border:none;" alt="team logo"/> -->
-</div>
-
-<div id="Title">
+<div id="Acessing Data">
 <h1>Parking Problems - Team TBD</h1>
-</div>
-
-<div id="Accessing Data">
 <h2>Accessing Parking Data</h2>
 <button type="button" onclick="loadDoc1()">Display 2015 Data</button>
 <button type="button" onclick="loadDoc2()">Display 2017 Data</button>
 </div>
 
-<div id="Scrolling Text Box"
-<div style="width:900px; height:200px; line-height:2em; overflow:scroll; padding:5px; background-color:black; color:green;"></div>
-</div> 
+<!-- <canvas id="myCanvas" width="700" height="200"
+style="border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas> -->
 
+<!-- <script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.fillStyle = "#FF0000";
+ctx.fillRect(0,0,150,75);
+</script> -->
 
 <script>
 
@@ -58,7 +57,11 @@ function loadDoc1() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("Scrolling Text Box").innerHTML = this.responseText;
+			var canvas = document.getElementById("myCanvas");
+			var ctx = canvas.getContext("2d");
+			ctx.font = "12px Arial";
+			ctx.fillText(this.responseText,8,12);
+			// document.getElementById("Parsing Data").innerHTML = this.responseText;
 		}
 	};
 	xhttp.open("GET", "https://data.austintexas.gov/resource/t6bu-kybx.json", true);
@@ -70,7 +73,7 @@ function loadDoc2() {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("Scrolling Text Box").innerHTML = this.responseText;
+			document.getElementById("Parsing Data").innerHTML = this.responseText;
 		}
 	};
 	xhttp.open("GET", "https://data.austintexas.gov/resource/y5cf-fbh5.json", true);
@@ -163,5 +166,4 @@ offense_charge_desciption = "PARKING - EXPIRED METER"
 
 <!-- 			
 Sources/Tutorials:
-Background Animation: https://www.w3schools.com/css/css3_animations.asp 
-Scrolling Text Box: http://www.html.am/html-codes/scrollboxes/html-scrollbox.cfm
+Background Animation: based on https://www.w3schools.com/css/css3_animations.asp 

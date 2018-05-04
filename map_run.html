@@ -5,12 +5,16 @@
 <html>
 
 <head>
-
 	<div id="Title">
-	<h1>Parking Problems - Team TBD</h1>
-	</div>
+		<h1>Parking Problems</h1>
+	</div> 
 
-	<style> 
+	<style>
+		/*look into flex box*/
+		#map {
+			width: 900px;
+			height: 500px;
+		}
 		#scrolling-text-box {
 			width: 900px;
 			height: 200px;
@@ -21,19 +25,66 @@
 			color: green;
 		}
 	</style>
-
 </head>
 
 <body>
-	<div id="floating-panel">
-		<button onclick="toggleHeatmap()">Toggle Heatmap"</button>
-		<button onclick="changeGradient()">Change Gradient</button>
-		<button onclick="changeRadius()">Change Radius</button>
-		<button onclick="changeOpacity()">Change Opacity</button>
-	</div>
-	<div id="map"></div>
-	<script>
-	
+	<h2>Austin Traffic Violations</h2>
+	<div id="map">Map will go here</div>
+	<script> 
+		var map, overlay, canvas, context, geocoder;
+
+		function initMap() {
+			var mapOptions = {
+				center: new google.maps.LatLng(30.27 ,-97.94),
+				zoom: 13.85,
+				center: {lat: 30.276, lng: -97.741},
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+			var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+			overlay = new google.maps.OverlayView();
+			overlay.draw = function(){};
+			overlay.setMap(map);
+
+			canvas = document.createElement('canvas');
+			canvas.style.position = 'absolute';
+			canvas.width = '750';
+			canvas.height = '650';
+			context = canvas.getContext('2d');
+	        
+	        var triangleCoords = [
+          		{lat: 30.261313, lng: -97.736956},
+          		{lat: 30.266577, lng: -97.756054},
+          		{lat: 30.279660, lng: -97.750389},
+          		{lat: 30.278965, lng: -97.747406},
+          		{lat: 30.282819, lng: -97.746054},
+          		{lat: 30.283586, lng: -97.752290},
+          		{lat: 30.286990, lng: -97.753062},
+          		{lat: 30.296058, lng: -97.748960},
+          		{lat: 30.294617, lng: -97.740974},
+          		{lat: 30.291972, lng: -97.741193},
+          		{lat: 30.287929, lng: -97.724402},
+          		{lat: 30.266558, lng: -97.733820},
+          		{lat: 30.262555, lng: -97.722189},
+          		{lat: 30.257198, lng: -97.724764},
+          		{lat: 30.261313, lng: -97.736956},
+        	];
+
+        	var bermudaTriangle = new google.maps.Polygon({
+          		paths: triangleCoords,
+          		strokeColor: '#FF0222',
+          		strokeOpacity: 0.8,
+          		strokeWeight: 1,
+          		fillColor: '#FF0000',
+          		fillOpacity: 0.1
+        	});
+        	bermudaTriangle.setMap(map);
+      }		
+	</script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJraDhNwsouHdU_ixoEKZ4r8ep64oQpC4&callback=initMap"async defer>
+	</script>
+
 
 	<div id="Accessing Data">
 	<h2>All Traffic Violations</h2>
@@ -48,7 +99,7 @@
 	</div>
 
 	<div id="scrolling-text-box">
-	</div>
+	</div> 
 
 	<div id="Parsing Data">
 	<h2>Finding Parking Violations</h2>
@@ -140,7 +191,6 @@
 			});
 		}
 	</script>
-
 </body>
-<!--  -->
+
 </html>
