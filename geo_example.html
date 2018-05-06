@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>Google Maps</title>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAPDUET0Qt7p2VcSk6JNU1sBSM5jMcmVqUpI7aqV44cW1cEECiThQYkcZUPRJn9vy_TWxWvuLoOfSFBw" type="text/javascript"></script>
+  </head>
+  <body onunload="GUnload()">
+    <h1>Parking Problems: Address Getter</h1>
+    <h3>Geolocations</h3>
+    <div id="message">&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br />&lt;markers&gt;<br /></div>
+
+
+    <script type="text/javascript">
+
+      meter_violations_2015 = 
+        [" 600 W28"," 1600 BARTON SPRINGS"," 90 RAINEY ST"," 2300 RED RIVER"," 600 PARK PL"," 500 RIO GRANDE"," 300 8TH ST W"," 400 BOWIE ST"," 1500 EAST 5TH ST"," 500 EAST 12TH"," 1200 25TH ST W"," 1100 ROSE ST"," 400 E 5TH STREET"," MACC LOT"," 2500 LONGVIEW"," MACC LOT"," 600 SABINE ST"," 300 4TH ST E"," 600 ONION"," 1400 EAST 6TH"," 500 BAYLOR ST"," 500 CONGRESS AV"," 200 TRINITY"," 500 8TH ST E"," 700 SAN JACINTO"," 400 7TH ST W"," 1000 E 6TH ST"," 40 EAST AVENUE"," 1200 SAN ANT. ST"," 400 8TH ST E"," 700 RIO GRANDE ST"," 500 6TH ST WEST"," 1500 EAST 6TH"," 400 3RD ST W"," 400 JOSEPHINE ST"," 500 BAYLOR"," 1100 EAST 6TH"," 700 7TH ST E"," 200 W 9TH"," 200 BLOCK BRUSHY STREET"," 1200 RIO GRANDE"," 60 RAINEY ST"," 600 RIO GRANDE"," 600 WEST AVENUE"," 400 8TH E"," 300 E 7TH ST"," 200 9TH ST W"," 400 EAST 4TH"," 600 16TH ST W"," 1200 E 6TH ST"," 1100 NUECES ST"," BUTLER SHORES"," 1500 EAST 4TH STREET"," 1200 EAST 5TH"," 700 SAN ANT. ST"," 400 BAYLOR"," 200 W 27TH STREET"," 1700 EAST 6TH STREET"," 1400 SAN ANTONIO"," 100 4TH ST E"," 300 13TH WEST"," 900 DEAN KEETON EAST"," 1300 E6TH"," 2300 SAN ANT. ST"," 600 21ST ST W"," 80 RAINEY ST"," 500 WEST 9TH"," 50 EAST AVE"," 700 COLORADO ST"," 500 WALLER"," 400 8TH ST E"," 400 10TH ST WEST"," 2100 NUECES ST"," 500 8TH ST E"," 50 RAINEY"," 800 WEST 3RD"," 600 SAN MARCOS"," MACC LOT"," 500 BRAZOS"," MACC LOT"," 800 3RD ST W"," 300 DEAN KEETON W"," 800 SAN ANTONIO"," 800 SAN ANTONIO"," 500 SAN ANT. ST"," 1000 EAST 5TH"," 500 W 7TH ST"," 600 NUECES"," 500 COLORADO ST"," 300 NUECES ST"," 500 WALLER"," 700 W 5TH ST"," 600 NECHES"," 900 EAST 5TH STREET"," 300 W11TH"," 600 COLORADO"," 700 SAN ANT. ST"," 1200 25T ST WEST"," 600 COMAL"," 2000 UNIVERSITY AV"," 800 WEST 3RD"," 400 BAYLOR ST"," 600 SAN ANTONIO"," 300 LEE BARTON"," 700 W 6TH ST"," 500 8TH STREET WEST"," 400 E 7TH ST"," 400 14TH ST W"," 200 4TH ST E"," 400 E 8TH ST"," 800 SAN ANTONIO"," 600 3RD ST E"," 400 WEST 10TH"," 100 7TH ST W"," 300 18TH ST W"," 200 4TH ST E"," 1100 ROSE"," 200 NUECES"," 500 EAST 12TH"," 300 18TH ST W"," 400 RIO GRANDE"," 1200 RED RIVER"," 200 E 8TH ST"," 700 TRINITY ST"," 900 DEAN KEETON E"," 200 W 4TH"," 700 NUECES"," 500 4TH ST E"," 600 TRINITY ST"," 400 8TH ST E"," 500 4TH ST WEST"," 800 BRAZOS ST"," 200 BRAZOS"," 2200 NUECES"," 200 W4TH"," 1200 WEST AVE"," 300 W 17TH ST"," 100 5TH ST W"," 500 SAN JACINTO"," 700 TRINITY ST"," 100 WEST 9TH"," 300 WEST 8TH"," 1600 TOOMEY RD"," 300 13TH ST W"," 700 SAN JACINTO"," 600 WEST AVE"," 500 BRUSHY"," 600 3RD ST E"," 400 E 7TH ST"," LIBRARY LOT"," 500 4TH STREET WEST"," 1900 SAN ANTONIO"," 600 NECHES ST"," 100 WEST 27TH"," 500 7TH ST WEST"," 300 W 11TH ST"," 2500 SAN ANT. ST"," 1400 WEST"," I-35 SOUTH LOT"," 700 NECHES ST"," 300 25TH ST W"," 1200 EAST 6TH"," 300 BRAZOS ST"," BUTLERSHORES"," 2400 NUECES ST"," 1300 E 5TH STREET"," 600 21ST ST W"," 300 CONGRESS AVENUE"," 200 COLORADO ST"," 200 COLORADO ST"," 700 GUADALUPE"," 700 23RD ST WEST"," 800 W 9TH ST"," 400 WEST 9TH"," 500 W4TH"," 900 E 5TH ST"," 900 E 5TH ST"," 600 MEDINA"," 1700 6TH E"," 1000 GUADALUPE"," 500 WEST 16 STREET"," 1300 WEST AVE"," 400 W 10TH STREET"," 400 W 10TH STREET"," 600 WEST 11TH"," 600 WEST 11 STREET"," 400 5TH W"," 600 GUADALUPE"," 600 DAVIS"," 2200 SAN ANTONIO"," 400 WEST 10TH STREET"," 300 10TH ST W"," 2300 GUADALUPE ST"," 500 WEST 7TH"," 500 ATTAYAC"," 1900 NUECES ST"," 400 W10TH"," 800 GUADALUPE ST"," 400 RIO GRANDE ST"," 600 WEST AV"," 300 WEST AVE"," 500 11TH WEST"," 700 SAN JACINTO BLVD"," 700 TRINITY"," 700 TRINITY"," 200 E 4TH ST"," 500 7TH ST W"," 90 TRINITY"," 700 SAN JACINTO"," 400 10TH STREET WEST"," 700 13 1/2 ST W"," 600 W 7TH STREET"," 100 TRINITY"," 700 SAN ANTONIO ST"," 900 E 5TH ST."," 600 5TH ST E"," 2600 RIO GRANDE ST"," 700 SAN JACINTO"," 500 NECHES"," 500 W 25TH ST"," 400 10TH STREET WEST"," 1000 EAST 7TH"," 1100 EAST 7TH"," 400 W 12TH"," 200 4TH ST EAST"," 60 RAINEY ST"," 400 W 14TH"," 1000 GUADALUPE"," 800 RED RIVER"," 500 8TH ST W"," 600 8TH ST E"," 400 NUECES"," 400 BRAZOS ST"," 800 CONGRESS AVE"," 700 COLORADO"," 600 DRISKILL"," 400 WEST 9TH STREET"," 700 COLORADO"," 500 W18ST"," 900 E 5TH STREET"," 300 12TH ST W"," 700 TRINITY ST"," 2600 UNIVERSITY AVENUE"," 1300 RED RIVER STREET"," 100 8TH ST E"," 200 COLORADO"," 600 TRINITY"," 700 13 1/2 ST W"," 900 W 2ND ST"," 3700 BONNIE"," 700 12TH ST W"," 1300 E 6TH"," 500 W 7TH"," 400 12TH ST W"," 1400 WEST AVENUE ST"," 300 W 6TH ST"," 1300 6TH STREET EAST"," 2100 GUADALUPE ST"," 400 4TH ST WEST"," 200 W3RD"," 200 W17TH"," 400 SABINE ST"," 900 2ND ST W"," 1300 RIO GRANDE ST"," 700 7TH ST W"," 300 10TH STREET WEST"," 2600 WHITIS AVE"," MACC LOT"," 500 8TH ST E"," 900 W 5TH ST"," 300 10TH ST W"," 300 SAN JACINTO BLVD"," 800 DEAN KEETON E"," 1000 WEST AVE"," 500 E 8TH"," MACC LOT"," 600 MEDINA"," 800 DEAN KEETON E"," 800 DEAN KEETON E"," 200 E 9TH ST"," 2600 UNIVERSITY AV"," 700 WEST AVE"," 800 CONGRESS"," 1500 E 6TH STREET"," 2000 UNIVERSITY AVE"," 1500 E 6TH ST"," 1400 SAN ANTONIO"," 600 13 1/2 ST W"," 1000 NUECES"," WALSH LANDING"," 600 SAN JACINTO"," 600 E DEAN KEETON"," 600 6TH ST E"," WALSH LANDING"," 400 JOSEPHINE"," 100 5TH ST E"," 700 NUECES"," 300 2ND ST E"," 600 E 6TH STREET"," 700 9TH STREET"," 900 LAVACA ST"," 200 6TH W"," 200 4TH ST W"," 700 LAVACA ST"," 50 RAINEY ST"," 600 SAN ANT. ST"," 300 8TH"," 2300 GUADALUPE ST"," 300 2ND ST W"," 700 E 7TH ST"," 2200 RIO GRANDE"," 300 12TH ST WEST"," 600 WEST AVENUE"," 200 4TH ST EAST"," 400 SAN JACINTO BLVD"," 400 10TH WEST"," 600 6TH ST E"," 800 NUECES"," 1200 SAN ANTONIO W"," 200 TRINITY ST"," 600 WEST 28TH"," 2500 LONGVIEW"," 600 E 10TH STREET"," 500 NECHES"];
+
+        meter_violations_2017= 
+        [" 100 WEST 6TH ST."," 500 TRINITY"," 600 E DEAN KEETON"," 100 WEST 3 STREET"," 700 TRINITY STREET"," 600 SABINE ST"," 40 EAST AVENUE"," 40 EAST AVENUE"," 200 W 8TH STREET"," 1500 EAST 4TH STREET"," 300 EAST 7TH"," 100 WEST 5TH"," 200 EAST 7TH STREET"," 2300 SAN ANTONIO"," 800 CONGRESS"," 500 COMAL"," 400 WEST 6TH STREET"," 2000 GUADALUPE"," 2000 GUADALUPE"," BUTLER SHORES LOT"," 2400 SETON"," 800 POWER PLANT"," 800 POWER PLANT"," 1100 WEST 25 STREET"," 100 WALTER SEAHOLM"," 400 SAN JACINTO"," 800 COLORADO"," 400 W 3RD"," 700 E 6TH ST"," 300 W 7TH STREET"," 400 W 6TH STREET"," 500 W 7TH STREET"," 500 W 7TH STREET"," 700 NUECES"," 700 NUECES"," 600 W 8TH STREET"," 700 WEST AVENUE"," 700 W 7TH STREET"," 700 W 7TH STREET"," 600 RIVER ST"," 600 RIVER ST"," 600 RIVER ST"," 600 RIVER ST"," 600 RIVER ST"," 600 RIVER ST"," 3700 LAKE AUSTIN BLVD"," 600 RIVER ST"," 1600 TOOMEY RD"," 1600 TOOMEY RD"," 1600 TOOMEY RD"," 600 NECHES ST"," 2400 NUECES ST"," 2400 NUECES ST"," 1300 E 5TH ST"," 500 MEDINA"," 200 E 4TH"," 500 SAN MARCOS"," 1000 E 5TH ST"," 500 WALLER"," 1200 E 5TH ST"," 500 NECHES ST"," 500 COMAL"," 1300 E 6TH ST"," 1000 E 6TH ST"," 600 SAN MARCOS"," BUTLER SHORES"," BUTLER SHORES"," 400 WEST AVE"," 300 WEST AVE"," 800 WEST 3RD"," 800 WEST 5TH"," 700 WEST AVE"," 500 RIO GRANDE"," 300 WEST 4TH"," 400 W 4TH ST"," 400 BOWIE"," 900 WEST 5TH"," 400 WEST AVE"," 700 WEST 5TH"," 200 WEST 2ND"," 2400 PEARL"," 2400 PEARL"," 2400 PEARL"," 700 25TH ST WEST"," 700 25TH ST WEST"," 2400 SETON"," 1200 EAST 6TH STREET"," 400 SAN ANTONIO"," 50 RAINEY ST"," 900 25TH ST WEST"," 700 26TH ST WEST"," 700 26TH ST WEST"," 700 26TH ST WEST"," 1900 SAN ANTONIO"," 100 EAST 8TH STREET"," 2500 LEON"," 2500 LEON"," 2500 LEON"," 2500 LEON"," 500 SAN JACINTO"," 400 JOSEPHINE"," 200 BRAZOS"," 900 2ND ST WEST"," 2500 LONGVIEW"," 2500 LONGVIEW"," 500 WEST 7TH STREET"," 2500 LONGVIEW"," 1200 WEST 25TH"," 2500 LEON"," 2500 LEON"," 2500 LEON"," 2500 LEON"," 1000 WEST 25TH"," 1000 WEST 25TH"," 100 E 4TH"," 1900 SIMOND"," 1700 ALDRICH"," 1700 ALDRICH"," 1700 ALDRICH"," 100 E 8TH ST."," 800 BRAZOS"," 500 WALLER"," 600 E 10TH ST."," 600 E 10TH ST."," 600 E 10TH ST."," 700 RED RIVER"," 500 RIO GRANDE"," 500 TRINITY"," 500 TRINITY"," 400 E. 5TH"," 500 NECHES"," 500 E. 5TH"," 500 E. 5TH"," 500 RED RIVER"," 700 E. 6TH"," 700 E. 6TH"," 700 E. 6TH"," 40 RAINEY ST"," 40 RAINEY ST"," 700 CUMMINGS"," 700 CUMMINGS"," 40 EAST AVE"," 50 EAST AVE"," 50 EAST AVE"," MACC LOT"," 1900 SIMOND"," MACC LOT"," MACC LOT"," 50 RAINEY ST"," 700 CUMMINGS"," 700 RIVER"," BULTER SHORES"," BULTER SHORES"," 2500 NUECES ST"," 2600 NUECES ST"," 2700 NUECES ST"," 2700 NUECES ST"," 2800 NUECES  ST"," 300 W 27TH ST"," BULTER SHORES"," 200 EAST 4TH STREET"," 2300 GUADALUPE"," 100 WEST 5 STREET"," 500 MEDINA"," 1100 E 6TH ST"," 1100 E 5TH ST"," 500 WALLER ST"," 1500 E 6TH ST"," 1400 E 6TH ST"," 1000 E 6TH ST"," 600 SAN MARCOS ST"," 1100 NUECES"," 1000 NUECES"," 1000 NUECES"," 1000 GUADALUPE"," 1000 GUADALUPE"," 800 CONGRESS"," 50 RAINEY"," 700 CUMMINGS"," 700 CUMMINGS"," 40 EAST AVENUE"," 800 BRAZOS"," MACC LOT"," MACC LOT"," MACC LOT"," MACC LOT"," MACC LOT"," 50 EAST AVENUE"," 50 EAST AVENUE"," 50 EAST AVENUE"," 700 RIVER"," 1900 SIMOND"," 1900 SIMOND"," 1900 SIMOND"," 1800 SIMOND"," 1700 ALDRICH"," 1700 ALDRICH"," 1700 ALDRICH"," 1700 ALDRICH"," 1800 MCBEE"," 700 BRAZOS"," 800 BRAZOS"," 400 SAN JACINTO"," 300 EAST 8TH ST"," 400 EAST 10TH ST"," 500 EAST 10TH ST"," 600 EAST 10TH ST"," 600 EAST 10TH ST"," 600 NECHES"," 600 NECHES"," 300 SAN ANTONIO"," 1900 RIO GRANDE"," 700 W 22ND STREET"," 600 WEST AVE"," 900 W 22ND STREET"," 900 W 22ND STREET"," 1900 PEARL ST"," 700 W 21ST STREET"," 700 W 21ST STREET"," 300 W 4TH ST"," 200 SAN ANTONIO"," 700 W 221/2 STREET"," 100 E 4TH ST"," 900 POPLAR ST"," 900 POPLAR ST"," 600 W 28TH STREET"," 1700 TOOMEY"," 2400 SAN ANTONIO"," 2400 SAN ANTONIO"," 700 W. 25TH"," 600 E 5TH STREET"," 200 E 4TH STREET"," 200 E 4TH STREET"," 200 E 5TH STREET"," 600 E 9TH ST."," 500 BRAZOS"," 200 E 4TH STREET"," 1900 RIO GRANDE"," 2100 RIO GRANDE"," 2100 RIO GRANDE"," 2100 RIO GRANDE"," 600 W 21ST"," 1900 NUECES"," 1900 NUECES"," 1900 NUECES"," 2100 NUECES"," 200 E. 9TH"," 700 SAN JACINTO"," MACC LOTT"," 2400 SETON"," 2400 SETON"," 2400 SETON"," 2500 SETON"," 2500 SETON"," 2500 SETON"," 2500 SETON"," 2500 SETON"," 2500 SETON"," 2500 SETON"," 900 POPLAR ST"," 900 POPLAR ST"," 1300 E 6TH"," 600 ONION"," 1900 GUADALUPE"," 300 BARTON SPRINGS"," 2400 SAN ANTONIO"," 400 SABINE"," 700 E 6TH ST"," 600 SABINE"," 200 E 5TH ST"," 200 E 5TH ST"," 200 E 5TH ST"," 2400 NUECES ST"," 2500 NUECES ST"," 2600 NUECES ST"," 2600 NUECES ST"," 500 WEST 27TH ST"," 300 WEST 27TH ST"," 100 BRAZOS"," 2600 WITHIS AVE"," 2600 WITHIS AVE"," 2600 WITHIS AVE"," 2600 WITHIS AVE"," 400 CONGRESS AVE"," 600 MEDINA ST"," 600 ATTAYAC ST"," 1400 EAST 6TH ST"," 1500 EAST 6TH ST"," 1000 EAST 5TH ST"," 1100 EAST 5TH ST"," 500 WALLER ST"," 1200 EAST 5TH ST"," 500 ATTAYAC ST"," 700 NECHES"," 400 10 STREET EAST"," 1500 EAST 5TH ST"," 1500 EAST 5TH ST"," 2300 NUECES"," 500 COMAL ST"," 1500 EAST 6TH ST"," 1500 EAST 6TH ST"," 1500 EAST 6TH ST"," 1200 EAST 6TH ST"," 2400 LEON STREET"," 2300 NUECES"," 1000 EAST 6TH ST"," 2300 NUECES"," 600 SAN MARCOS ST"," 400 9TH ST EAST"," 500 RIO GRANDE"," 2400 RIO GRANDE"," 800 W. 3D ST"," 2900 SAN JACINTO"," 600 E 6TH ST"," 300 WEST 14TH"," 2900 SAN JACINTO"," 500 RIO GRANDE"," BUTLER SHORES LOT"," BUTLER SHORES LOT"," 800 POWER PLANT"," 100 WALTER SEAHOLM"," 700 CONGRESS"," 700 COLORADO"," 800 COLORADO"," 200 W 8TH"," 700 WEST AVE"," 200 E 4TH"," 700 GUADALUPE"," 700 WEST AVE"," 500 EAST 9TH STREET"," 500 W 7TH"," 500 W 7TH"," 500 W 7TH"," 700 NUECES"," 700 NUECES"," 700 NUECES"," 800 WEST"," 700 WEST AVE"," 100 W 6TH STREET"," 100 W 5TH STREET"," 100 W 5TH STREET"," 100 W 5TH STREET"," 100 W 5TH STREET"," 200 W 4TH STREET"," 500 BAYLOR"," 800 LAMBIE"," 200 E 5TH STREET"," 300 W 4TH STREET"," 700 DEAN KEETON"," 800 W 3RD STREET"," 800 W 3RD STREET"," 900 W 3RD STREET"," 300 BOWIE"," 700 DEAN KEETON"," 500 WEST AV"," 500 WEST AV"," 700 W 5TH STREET"," 300 W 2ND STREET"," 200 W 3RD STREET"," 500 WEST 21 STREET"," 100 E 9TH STREET"," 1500 E 6TH STREET"," 900 SAN ANTONIO"," 900 NUECES ST"," 500 COMAL"," 500 W 4TH STREET"," 300 NUECES"," 600 W 4TH"," 400 W 16TH STREET"," 400 SABINE ST"," 1000 GUADALUPE"," 600 W21ST"," 300 N LAMAR"," 300 WEST 7TH"," 100 WEST 9TH STREET"," 400 RIO GRANDE"," 600 DRISKILL ST"," 1100 ROSE ST"," 600 W 6TH STREET"," 2500 NUECES ST"," 800 E DEAN KEETON ST"," 1600 W 5TH STREET"," 1100 EAST 6TH ST"," 2500 LEON"," 500 E 10TH ST"," 1500 EAST 6TH STREET"," 700 GUADALUPE"," 100 E 4TH STREET"," 200 E 7TH ST."," 500 W 25TH STREET"," 700 WEST AV"," 400 W 2ND ST"," 1900 PEARL"," 600 MEDINA"," 500 NAVASOTA"," 200 E3RD"," MACC LOT"," 1600 TOOMEY"," 2200 PEARL"," 3700 LAKE AUSTIN"," 3700 LAKE AUSTIN"," 1500 E 5TH ST"," 1500 E 5TH ST"," 1600 BUTLER PARK"," 800 W 3RD STREET"," 3700 LAKE AUSTIN BLVD"," 1500 E 5TH ST"," 3800 LAKE AUSTIN BLVD"," 1600 BUTLER PARK LOT"," 3700 WALSH BOAT LANDING LOT"," 3700 BONNIE STREET"," 3700 BONNIE STREET"," 3800 LAKE AUSTIN BLVD"," 3800 LAKE AUSTIN BLVD"];
+
+      function getFullAddress(streetAddress) {
+        var fullAddresses = [];
+        streetAddress.forEach(function(address) {
+          fullAddresses.push(address+", Austin, TX");
+        });
+        return fullAddresses;
+      }
+
+    // delay between geocode requests - at the time of writing, 100 miliseconds seems to work well
+    var delay = 100;
+
+
+    if (GBrowserIsCompatible()) { 
+      // ====== Create a Client Geocoder ======
+      var geo = new GClientGeocoder(); 
+
+      // ====== Array for decoding the failure codes ======
+      var reasons=[];
+      reasons[G_GEO_SUCCESS]            = "Success";
+      reasons[G_GEO_MISSING_ADDRESS]    = "Missing Address: The address was either missing or had no value.";
+      reasons[G_GEO_UNKNOWN_ADDRESS]    = "Unknown Address:  No corresponding geographic location could be found for the specified address.";
+      reasons[G_GEO_UNAVAILABLE_ADDRESS]= "Unavailable Address:  The geocode for the given address cannot be returned due to legal or contractual reasons.";
+      reasons[G_GEO_BAD_KEY]            = "Bad Key: The API key is either invalid or does not match the domain for which it was given";
+      reasons[G_GEO_TOO_MANY_QUERIES]   = "Too Many Queries: The daily geocoding quota for this site has been exceeded.";
+      reasons[G_GEO_SERVER_ERROR]       = "Server error: The geocoding request could not be successfully processed.";
+      reasons[403]                      = "Error 403: Probably an incorrect error caused by a bug in the handling of invalid JSON.";
+      
+      // ====== Geocoding ======
+      function getAddress(search, next) {
+        geo.getLocations(search, function (result)
+          { 
+            // If that was successful
+            if (result.Status.code == G_GEO_SUCCESS) {
+              // Lets assume that the first marker is the one we want
+              var p = result.Placemark[0].Point.coordinates;
+              var lat=p[1];
+              var lng=p[0];
+              // Display the results in XML format
+              var xml = '&nbsp;&nbsp;&lt;marker address="' + search + '" lat="' +lat+ '" lng="' +lng+ '"&gt;<br>';
+              document.getElementById("message").innerHTML += xml;
+            }
+            // ====== Decode the error status ======
+            else {
+              // === if we were sending the requests to fast, try this one again and increase the delay
+              if (result.Status.code == G_GEO_TOO_MANY_QUERIES) {
+                nextAddress--;
+                delay++;
+              } else {
+                var reason="Code "+result.Status.code;
+                if (reasons[result.Status.code]) {
+                  reason = reasons[result.Status.code]
+                } 
+                var xml = '&nbsp;&nbsp;&lt;marker address="' + search + '" error="' +reason+ '"&gt;<br>';
+                document.getElementById("message").innerHTML += xml;
+              }   
+            }
+            next();
+          }
+        );
+      }
+
+
+
+      // ======= An array of locations that we want to Geocode ========
+      //FOR 2015 METER VIOLATIONS:
+      var addresses = getFullAddress(meter_violations_2015);
+      //FOR 2017 METER VIOLATIONS:
+      // var addresses = getFullAddress(meter_violations_2017);
+    
+      // ======= Global variable to remind us what to do next
+      var nextAddress = 0;
+
+      // ======= Function to call the next Geocode operation when the reply comes back
+
+      function theNext() {
+        if (nextAddress < addresses.length) {
+          setTimeout('getAddress("'+addresses[nextAddress]+'",theNext)', delay);
+          nextAddress++;
+        } else {
+          document.getElementById("message").innerHTML += "&lt;/markers&gt;";
+        }
+      }
+
+      // ======= Call that function for the first time =======
+      theNext();
+  
+
+
+    }
+    
+    // display a warning if the browser was not compatible
+    else {
+      alert("Sorry, the Google Maps API is not compatible with this browser");
+    }
+
+    // This Javascript is based on code provided by the
+    // Community Church Javascript Team
+    // http://www.bisphamchurch.org.uk/   
+    // http://econym.org.uk/gmap/
+
+    //]]>
+    </script>
+  </body>
+
+</html>
+
+
+
+

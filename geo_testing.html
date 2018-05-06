@@ -28,8 +28,6 @@
 			100% {background: aqua;}
 		}
 		#map {
-			/*width: 900px;
-			height: 500px;*/
 			width: 900px;
 			height: 400px;
 
@@ -47,7 +45,7 @@
 </head>
 
 <body>
-	<h3>Austin Traffic Violations</h3>
+	<h3>Get Addresses for... </h3>
 	<button onclick="getData(2015, 'Parking Violations 2015', 'count-parking')">
 		2015 parking violations</button>
 	<button onclick="getData(2017, 'Parking Violations 2017', 'count-parking')">
@@ -58,6 +56,7 @@
 	<button onclick="getData(2017, 'Meter Violations 2017', 'count-meter')">
 		2017 meter violations</button>
 
+	<h3>Display on map</h3>
 	<div id="map">Map will go here</div>
 	
 	<script> 
@@ -171,14 +170,18 @@
 					if (type==="parking") {
 						// console.log("Parking violation "+i+": "+violation.offense_charge_description);
 						// console.log(violation.offense_cross_street, violation.offense_street_name);
-						parking_addresses.push(violation.offense_cross_street + violation.offense_street_name);
+						var address = violation.offense_cross_street + violation.offense_street_name;
+						parking_addresses.push(address);
+						setTimeout(getLatLong(address), 2000);
 						i++;
 					}
 					if (type==="meter") {
 						if (meter_violation_types.includes(violation.offense_charge_description.toLowerCase())) {
 							// console.log("Meter violation "+i+": "+violation.offense_charge_description);
 							// console.log(violation.offense_cross_street, violation.offense_street_name);
-							meter_addresses.push(violation.offense_cross_street + violation.offense_street_name);
+							var address = violation.offense_cross_street + violation.offense_street_name;
+							meter_addresses.push(address);
+							setTimeout(getLatLong(address), 2000);
 							i++;
 						}
 					}
@@ -189,17 +192,43 @@
 			var year = displayDivID.slice(-4,);
 			document.getElementById(displayDivID).innerHTML = "Total "+year+" "+type+ " violations = "+i;
 
-			if (type==="parking") {
-				console.log(year+" parking addresses = ");
-				console.log(JSON.stringify(parking_addresses));
-			}
+			// if (type==="parking") {
+			// 	console.log(year+" parking addresses = ");
+			// 	console.log(parking_addresses);
+			// }
 
-			else if (type==="meter") {
-				console.log(year+" meter addresses = ");
-				console.log(JSON.stringify(meter_addresses));
+			// else if (type==="meter") {
+			// 	console.log(year+" meter addresses = ");
+			// 	console.log(meter_addresses);
+			// }
+		}
+		function getLatLong(streetAddress) {
+			console.log("Lat/Long call!");
+			var fullAddress = streetAddress+", Austin, TX";
+			console.log("fullAddress: "+fullAddress);
+			try {
+				geocoder = new google.maps.Geocoder();
+				geocoder.geocode({'address': fullAddress}, function(results, status) {
+					console.log('status: '+status);
+					if (status === 'OK') {
+						console.log("results: ");
+						console.log(results);
+					}
+					else {
+						console.log('Geocoder was not successfull for the following reason: ' + status);
+					}
+				});
+			}
+			catch(err) {
+				console.log(err);
 			}
 		}
 	</script>
+
+	<script async defer
+	src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyCJraDhNwsouHdU_ixoEKZ4r8ep64oQpC4&callback=initMap"
+	</script>
+
 </body>
 
 </html>
