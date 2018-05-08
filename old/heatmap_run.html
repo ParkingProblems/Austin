@@ -1,12 +1,37 @@
+<!-- Parking Project - Cleaner Code
+	 Jocelyn Lorrey & Deanna Delgado -->
+
 <!DOCTYPE html>
 <html>
-	<head>
-		<h2> Parking Problems: Meter Data </h2>
-	</head>
 
-	<body>
-		<script>
-			var meter_data_2015 = {
+<head>
+	<div id="Title">
+		<h1>Parking Problems</h1>
+	</div> 
+
+	<style>
+		/*look into flex box*/
+		#map {
+			width: 900px;
+			height: 500px;
+		}
+		#scrolling-text-box {
+			width: 900px;
+			height: 200px;
+			line-height: 2em;
+			overflow: scroll;
+			padding: 5px;
+			background-color: black;
+			color: green;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>Austin Traffic Violations</h2>
+	<div id="map">Map will go here</div>
+	<script> 
+		var meter_data_2015 = {
 				"markers": {
 					"marker": [
 				  {
@@ -1630,10 +1655,8 @@
 				    "-lng": "-97.7385855"
 				  }
 				]
-				}
-			};
-
-			var meter_data_2017 = {
+				}};
+		var meter_data_2017 = {
 			  "markers": {
 			    "marker": [
 			      {
@@ -3707,19 +3730,224 @@
 			        "-lng": "-97.78307699999999"
 			      }
 			    ]
-			  }
-			};
+			  }};
 
+		var meter_15_latlng = [];
 		meter_data_2015.markers.marker.forEach(function(location) {
-			// console.log("Street Address: "+ location["-address"]);
-			console.log("Lat/Long: "+ location["-lat"]+", "+location["-lng"]);
+			meter_15_latlng.push([eval(location["-lat"]), eval(location["-lng"])]);
 		});
-
+		// console.log(JSON.stringify(meter_15_latlng));
+		// meter_15_latlng = an array of arrays of the form:
+		// 				     [ [lat,lng], [lat,lng], ..., [lat,lng] ];
+		var meter_17_latlng = [];
 		meter_data_2017.markers.marker.forEach(function(location) {
-			console.log("Lat/Long: "+ location["-lat"]+", "+location["-lng"]);
+			meter_17_latlng.push([eval(location["-lat"]), eval(location["-lng"])]);
 		});
+		// console.log(JSON.stringify(meter_17_latlng));
+		// meter_17_latlng = an array of arrays of the form:
+		// 				     [ [lat,lng], [lat,lng], ..., [lat,lng] ];
+		
+		var map, overlay, canvas, context, geocoder;
 
-		</script>
-	</body>
+		function initMap() {
+			var mapOptions = {
+				center: new google.maps.LatLng(30.27 ,-97.94),
+				zoom: 13.85,
+				center: {lat: 30.276, lng: -97.741},
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+			var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+			overlay = new google.maps.OverlayView();
+			overlay.draw = function(){};
+			overlay.setMap(map);
+
+			canvas = document.createElement('canvas');
+			canvas.style.position = 'absolute';
+			canvas.width = '750';
+			canvas.height = '650';
+			context = canvas.getContext('2d');
+	        
+	        var triangleCoords = [
+          		{lat: 30.261313, lng: -97.736956},
+          		{lat: 30.266577, lng: -97.756054},
+          		{lat: 30.279660, lng: -97.750389},
+          		{lat: 30.278965, lng: -97.747406},
+          		{lat: 30.282819, lng: -97.746054},
+          		{lat: 30.283586, lng: -97.752290},
+          		{lat: 30.286990, lng: -97.753062},
+          		{lat: 30.296058, lng: -97.748960},
+          		{lat: 30.294617, lng: -97.740974},
+          		{lat: 30.291972, lng: -97.741193},
+          		{lat: 30.287929, lng: -97.724402},
+          		{lat: 30.266558, lng: -97.733820},
+          		{lat: 30.262555, lng: -97.722189},
+          		{lat: 30.257198, lng: -97.724764},
+          		{lat: 30.261313, lng: -97.736956},
+        	];
+
+        	var bermudaTriangle = new google.maps.Polygon({
+          		paths: triangleCoords,
+          		strokeColor: '#FF0222',
+          		strokeOpacity: 0.8,
+          		strokeWeight: 1,
+          		fillColor: '#FF0000',
+          		fillOpacity: 0.1
+        	});
+        	bermudaTriangle.setMap(map);
+      }		
+	</script>
+
+<!-- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJraDhNwsouHdU_ixoEKZ4r8ep64oQpC4&callback=initMap"async defer>
+	</script> -->
+
+
+	<div id="Accessing Data">
+	<h2>All Traffic Violations</h2>
+	<button type="button" 
+			onclick="getData(2015, 'scrolling-text-box', 'display')">
+			Display 2015 Data
+	</button>
+	<button type="button" 
+			onclick="getData(2017, 'scrolling-text-box', 'display')">
+			Display 2017 Data
+	</button>
+	</div>
+
+	<div id="scrolling-text-box">
+	</div> 
+
+	<div id="Parsing Data">
+	<h2>Finding Parking Violations</h2>
+	<button type="button" 
+			onclick="getData(2015, 'Parking Violations 2015', 'count-parking')">
+			Display 2015 Parking Violations
+	</button>
+	<button type="button" 
+		onclick="getData(2017, 'Parking Violations 2017', 'count-parking')">
+		Display 2017 Parking Violations
+	</button>
+
+	<div id="Parking Violations 2015"></div>
+	<div id="Parking Violations 2017"></div>
+
+	<h2>Finding Meter Violations</h2>
+	<button type="button" 
+			onclick="getData(2015, 'Meter Violations 2015', 'count-meter')">
+			Display 2015 Meter Violations
+	</button>
+	<button type="button" 
+		onclick="getData(2017, 'Meter Violations 2017', 'count-meter')">
+		Display 2017 Meter Violations
+	</button>
+
+	<div id="Meter Violations 2015"></div>
+	<div id="Meter Violations 2017"></div>
+
+	<script>
+		function getData(year, displayDivID, task) {
+			console.log("Button clicked");
+			var dataDict = {2015:"https://data.austintexas.gov/resource/t6bu-kybx.json",
+							2017:"https://data.austintexas.gov/resource/y5cf-fbh5.json"};
+		
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var raw_data = this.responseText;
+					var data = eval(this.responseText);
+					if (task=='display'){
+						console.log("display");
+						displayData(raw_data, displayDivID);
+					}
+					else if (task=='count-parking') {  //count parking violations
+						console.log("count-parking");
+						count(data, displayDivID, 'parking');
+					}
+					else if (task=='count-meter') { //count meter violations
+						console.log("count-meter");
+						count(data, displayDivID, 'meter');
+					}
+					else {
+						console.log("Invalid input type");
+					}
+				}
+			};
+			xhttp.open("GET", dataDict[year], true);
+			xhttp.send();
+		}
+
+		function displayData(data, displayDivID) {
+			document.getElementById(displayDivID).innerHTML = data;
+		}
+
+		function count(data, displayDivID, type) {
+			console.log("counting "+type);
+
+			var i = 1;
+			var meter_violation_types = ["parking - expired meter", "parking-expired meter", "expired meter", "parking - pay station receipt not displayed", "parking-pay station receipt not displayed", "pay station receipt not displayed", "parking - expired pay station receipt", "parking-expired pay station receipt", "expired pay station receipt"];
+
+			data.forEach(function(violation) {
+				if (violation.offense_case_type==="PK") {
+					if (type==="parking") {
+						console.log("Parking violation "+i+": "+violation.offense_charge_description);
+						console.log(violation.offense_cross_street, violation.offense_street_name);
+						i++;
+					}
+					if (type==="meter") {
+						if (meter_violation_types.includes(violation.offense_charge_description.toLowerCase())) {
+							console.log("Meter violation "+i+": "+violation.offense_charge_description);
+							console.log(violation.offense_cross_street, violation.offense_street_name);
+							i++;
+						}
+					}
+				}
+
+				var year = displayDivID.slice(-4,);
+				document.getElementById(displayDivID).innerHTML = "Total "+year+" "+type+ " violations = "+i;
+			});
+		}
+
+		function displayHeatmap() {
+			var map = initMap();
+			var heatmap =new google.maps.visualization.HeatmapLayer({
+				data: getPoints(),
+				map: map
+			});
+		}
+
+		function getPoints() {
+			return [
+				new google.maps.LatLng(30.2935352, -97.7430071),
+				new google.maps.LatLng(30.2937352, -97.7430171),
+				new google.maps.LatLng(30.2938352, -97.7430271),
+				new google.maps.LatLng(30.2933352, -97.7430371),
+				new google.maps.LatLng(30.2938352, -97.7430071),
+				new google.maps.LatLng(30.2935352, -97.7435071),
+				new google.maps.LatLng(30.2935352, -97.7438071),
+				new google.maps.LatLng(30.2983535, -97.7439071),
+				new google.maps.LatLng(30.2943352, -97.7430071),
+				new google.maps.LatLng(30.2963532, -97.7430071),
+				new google.maps.LatLng(30.2935652, -97.7430071),
+				new google.maps.LatLng(30.2945352, -97.7430071),
+				new google.maps.LatLng(30.2935752, -97.7433071),
+				new google.maps.LatLng(30.2945352, -97.7434071),
+				new google.maps.LatLng(30.2975352, -97.7438071),
+				new google.maps.LatLng(30.2936352, -97.7430071),
+				new google.maps.LatLng(30.2935352, -97.7430071),
+				new google.maps.LatLng(30.2939352, -97.7439071),
+				new google.maps.LatLng(30.2935352, -97.7430081),
+				new google.maps.LatLng(30.2930352, -97.7430071),
+				new google.maps.LatLng(30.2935052, -97.7430061),
+				new google.maps.LatLng(30.2905352, -97.7430021),
+				new google.maps.LatLng(30.2935052, -97.7430073),
+				new google.maps.LatLng(30.2937352, -97.7430271),
+				new google.maps.LatLng(30.2935312, -97.7430273)
+			];
+		}
+	</script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJraDhNwsouHdU_ixoEKZ4r8ep64oQpC4&libraries=visualization&callback=initMap"async defer>
+	</script>
+</body>
 
 </html>

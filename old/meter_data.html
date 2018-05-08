@@ -1,37 +1,19 @@
-<!-- Parking Project - Cleaner Code
-	 Jocelyn Lorrey & Deanna Delgado -->
-
 <!DOCTYPE html>
 <html>
+	<head>
+		<h2> Parking Problems: Meter Data </h2>
+		<h3> Team TBD: Jocelyn Lorrey and Deanna Delgado</h3>
+		<style>
+			#map {
+				height: 100%;
+			}
+		</style>
+	</head>
 
-<head>
-	<div id="Title">
-		<h1>Parking Problems</h1>
-	</div> 
-
-	<style>
-		/*look into flex box*/
-		#map {
-			width: 900px;
-			height: 500px;
-		}
-		#scrolling-text-box {
-			width: 900px;
-			height: 200px;
-			line-height: 2em;
-			overflow: scroll;
-			padding: 5px;
-			background-color: black;
-			color: green;
-		}
-	</style>
-</head>
-
-<body>
-	<h2>Austin Traffic Violations</h2>
-	<div id="map">Map will go here</div>
-	<script> 
-		var meter_data_2015 = {
+	<body>
+		<div id="map">Map will go here</div>
+		<script>
+			var meter_data_2015 = {
 				"markers": {
 					"marker": [
 				  {
@@ -1655,8 +1637,10 @@
 				    "-lng": "-97.7385855"
 				  }
 				]
-				}};
-		var meter_data_2017 = {
+				}
+			};
+
+			var meter_data_2017 = {
 			  "markers": {
 			    "marker": [
 			      {
@@ -3730,26 +3714,20 @@
 			        "-lng": "-97.78307699999999"
 			      }
 			    ]
-			  }};
+			  }
+			};
 
-		var meter_15_latlng = [];
-		meter_data_2015.markers.marker.forEach(function(location) {
-			meter_15_latlng.push([eval(location["-lat"]), eval(location["-lng"])]);
-		});
-		// console.log(JSON.stringify(meter_15_latlng));
-		// meter_15_latlng = an array of arrays of the form:
-		// 				     [ [lat,lng], [lat,lng], ..., [lat,lng] ];
-		var meter_17_latlng = [];
-		meter_data_2017.markers.marker.forEach(function(location) {
-			meter_17_latlng.push([eval(location["-lat"]), eval(location["-lng"])]);
-		});
-		// console.log(JSON.stringify(meter_17_latlng));
-		// meter_17_latlng = an array of arrays of the form:
-		// 				     [ [lat,lng], [lat,lng], ..., [lat,lng] ];
-		
-		var map, overlay, canvas, context, geocoder;
+		// meter_data_2015.markers.marker.forEach(function(location) {
+		// 	console.log("Lat/Long: "+ location["-lat"]+", "+location["-lng"]);
+		// });
 
+		// meter_data_2017.markers.marker.forEach(function(location) {
+		// 	console.log("Lat/Long: "+ location["-lat"]+", "+location["-lng"]);
+		// });
+
+		var map, overlay, canvas, context, geocoder, heatmap;
 		function initMap() {
+			console.log("init map");
 			var mapOptions = {
 				center: new google.maps.LatLng(30.27 ,-97.94),
 				zoom: 13.85,
@@ -3758,6 +3736,16 @@
 			}
 			var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+			drawZoneLimits(map);
+
+			// heatmap = new google.maps.visualization.HeatmapLayer({
+			// 	data: get_meter15_pts(),
+			// 	map: map
+			// });
+		}
+
+		function drawZoneLimits(map) {
+			console.log("draw zone limits");
 			overlay = new google.maps.OverlayView();
 			overlay.draw = function(){};
 			overlay.setMap(map);
@@ -3795,118 +3783,13 @@
           		fillOpacity: 0.1
         	});
         	bermudaTriangle.setMap(map);
-      }		
-	</script>
-
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJraDhNwsouHdU_ixoEKZ4r8ep64oQpC4&callback=initMap"async defer>
-	</script>
-
-
-	<div id="Accessing Data">
-	<h2>All Traffic Violations</h2>
-	<button type="button" 
-			onclick="getData(2015, 'scrolling-text-box', 'display')">
-			Display 2015 Data
-	</button>
-	<button type="button" 
-			onclick="getData(2017, 'scrolling-text-box', 'display')">
-			Display 2017 Data
-	</button>
-	</div>
-
-	<div id="scrolling-text-box">
-	</div> 
-
-	<div id="Parsing Data">
-	<h2>Finding Parking Violations</h2>
-	<button type="button" 
-			onclick="getData(2015, 'Parking Violations 2015', 'count-parking')">
-			Display 2015 Parking Violations
-	</button>
-	<button type="button" 
-		onclick="getData(2017, 'Parking Violations 2017', 'count-parking')">
-		Display 2017 Parking Violations
-	</button>
-
-	<div id="Parking Violations 2015"></div>
-	<div id="Parking Violations 2017"></div>
-
-	<h2>Finding Meter Violations</h2>
-	<button type="button" 
-			onclick="getData(2015, 'Meter Violations 2015', 'count-meter')">
-			Display 2015 Meter Violations
-	</button>
-	<button type="button" 
-		onclick="getData(2017, 'Meter Violations 2017', 'count-meter')">
-		Display 2017 Meter Violations
-	</button>
-
-	<div id="Meter Violations 2015"></div>
-	<div id="Meter Violations 2017"></div>
-
-	<script>
-		function getData(year, displayDivID, task) {
-			console.log("Button clicked");
-			var dataDict = {2015:"https://data.austintexas.gov/resource/t6bu-kybx.json",
-							2017:"https://data.austintexas.gov/resource/y5cf-fbh5.json"};
+		}
 		
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					var raw_data = this.responseText;
-					var data = eval(this.responseText);
-					if (task=='display'){
-						console.log("display");
-						displayData(raw_data, displayDivID);
-					}
-					else if (task=='count-parking') {  //count parking violations
-						console.log("count-parking");
-						count(data, displayDivID, 'parking');
-					}
-					else if (task=='count-meter') { //count meter violations
-						console.log("count-meter");
-						count(data, displayDivID, 'meter');
-					}
-					else {
-						console.log("Invalid input type");
-					}
-				}
-			};
-			xhttp.open("GET", dataDict[year], true);
-			xhttp.send();
-		}
-
-		function displayData(data, displayDivID) {
-			document.getElementById(displayDivID).innerHTML = data;
-		}
-
-		function count(data, displayDivID, type) {
-			console.log("counting "+type);
-
-			var i = 1;
-			var meter_violation_types = ["parking - expired meter", "parking-expired meter", "expired meter", "parking - pay station receipt not displayed", "parking-pay station receipt not displayed", "pay station receipt not displayed", "parking - expired pay station receipt", "parking-expired pay station receipt", "expired pay station receipt"];
-
-			data.forEach(function(violation) {
-				if (violation.offense_case_type==="PK") {
-					if (type==="parking") {
-						console.log("Parking violation "+i+": "+violation.offense_charge_description);
-						console.log(violation.offense_cross_street, violation.offense_street_name);
-						i++;
-					}
-					if (type==="meter") {
-						if (meter_violation_types.includes(violation.offense_charge_description.toLowerCase())) {
-							console.log("Meter violation "+i+": "+violation.offense_charge_description);
-							console.log(violation.offense_cross_street, violation.offense_street_name);
-							i++;
-						}
-					}
-				}
-
-				var year = displayDivID.slice(-4,);
-				document.getElementById(displayDivID).innerHTML = "Total "+year+" "+type+ " violations = "+i;
-			});
-		}
-	</script>
-</body>
+		</script>
+	
+		<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJraDhNwsouHdU_ixoEKZ4r8ep64oQpC4&libraries=visualization&callback=initMap">
+		</script>
+	</body>
 
 </html>
