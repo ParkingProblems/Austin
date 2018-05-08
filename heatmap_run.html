@@ -1,0 +1,3912 @@
+<!-- Parking Project - Cleaner Code
+	 Jocelyn Lorrey & Deanna Delgado -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<div id="Title">
+		<h1>Parking Problems</h1>
+	</div> 
+
+	<style>
+		/*look into flex box*/
+		#map {
+			width: 900px;
+			height: 500px;
+		}
+		#scrolling-text-box {
+			width: 900px;
+			height: 200px;
+			line-height: 2em;
+			overflow: scroll;
+			padding: 5px;
+			background-color: black;
+			color: green;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>Austin Traffic Violations</h2>
+	<div id="map">Map will go here</div>
+	<script> 
+		var meter_data_2015 = {
+				"markers": {
+					"marker": [
+				  {
+				    "-address": " 600 W28, Austin, TX",
+				    "-lat": "30.2935352",
+				    "-lng": "-97.7430071"
+				  },
+				  {
+				    "-address": " 1600 BARTON SPRINGS, Austin, TX",
+				    "-lat": "30.2634275",
+				    "-lng": "-97.76089089999999"
+				  },
+				  {
+				    "-address": " 90 RAINEY ST, Austin, TX",
+				    "-lat": "30.2603052",
+				    "-lng": "-97.73846630000003"
+				  },
+				  {
+				    "-address": " 2300 RED RIVER, Austin, TX",
+				    "-lat": "30.2850357",
+				    "-lng": "-97.7288552"
+				  },
+				  {
+				    "-address": " 600 PARK PL, Austin, TX",
+				    "-lat": "30.2900532",
+				    "-lng": "-97.734466"
+				  },
+				  {
+				    "-address": " 500 RIO GRANDE, Austin, TX",
+				    "-lat": "30.2692032",
+				    "-lng": "-97.749796"
+				  },
+				  {
+				    "-address": " 300 8TH ST W, Austin, TX",
+				    "-lat": "30.2705783",
+				    "-lng": "-97.7444989"
+				  },
+				  {
+				    "-address": " 400 BOWIE ST, Austin, TX",
+				    "-lat": "30.2694879",
+				    "-lng": "-97.75356959999999"
+				  },
+				  {
+				    "-address": " 1500 EAST 5TH ST, Austin, TX",
+				    "-lat": "30.2624883",
+				    "-lng": "-97.72794750000003"
+				  },
+				  {
+				    "-address": " 500 EAST 12TH, Austin, TX",
+				    "-lat": "30.2735599",
+				    "-lng": "-97.73603800000001"
+				  },
+				  {
+				    "-address": " 1200 25TH ST W, Austin, TX",
+				    "-lat": "30.2899926",
+				    "-lng": "-97.75118399999997"
+				  },
+				  {
+				    "-address": " 1100 ROSE ST, Austin, TX",
+				    "-lat": "30.2706103",
+				    "-lng": "-97.75619460000001"
+				  },
+				  {
+				    "-address": " 400 E 5TH STREET, Austin, TX",
+				    "-lat": "30.2661415",
+				    "-lng": "-97.73967399999998"
+				  },
+				  {
+				    "-address": " MACC LOT, Austin, TX",
+				    "-lat": "30.2581744",
+				    "-lng": "-97.7400399"
+				  },
+				  {
+				    "-address": " 2500 LONGVIEW, Austin, TX",
+				    "-lat": "30.2896694",
+				    "-lng": "-97.75074459999996"
+				  },
+				  {
+				    "-address": " MACC LOT, Austin, TX",
+				    "-lat": "30.2581744",
+				    "-lng": "-97.7400399"
+				  },
+				  {
+				    "-address": " 600 SABINE ST, Austin, TX",
+				    "-lat": "30.2663927",
+				    "-lng": "-97.73625959999998"
+				  },
+				  {
+				    "-address": " 300 4TH ST E, Austin, TX",
+				    "-lat": "30.2655533",
+				    "-lng": "-97.74022739999998"
+				  },
+				  {
+				    "-address": " 600 ONION, Austin, TX",
+				    "-lat": "30.2637293",
+				    "-lng": "-97.7275186"
+				  },
+				  {
+				    "-address": " 1400 EAST 6TH, Austin, TX",
+				    "-lat": "30.263888",
+				    "-lng": "-97.72809899999999"
+				  },
+				  {
+				    "-address": " 500 BAYLOR ST, Austin, TX",
+				    "-lat": "30.2711819",
+				    "-lng": "-97.75588040000002"
+				  },
+				  {
+				    "-address": " 500 CONGRESS AV, Austin, TX",
+				    "-lat": "30.2673804",
+				    "-lng": "-97.74341020000003"
+				  },
+				  {
+				    "-address": " 200 TRINITY, Austin, TX",
+				    "-lat": "30.263793",
+				    "-lng": "-97.74115700000004"
+				  },
+				  {
+				    "-address": " 500 8TH ST E, Austin, TX",
+				    "-lat": "30.268881",
+				    "-lng": "-97.73725200000001"
+				  },
+				  {
+				    "-address": " 700 SAN JACINTO, Austin, TX",
+				    "-lat": "30.2689471",
+				    "-lng": "-97.7403971"
+				  },
+				  {
+				    "-address": " 400 7TH ST W, Austin, TX",
+				    "-lat": "30.2699975",
+				    "-lng": "-97.7459728"
+				  },
+				  {
+				    "-address": " 1000 E 6TH ST, Austin, TX",
+				    "-lat": "30.2651766",
+				    "-lng": "-97.7322072"
+				  },
+				  {
+				    "-address": " 40 EAST AVENUE, Austin, TX",
+				    "-lat": "30.2555843",
+				    "-lng": "-97.73881879999999"
+				  },
+				  {
+				    "-address": " 1200 SAN ANT. ST, Austin, TX",
+				    "-lat": "30.2754395",
+				    "-lng": "-97.74534119999998"
+				  },
+				  {
+				    "-address": " 400 8TH ST E, Austin, TX",
+				    "-lat": "30.269123",
+				    "-lng": "-97.73811"
+				  },
+				  {
+				    "-address": " 700 RIO GRANDE ST, Austin, TX",
+				    "-lat": "30.271131",
+				    "-lng": "-97.74938309999999"
+				  },
+				  {
+				    "-address": " 500 6TH ST WEST, Austin, TX",
+				    "-lat": "30.2696472",
+				    "-lng": "-97.74748449999998"
+				  },
+				  {
+				    "-address": " 1500 EAST 6TH, Austin, TX",
+				    "-lat": "30.2634308",
+				    "-lng": "-97.72726399999999"
+				  },
+				  {
+				    "-address": " 400 3RD ST W, Austin, TX",
+				    "-lat": "30.2662331",
+				    "-lng": "-97.74733959999998"
+				  },
+				  {
+				    "-address": " 400 JOSEPHINE ST, Austin, TX",
+				    "-lat": "30.2622322",
+				    "-lng": "-97.75861150000003"
+				  },
+				  {
+				    "-address": " 500 BAYLOR, Austin, TX",
+				    "-lat": "30.2711819",
+				    "-lng": "-97.75588040000002"
+				  },
+				  {
+				    "-address": " 1100 EAST 6TH, Austin, TX",
+				    "-lat": "30.2648498",
+				    "-lng": "-97.73129489999997"
+				  },
+				  {
+				    "-address": " 700 7TH ST E, Austin, TX",
+				    "-lat": "30.2674769",
+				    "-lng": "-97.73496539999996"
+				  },
+				  {
+				    "-address": " 200 W 9TH, Austin, TX",
+				    "-lat": "30.2710325",
+				    "-lng": "-97.74191869999999"
+				  },
+				  {
+				    "-address": " 200 BLOCK BRUSHY STREET, Austin, TX",
+				    "-lat": "30.2618407",
+				    "-lng": "-97.7351774"
+				  },
+				  {
+				    "-address": " 1200 RIO GRANDE, Austin, TX",
+				    "-lat": "30.2758221",
+				    "-lng": "-97.74732269999998"
+				  },
+				  {
+				    "-address": " 60 RAINEY ST, Austin, TX",
+				    "-lat": "30.2581477",
+				    "-lng": "-97.73929659999999"
+				  },
+				  {
+				    "-address": " 600 RIO GRANDE, Austin, TX",
+				    "-lat": "30.269945",
+				    "-lng": "-97.74952389999999"
+				  },
+				  {
+				    "-address": " 600 WEST AVENUE, Austin, TX",
+				    "-lat": "30.2702478",
+				    "-lng": "-97.75058589999998"
+				  },
+				  {
+				    "-address": " 400 8TH E, Austin, TX",
+				    "-lat": "30.269123",
+				    "-lng": "-97.73811"
+				  },
+				  {
+				    "-address": " 300 E 7TH ST, Austin, TX",
+				    "-lat": "30.2685022",
+				    "-lng": "-97.7395219"
+				  },
+				  {
+				    "-address": " 200 9TH ST W, Austin, TX",
+				    "-lat": "30.2710325",
+				    "-lng": "-97.74191869999999"
+				  },
+				  {
+				    "-address": " 400 EAST 4TH, Austin, TX",
+				    "-lat": "30.2652398",
+				    "-lng": "-97.73991030000002"
+				  },
+				  {
+				    "-address": " 600 16TH ST W, Austin, TX",
+				    "-lat": "30.2794534",
+				    "-lng": "-97.7448139"
+				  },
+				  {
+				    "-address": " 1200 E 6TH ST, Austin, TX",
+				    "-lat": "30.2645069",
+				    "-lng": "-97.73027660000002"
+				  },
+				  {
+				    "-address": " 1100 NUECES ST, Austin, TX",
+				    "-lat": "30.2745849",
+				    "-lng": "-97.74689619999998"
+				  },
+				  {
+				    "-address": " BUTLER SHORES, Austin, TX",
+				    "-lat": "30.2653872",
+				    "-lng": "-97.76025299999998"
+				  },
+				  {
+				    "-address": " 1500 EAST 4TH STREET, Austin, TX",
+				    "-lat": "30.2617445",
+				    "-lng": "-97.72813380000002"
+				  },
+				  {
+				    "-address": " 1200 EAST 5TH, Austin, TX",
+				    "-lat": "30.2635096",
+				    "-lng": "-97.73093169999999"
+				  },
+				  {
+				    "-address": " 700 SAN ANT. ST, Austin, TX",
+				    "-lat": "30.270485",
+				    "-lng": "-97.74719390000001"
+				  },
+				  {
+				    "-address": " 400 BAYLOR, Austin, TX",
+				    "-lat": "30.2707249",
+				    "-lng": "-97.75611800000001"
+				  },
+				  {
+				    "-address": " 200 W 27TH STREET, Austin, TX",
+				    "-lat": "30.2918066",
+				    "-lng": "-97.73892569999998"
+				  },
+				  {
+				    "-address": " 1700 EAST 6TH STREET, Austin, TX",
+				    "-lat": "30.2626731",
+				    "-lng": "-97.72416679999998"
+				  },
+				  {
+				    "-address": " 1400 SAN ANTONIO, Austin, TX",
+				    "-lat": "30.2772616",
+				    "-lng": "-97.74443730000002"
+				  },
+				  {
+				    "-address": " 100 4TH ST E, Austin, TX",
+				    "-lat": "30.2661969",
+				    "-lng": "-97.74347510000001"
+				  },
+				  {
+				    "-address": " 300 13TH WEST, Austin, TX",
+				    "-lat": "30.2757142",
+				    "-lng": "-97.74262440000001"
+				  },
+				  {
+				    "-address": " 900 DEAN KEETON EAST, Austin, TX",
+				    "-lat": "30.2878241",
+				    "-lng": "-97.7267046"
+				  },
+				  {
+				    "-address": " 1300 E6TH, Austin, TX",
+				    "-lat": "30.2641192",
+				    "-lng": "-97.7292582"
+				  },
+				  {
+				    "-address": " 2300 SAN ANT. ST, Austin, TX",
+				    "-lat": "30.2869314",
+				    "-lng": "-97.74298579999999"
+				  },
+				  {
+				    "-address": " 600 21ST ST W, Austin, TX",
+				    "-lat": "30.2839548",
+				    "-lng": "-97.74403510000002"
+				  },
+				  {
+				    "-address": " 80 RAINEY ST, Austin, TX",
+				    "-lat": "30.2592517",
+				    "-lng": "-97.73904979999998"
+				  },
+				  {
+				    "-address": " 500 WEST 9TH, Austin, TX",
+				    "-lat": "30.272142",
+				    "-lng": "-97.7463487"
+				  },
+				  {
+				    "-address": " 50 EAST AVE, Austin, TX",
+				    "-lat": "30.2567486",
+				    "-lng": "-97.73878689999998"
+				  },
+				  {
+				    "-address": " 700 COLORADO ST, Austin, TX",
+				    "-lat": "30.2700535",
+				    "-lng": "-97.7438017"
+				  },
+				  {
+				    "-address": " 500 WALLER, Austin, TX",
+				    "-lat": "30.26352199999999",
+				    "-lng": "-97.7309376"
+				  },
+				  {
+				    "-address": " 400 8TH ST E, Austin, TX",
+				    "-lat": "30.269123",
+				    "-lng": "-97.73811"
+				  },
+				  {
+				    "-address": " 400 10TH ST WEST, Austin, TX",
+				    "-lat": "30.2734",
+				    "-lng": "-97.74532299999998"
+				  },
+				  {
+				    "-address": " 2100 NUECES ST, Austin, TX",
+				    "-lat": "30.2841641",
+				    "-lng": "-97.74434389999999"
+				  },
+				  {
+				    "-address": " 500 8TH ST E, Austin, TX",
+				    "-lat": "30.268881",
+				    "-lng": "-97.73725200000001"
+				  },
+				  {
+				    "-address": " 50 RAINEY, Austin, TX",
+				    "-lat": "30.2574627",
+				    "-lng": "-97.73946790000002"
+				  },
+				  {
+				    "-address": " 800 WEST 3RD, Austin, TX",
+				    "-lat": "30.2679817",
+				    "-lng": "-97.7519107"
+				  },
+				  {
+				    "-address": " 600 SAN MARCOS, Austin, TX",
+				    "-lat": "30.2651248",
+				    "-lng": "-97.7325232"
+				  },
+				  {
+				    "-address": " MACC LOT, Austin, TX",
+				    "-lat": "30.2581744",
+				    "-lng": "-97.7400399"
+				  },
+				  {
+				    "-address": " 500 BRAZOS, Austin, TX",
+				    "-lat": "30.2667619",
+				    "-lng": "-97.7418351"
+				  },
+				  {
+				    "-address": " MACC LOT, Austin, TX",
+				    "-lat": "30.2581744",
+				    "-lng": "-97.7400399"
+				  },
+				  {
+				    "-address": " 800 3RD ST W, Austin, TX",
+				    "-lat": "30.2679817",
+				    "-lng": "-97.7519107"
+				  },
+				  {
+				    "-address": " 300 DEAN KEETON W, Austin, TX",
+				    "-lat": "30.2902267",
+				    "-lng": "-97.74077840000001"
+				  },
+				  {
+				    "-address": " 800 SAN ANTONIO, Austin, TX",
+				    "-lat": "30.2714079",
+				    "-lng": "-97.74686910000003"
+				  },
+				  {
+				    "-address": " 800 SAN ANTONIO, Austin, TX",
+				    "-lat": "30.2714079",
+				    "-lng": "-97.74686910000003"
+				  },
+				  {
+				    "-address": " 500 SAN ANT. ST, Austin, TX",
+				    "-lat": "30.2685728",
+				    "-lng": "-97.74768159999996"
+				  },
+				  {
+				    "-address": " 1000 EAST 5TH, Austin, TX",
+				    "-lat": "30.2640381",
+				    "-lng": "-97.73209689999999"
+				  },
+				  {
+				    "-address": " 500 W 7TH ST, Austin, TX",
+				    "-lat": "30.2704487",
+				    "-lng": "-97.74717720000001"
+				  },
+				  {
+				    "-address": " 600 NUECES, Austin, TX",
+				    "-lat": "30.2696374",
+				    "-lng": "-97.7484442"
+				  },
+				  {
+				    "-address": " 500 COLORADO ST, Austin, TX",
+				    "-lat": "30.269666",
+				    "-lng": "-97.74401439999997"
+				  },
+				  {
+				    "-address": " 300 NUECES ST, Austin, TX",
+				    "-lat": "30.2668455",
+				    "-lng": "-97.74948919999997"
+				  },
+				  {
+				    "-address": " 500 WALLER, Austin, TX",
+				    "-lat": "30.26352199999999",
+				    "-lng": "-97.7309376"
+				  },
+				  {
+				    "-address": " 700 W 5TH ST, Austin, TX",
+				    "-lat": "30.2692685",
+				    "-lng": "-97.7500713"
+				  },
+				  {
+				    "-address": " 600 NECHES, Austin, TX",
+				    "-lat": "30.2667911",
+				    "-lng": "-97.73824389999999"
+				  },
+				  {
+				    "-address": " 900 EAST 5TH STREET, Austin, TX",
+				    "-lat": "30.2645139",
+				    "-lng": "-97.73396600000001"
+				  },
+				  {
+				    "-address": " 300 W11TH, Austin, TX",
+				    "-lat": "30.2734128",
+				    "-lng": "-97.74347209999996"
+				  },
+				  {
+				    "-address": " 600 COLORADO, Austin, TX",
+				    "-lat": "30.2698206",
+				    "-lng": "-97.74361640000001"
+				  },
+				  {
+				    "-address": " 700 SAN ANT. ST, Austin, TX",
+				    "-lat": "30.270485",
+				    "-lng": "-97.74719390000001"
+				  },
+				  {
+				    "-address": " 1200 25T ST WEST, Austin, TX",
+				    "-lat": "30.2899926",
+				    "-lng": "-97.75118399999997"
+				  },
+				  {
+				    "-address": " 600 COMAL, Austin, TX",
+				    "-lat": "30.2640565",
+				    "-lng": "-97.7259454"
+				  },
+				  {
+				    "-address": " 2000 UNIVERSITY AV, Austin, TX",
+				    "-lat": "30.282718",
+				    "-lng": "-97.74011289999999"
+				  },
+				  {
+				    "-address": " 800 WEST 3RD, Austin, TX",
+				    "-lat": "30.2679817",
+				    "-lng": "-97.7519107"
+				  },
+				  {
+				    "-address": " 400 BAYLOR ST, Austin, TX",
+				    "-lat": "30.2707249",
+				    "-lng": "-97.75611800000001"
+				  },
+				  {
+				    "-address": " 600 SAN ANTONIO, Austin, TX",
+				    "-lat": "30.2693257",
+				    "-lng": "-97.7473622"
+				  },
+				  {
+				    "-address": " 300 LEE BARTON, Austin, TX",
+				    "-lat": "30.2618829",
+				    "-lng": "-97.75756560000002"
+				  },
+				  {
+				    "-address": " 700 W 6TH ST, Austin, TX",
+				    "-lat": "30.2702542",
+				    "-lng": "-97.74971269999998"
+				  },
+				  {
+				    "-address": " 500 8TH STREET WEST, Austin, TX",
+				    "-lat": "30.2712128",
+				    "-lng": "-97.7466824"
+				  },
+				  {
+				    "-address": " 400 E 7TH ST, Austin, TX",
+				    "-lat": "30.2680167",
+				    "-lng": "-97.73898070000001"
+				  },
+				  {
+				    "-address": " 400 14TH ST W, Austin, TX",
+				    "-lat": "30.2773128",
+				    "-lng": "-97.74358000000001"
+				  },
+				  {
+				    "-address": " 200 4TH ST E, Austin, TX",
+				    "-lat": "30.2658171",
+				    "-lng": "-97.7421827"
+				  },
+				  {
+				    "-address": " 400 E 8TH ST, Austin, TX",
+				    "-lat": "30.269123",
+				    "-lng": "-97.73811"
+				  },
+				  {
+				    "-address": " 800 SAN ANTONIO, Austin, TX",
+				    "-lat": "30.2714079",
+				    "-lng": "-97.74686910000003"
+				  },
+				  {
+				    "-address": " 600 3RD ST E, Austin, TX",
+				    "-lat": "30.26378159999999",
+				    "-lng": "-97.7379995"
+				  },
+				  {
+				    "-address": " 400 WEST 10TH, Austin, TX",
+				    "-lat": "30.2734",
+				    "-lng": "-97.74532299999998"
+				  },
+				  {
+				    "-address": " 100 7TH ST W, Austin, TX",
+				    "-lat": "30.2689682",
+				    "-lng": "-97.74247880000001"
+				  },
+				  {
+				    "-address": " 300 18TH ST W, Austin, TX",
+				    "-lat": "30.2803043",
+				    "-lng": "-97.74094330000003"
+				  },
+				  {
+				    "-address": " 200 4TH ST E, Austin, TX",
+				    "-lat": "30.2658171",
+				    "-lng": "-97.7421827"
+				  },
+				  {
+				    "-address": " 1100 ROSE, Austin, TX",
+				    "-lat": "30.4871032",
+				    "-lng": "-97.73003640000002"
+				  },
+				  {
+				    "-address": " 200 NUECES, Austin, TX",
+				    "-lat": "30.2667194",
+				    "-lng": "-97.75001029999999"
+				  },
+				  {
+				    "-address": " 500 EAST 12TH, Austin, TX",
+				    "-lat": "30.2735599",
+				    "-lng": "-97.73603800000001"
+				  },
+				  {
+				    "-address": " 300 18TH ST W, Austin, TX",
+				    "-lat": "30.2803043",
+				    "-lng": "-97.74094330000003"
+				  },
+				  {
+				    "-address": " 400 RIO GRANDE, Austin, TX",
+				    "-lat": "30.26811499999999",
+				    "-lng": "-97.75019020000002"
+				  },
+				  {
+				    "-address": " 1200 RED RIVER, Austin, TX",
+				    "-lat": "30.2722352",
+				    "-lng": "-97.73506580000003"
+				  },
+				  {
+				    "-address": " 200 E 8TH ST, Austin, TX",
+				    "-lat": "30.2697161",
+				    "-lng": "-97.74026979999996"
+				  },
+				  {
+				    "-address": " 700 TRINITY ST, Austin, TX",
+				    "-lat": "30.2682767",
+				    "-lng": "-97.7389498"
+				  },
+				  {
+				    "-address": " 900 DEAN KEETON E, Austin, TX",
+				    "-lat": "30.2878241",
+				    "-lng": "-97.7267046"
+				  },
+				  {
+				    "-address": " 200 W 4TH, Austin, TX",
+				    "-lat": "30.2665708",
+				    "-lng": "-97.74486719999999"
+				  },
+				  {
+				    "-address": " 700 NUECES, Austin, TX",
+				    "-lat": "30.270578",
+				    "-lng": "-97.74810709999997"
+				  },
+				  {
+				    "-address": " 500 4TH ST E, Austin, TX",
+				    "-lat": "30.2651364",
+				    "-lng": "-97.73819040000001"
+				  },
+				  {
+				    "-address": " 600 TRINITY ST, Austin, TX",
+				    "-lat": "30.2670774",
+				    "-lng": "-97.73933149999999"
+				  },
+				  {
+				    "-address": " 400 8TH ST E, Austin, TX",
+				    "-lat": "30.269123",
+				    "-lng": "-97.73811"
+				  },
+				  {
+				    "-address": " 500 4TH ST WEST, Austin, TX",
+				    "-lat": "30.26746379999999",
+				    "-lng": "-97.74806480000001"
+				  },
+				  {
+				    "-address": " 800 BRAZOS ST, Austin, TX",
+				    "-lat": "30.2699818",
+				    "-lng": "-97.74107609999999"
+				  },
+				  {
+				    "-address": " 200 BRAZOS, Austin, TX",
+				    "-lat": "30.2639381",
+				    "-lng": "-97.742865"
+				  },
+				  {
+				    "-address": " 2200 NUECES, Austin, TX",
+				    "-lat": "30.2854006",
+				    "-lng": "-97.74418789999999"
+				  },
+				  {
+				    "-address": " 200 W4TH, Austin, TX",
+				    "-lat": "30.2665708",
+				    "-lng": "-97.74486719999999"
+				  },
+				  {
+				    "-address": " 1200 WEST AVE, Austin, TX",
+				    "-lat": "30.2761224",
+				    "-lng": "-97.74840840000002"
+				  },
+				  {
+				    "-address": " 300 W 17TH ST, Austin, TX",
+				    "-lat": "30.2794139",
+				    "-lng": "-97.7412668"
+				  },
+				  {
+				    "-address": " 100 5TH ST W, Austin, TX",
+				    "-lat": "30.26711929999999",
+				    "-lng": "-97.7431378"
+				  },
+				  {
+				    "-address": " 500 SAN JACINTO, Austin, TX",
+				    "-lat": "30.2667942",
+				    "-lng": "-97.7409341"
+				  },
+				  {
+				    "-address": " 700 TRINITY ST, Austin, TX",
+				    "-lat": "30.2682767",
+				    "-lng": "-97.7389498"
+				  },
+				  {
+				    "-address": " 100 WEST 9TH, Austin, TX",
+				    "-lat": "30.2708597",
+				    "-lng": "-97.74178"
+				  },
+				  {
+				    "-address": " 300 WEST 8TH, Austin, TX",
+				    "-lat": "30.2705783",
+				    "-lng": "-97.7444989"
+				  },
+				  {
+				    "-address": " 1600 TOOMEY RD, Austin, TX",
+				    "-lat": "30.2639388",
+				    "-lng": "-97.76074890000001"
+				  },
+				  {
+				    "-address": " 300 13TH ST W, Austin, TX",
+				    "-lat": "30.2757142",
+				    "-lng": "-97.74262440000001"
+				  },
+				  {
+				    "-address": " 700 SAN JACINTO, Austin, TX",
+				    "-lat": "30.2689471",
+				    "-lng": "-97.7403971"
+				  },
+				  {
+				    "-address": " 600 WEST AVE, Austin, TX",
+				    "-lat": "30.2702478",
+				    "-lng": "-97.75058589999998"
+				  },
+				  {
+				    "-address": " 500 BRUSHY, Austin, TX",
+				    "-lat": "30.2645267",
+				    "-lng": "-97.73397210000002"
+				  },
+				  {
+				    "-address": " 600 3RD ST E, Austin, TX",
+				    "-lat": "30.26378159999999",
+				    "-lng": "-97.7379995"
+				  },
+				  {
+				    "-address": " 400 E 7TH ST, Austin, TX",
+				    "-lat": "30.2680167",
+				    "-lng": "-97.73898070000001"
+				  },
+				  {
+				    "-address": " LIBRARY LOT, Austin, TX",
+				    "-lat": "30.2858226",
+				    "-lng": "-97.72926110000003"
+				  },
+				  {
+				    "-address": " 500 4TH STREET WEST, Austin, TX",
+				    "-lat": "30.26746379999999",
+				    "-lng": "-97.74806480000001"
+				  },
+				  {
+				    "-address": " 1900 SAN ANTONIO, Austin, TX",
+				    "-lat": "30.2820733",
+				    "-lng": "-97.7431987"
+				  },
+				  {
+				    "-address": " 600 NECHES ST, Austin, TX",
+				    "-lat": "30.2667911",
+				    "-lng": "-97.73824389999999"
+				  },
+				  {
+				    "-address": " 100 WEST 27TH, Austin, TX",
+				    "-lat": "30.2917307",
+				    "-lng": "-97.73794190000001"
+				  },
+				  {
+				    "-address": " 500 7TH ST WEST, Austin, TX",
+				    "-lat": "30.2704487",
+				    "-lng": "-97.74717720000001"
+				  },
+				  {
+				    "-address": " 300 W 11TH ST, Austin, TX",
+				    "-lat": "30.2734128",
+				    "-lng": "-97.74347209999996"
+				  },
+				  {
+				    "-address": " 2500 SAN ANT. ST, Austin, TX",
+				    "-lat": "30.2892716",
+				    "-lng": "-97.74241289999998"
+				  },
+				  {
+				    "-address": " 1400 WEST, Austin, TX",
+				    "-lat": "30.2782419",
+				    "-lng": "-97.74793009999996"
+				  },
+				  {
+				    "-address": " I-35 SOUTH LOT, Austin, TX",
+				    "-lat": "30.210632",
+				    "-lng": "-97.75433399999997"
+				  },
+				  {
+				    "-address": " 700 NECHES ST, Austin, TX",
+				    "-lat": "30.2677279",
+				    "-lng": "-97.73790889999998"
+				  },
+				  {
+				    "-address": " 300 25TH ST W, Austin, TX",
+				    "-lat": "30.288706",
+				    "-lng": "-97.74037049999998"
+				  },
+				  {
+				    "-address": " 1200 EAST 6TH, Austin, TX",
+				    "-lat": "30.2645069",
+				    "-lng": "-97.73027660000002"
+				  },
+				  {
+				    "-address": " 300 BRAZOS ST, Austin, TX",
+				    "-lat": "30.2651035",
+				    "-lng": "-97.7424532"
+				  },
+				  {
+				    "-address": " BUTLERSHORES, Austin, TX",
+				    "-lat": "30.2653872",
+				    "-lng": "-97.76025299999998"
+				  },
+				  {
+				    "-address": " 2400 NUECES ST, Austin, TX",
+				    "-lat": "30.2883838",
+				    "-lng": "-97.74343340000001"
+				  },
+				  {
+				    "-address": " 1300 E 5TH STREET, Austin, TX",
+				    "-lat": "30.2633143",
+				    "-lng": "-97.72948919999999"
+				  },
+				  {
+				    "-address": " 600 21ST ST W, Austin, TX",
+				    "-lat": "30.2839548",
+				    "-lng": "-97.74403510000002"
+				  },
+				  {
+				    "-address": " 300 CONGRESS AVENUE, Austin, TX",
+				    "-lat": "30.26558",
+				    "-lng": "-97.744191"
+				  },
+				  {
+				    "-address": " 200 COLORADO ST, Austin, TX",
+				    "-lat": "30.2754245",
+				    "-lng": "-97.74203549999999"
+				  },
+				  {
+				    "-address": " 200 COLORADO ST, Austin, TX",
+				    "-lat": "30.2754245",
+				    "-lng": "-97.74203549999999"
+				  },
+				  {
+				    "-address": " 700 GUADALUPE, Austin, TX",
+				    "-lat": "30.2703758",
+				    "-lng": "-97.74614759999997"
+				  },
+				  {
+				    "-address": " 700 23RD ST WEST, Austin, TX",
+				    "-lat": "30.2872216",
+				    "-lng": "-97.74475580000001"
+				  },
+				  {
+				    "-address": " 800 W 9TH ST, Austin, TX",
+				    "-lat": "30.2730544",
+				    "-lng": "-97.7495581"
+				  },
+				  {
+				    "-address": " 400 WEST 9TH, Austin, TX",
+				    "-lat": "30.2718481",
+				    "-lng": "-97.74526200000003"
+				  },
+				  {
+				    "-address": " 500 W4TH, Austin, TX",
+				    "-lat": "30.26746379999999",
+				    "-lng": "-97.74806480000001"
+				  },
+				  {
+				    "-address": " 900 E 5TH ST, Austin, TX",
+				    "-lat": "30.2645139",
+				    "-lng": "-97.73396600000001"
+				  },
+				  {
+				    "-address": " 900 E 5TH ST, Austin, TX",
+				    "-lat": "30.2645139",
+				    "-lng": "-97.73396600000001"
+				  },
+				  {
+				    "-address": " 600 MEDINA, Austin, TX",
+				    "-lat": "30.2647702",
+				    "-lng": "-97.7315132"
+				  },
+				  {
+				    "-address": " 1700 6TH E, Austin, TX",
+				    "-lat": "30.2626731",
+				    "-lng": "-97.72416679999998"
+				  },
+				  {
+				    "-address": " 1000 GUADALUPE, Austin, TX",
+				    "-lat": "30.2734081",
+				    "-lng": "-97.7452351"
+				  },
+				  {
+				    "-address": " 500 WEST 16 STREET, Austin, TX",
+				    "-lat": "30.2794187",
+				    "-lng": "-97.7439407"
+				  },
+				  {
+				    "-address": " 1300 WEST AVE, Austin, TX",
+				    "-lat": "30.2775836",
+				    "-lng": "-97.7481856"
+				  },
+				  {
+				    "-address": " 400 W 10TH STREET, Austin, TX",
+				    "-lat": "30.2734",
+				    "-lng": "-97.74532299999998"
+				  },
+				  {
+				    "-address": " 400 W 10TH STREET, Austin, TX",
+				    "-lat": "30.2734",
+				    "-lng": "-97.74532299999998"
+				  },
+				  {
+				    "-address": " 600 WEST 11TH, Austin, TX",
+				    "-lat": "30.2743049",
+				    "-lng": "-97.7467221"
+				  },
+				  {
+				    "-address": " 600 WEST 11 STREET, Austin, TX",
+				    "-lat": "30.2743049",
+				    "-lng": "-97.7467221"
+				  },
+				  {
+				    "-address": " 400 5TH W, Austin, TX",
+				    "-lat": "30.2681323",
+				    "-lng": "-97.74666100000002"
+				  },
+				  {
+				    "-address": " 600 GUADALUPE, Austin, TX",
+				    "-lat": "30.26934929999999",
+				    "-lng": "-97.74646589999998"
+				  },
+				  {
+				    "-address": " 600 DAVIS, Austin, TX",
+				    "-lat": "30.2601478",
+				    "-lng": "-97.7384606"
+				  },
+				  {
+				    "-address": " 2200 SAN ANTONIO, Austin, TX",
+				    "-lat": "30.2852942",
+				    "-lng": "-97.74324769999998"
+				  },
+				  {
+				    "-address": " 400 WEST 10TH STREET, Austin, TX",
+				    "-lat": "30.2734",
+				    "-lng": "-97.74532299999998"
+				  },
+				  {
+				    "-address": " 300 10TH ST W, Austin, TX",
+				    "-lat": "30.27244719999999",
+				    "-lng": "-97.74383210000002"
+				  },
+				  {
+				    "-address": " 2300 GUADALUPE ST, Austin, TX",
+				    "-lat": "30.28663349999999",
+				    "-lng": "-97.7419673"
+				  },
+				  {
+				    "-address": " 500 WEST 7TH, Austin, TX",
+				    "-lat": "30.2704487",
+				    "-lng": "-97.74717720000001"
+				  },
+				  {
+				    "-address": " 500 ATTAYAC, Austin, TX",
+				    "-lat": "30.263179",
+				    "-lng": "-97.72990779999998"
+				  },
+				  {
+				    "-address": " 1900 NUECES ST, Austin, TX",
+				    "-lat": "30.2823794",
+				    "-lng": "-97.74417699999998"
+				  },
+				  {
+				    "-address": " 400 W10TH, Austin, TX",
+				    "-lat": "30.2734",
+				    "-lng": "-97.74532299999998"
+				  },
+				  {
+				    "-address": " 800 GUADALUPE ST, Austin, TX",
+				    "-lat": "30.2713027",
+				    "-lng": "-97.7459991"
+				  },
+				  {
+				    "-address": " 400 RIO GRANDE ST, Austin, TX",
+				    "-lat": "30.26811499999999",
+				    "-lng": "-97.75019020000002"
+				  },
+				  {
+				    "-address": " 600 WEST AV, Austin, TX",
+				    "-lat": "30.2702478",
+				    "-lng": "-97.75058589999998"
+				  },
+				  {
+				    "-address": " 300 WEST AVE, Austin, TX",
+				    "-lat": "30.2682122",
+				    "-lng": "-97.7515009"
+				  },
+				  {
+				    "-address": " 500 11TH WEST, Austin, TX",
+				    "-lat": "30.2740085",
+				    "-lng": "-97.74561619999997"
+				  },
+				  {
+				    "-address": " 700 SAN JACINTO BLVD, Austin, TX",
+				    "-lat": "30.2689471",
+				    "-lng": "-97.7403971"
+				  },
+				  {
+				    "-address": " 700 TRINITY, Austin, TX",
+				    "-lat": "30.2682767",
+				    "-lng": "-97.7389498"
+				  },
+				  {
+				    "-address": " 700 TRINITY, Austin, TX",
+				    "-lat": "30.2682767",
+				    "-lng": "-97.7389498"
+				  },
+				  {
+				    "-address": " 200 E 4TH ST, Austin, TX",
+				    "-lat": "30.2658171",
+				    "-lng": "-97.7421827"
+				  },
+				  {
+				    "-address": " 500 7TH ST W, Austin, TX",
+				    "-lat": "30.2704487",
+				    "-lng": "-97.74717720000001"
+				  },
+				  {
+				    "-address": " 90 TRINITY, Austin, TX",
+				    "-lat": "30.2622821",
+				    "-lng": "-97.74127550000003"
+				  },
+				  {
+				    "-address": " 700 SAN JACINTO, Austin, TX",
+				    "-lat": "30.2689471",
+				    "-lng": "-97.7403971"
+				  },
+				  {
+				    "-address": " 400 10TH STREET WEST, Austin, TX",
+				    "-lat": "30.2734",
+				    "-lng": "-97.74532299999998"
+				  },
+				  {
+				    "-address": " 700 13 1/2 ST W, Austin, TX",
+				    "-lat": "30.27734389999999",
+				    "-lng": "-97.74676979999998"
+				  },
+				  {
+				    "-address": " 600 W 7TH STREET, Austin, TX",
+				    "-lat": "30.2708796",
+				    "-lng": "-97.74822719999997"
+				  },
+				  {
+				    "-address": " 100 TRINITY, Austin, TX",
+				    "-lat": "30.2624264",
+				    "-lng": "-97.74106970000003"
+				  },
+				  {
+				    "-address": " 700 SAN ANTONIO ST, Austin, TX",
+				    "-lat": "30.270485",
+				    "-lng": "-97.74719390000001"
+				  },
+				  {
+				    "-address": " 900 E 5TH ST., Austin, TX",
+				    "-lat": "30.2645139",
+				    "-lng": "-97.73396600000001"
+				  },
+				  {
+				    "-address": " 600 5TH ST E, Austin, TX",
+				    "-lat": "30.265553",
+				    "-lng": "-97.73752159999998"
+				  },
+				  {
+				    "-address": " 2600 RIO GRANDE ST, Austin, TX",
+				    "-lat": "30.2909718",
+				    "-lng": "-97.74470459999998"
+				  },
+				  {
+				    "-address": " 700 SAN JACINTO, Austin, TX",
+				    "-lat": "30.2689471",
+				    "-lng": "-97.7403971"
+				  },
+				  {
+				    "-address": " 500 NECHES, Austin, TX",
+				    "-lat": "30.2658524",
+				    "-lng": "-97.7385855"
+				  },
+				  {
+				    "-address": " 500 W 25TH ST, Austin, TX",
+				    "-lat": "30.2891282",
+				    "-lng": "-97.7422573"
+				  },
+				  {
+				    "-address": " 400 10TH STREET WEST, Austin, TX",
+				    "-lat": "30.2734",
+				    "-lng": "-97.74532299999998"
+				  },
+				  {
+				    "-address": " 1000 EAST 7TH, Austin, TX",
+				    "-lat": "30.2662071",
+				    "-lng": "-97.73144339999999"
+				  },
+				  {
+				    "-address": " 1100 EAST 7TH, Austin, TX",
+				    "-lat": "30.2657209",
+				    "-lng": "-97.7303369"
+				  },
+				  {
+				    "-address": " 400 W 12TH, Austin, TX",
+				    "-lat": "30.274906",
+				    "-lng": "-97.74412719999998"
+				  },
+				  {
+				    "-address": " 200 4TH ST EAST, Austin, TX",
+				    "-lat": "30.2658171",
+				    "-lng": "-97.7421827"
+				  },
+				  {
+				    "-address": " 60 RAINEY ST, Austin, TX",
+				    "-lat": "30.2581477",
+				    "-lng": "-97.73929659999999"
+				  },
+				  {
+				    "-address": " 400 W 14TH, Austin, TX",
+				    "-lat": "30.2773128",
+				    "-lng": "-97.74358000000001"
+				  },
+				  {
+				    "-address": " 1000 GUADALUPE, Austin, TX",
+				    "-lat": "30.2734081",
+				    "-lng": "-97.7452351"
+				  },
+				  {
+				    "-address": " 800 RED RIVER, Austin, TX",
+				    "-lat": "30.2683663",
+				    "-lng": "-97.73649799999998"
+				  },
+				  {
+				    "-address": " 500 8TH ST W, Austin, TX",
+				    "-lat": "30.2712128",
+				    "-lng": "-97.7466824"
+				  },
+				  {
+				    "-address": " 600 8TH ST E, Austin, TX",
+				    "-lat": "30.2683562",
+				    "-lng": "-97.73649879999999"
+				  },
+				  {
+				    "-address": " 400 NUECES, Austin, TX",
+				    "-lat": "30.2681085",
+				    "-lng": "-97.7492671"
+				  },
+				  {
+				    "-address": " 400 BRAZOS ST, Austin, TX",
+				    "-lat": "30.2658249",
+				    "-lng": "-97.74219189999997"
+				  },
+				  {
+				    "-address": " 800 CONGRESS AVE, Austin, TX",
+				    "-lat": "30.2702192",
+				    "-lng": "-97.74221879999999"
+				  },
+				  {
+				    "-address": " 700 COLORADO, Austin, TX",
+				    "-lat": "30.2700535",
+				    "-lng": "-97.7438017"
+				  },
+				  {
+				    "-address": " 600 DRISKILL, Austin, TX",
+				    "-lat": "30.261196",
+				    "-lng": "-97.7390062"
+				  },
+				  {
+				    "-address": " 400 WEST 9TH STREET, Austin, TX",
+				    "-lat": "30.2718481",
+				    "-lng": "-97.74526200000003"
+				  },
+				  {
+				    "-address": " 700 COLORADO, Austin, TX",
+				    "-lat": "30.2700535",
+				    "-lng": "-97.7438017"
+				  },
+				  {
+				    "-address": " 500 W18ST, Austin, TX",
+				    "-lat": "30.2811631",
+				    "-lng": "-97.74321929999996"
+				  },
+				  {
+				    "-address": " 900 E 5TH STREET, Austin, TX",
+				    "-lat": "30.2645139",
+				    "-lng": "-97.73396600000001"
+				  },
+				  {
+				    "-address": " 300 12TH ST W, Austin, TX",
+				    "-lat": "30.2745868",
+				    "-lng": "-97.74303939999999"
+				  },
+				  {
+				    "-address": " 700 TRINITY ST, Austin, TX",
+				    "-lat": "30.2682767",
+				    "-lng": "-97.7389498"
+				  },
+				  {
+				    "-address": " 2600 UNIVERSITY AVENUE, Austin, TX",
+				    "-lat": "30.29073",
+				    "-lng": "-97.739012"
+				  },
+				  {
+				    "-address": " 1300 RED RIVER STREET, Austin, TX",
+				    "-lat": "30.2734349",
+				    "-lng": "-97.7349539"
+				  },
+				  {
+				    "-address": " 100 8TH ST E, Austin, TX",
+				    "-lat": "30.2699158",
+				    "-lng": "-97.74209330000002"
+				  },
+				  {
+				    "-address": " 200 COLORADO, Austin, TX",
+				    "-lat": "30.2754245",
+				    "-lng": "-97.74203549999999"
+				  },
+				  {
+				    "-address": " 600 TRINITY, Austin, TX",
+				    "-lat": "30.2670774",
+				    "-lng": "-97.73933149999999"
+				  },
+				  {
+				    "-address": " 700 13 1/2 ST W, Austin, TX",
+				    "-lat": "30.27734389999999",
+				    "-lng": "-97.74676979999998"
+				  },
+				  {
+				    "-address": " 900 W 2ND ST, Austin, TX",
+				    "-lat": "30.2671791",
+				    "-lng": "-97.75491269999998"
+				  },
+				  {
+				    "-address": " 3700 BONNIE, Austin, TX",
+				    "-lat": "30.2965101",
+				    "-lng": "-97.78189169999996"
+				  },
+				  {
+				    "-address": " 700 12TH ST W, Austin, TX",
+				    "-lat": "30.2758141",
+				    "-lng": "-97.7473377"
+				  },
+				  {
+				    "-address": " 1300 E 6TH, Austin, TX",
+				    "-lat": "30.2641192",
+				    "-lng": "-97.7292582"
+				  },
+				  {
+				    "-address": " 500 W 7TH, Austin, TX",
+				    "-lat": "30.2704487",
+				    "-lng": "-97.74717720000001"
+				  },
+				  {
+				    "-address": " 400 12TH ST W, Austin, TX",
+				    "-lat": "30.274906",
+				    "-lng": "-97.74412719999998"
+				  },
+				  {
+				    "-address": " 1400 WEST AVENUE ST, Austin, TX",
+				    "-lat": "30.2782419",
+				    "-lng": "-97.74793009999996"
+				  },
+				  {
+				    "-address": " 300 W 6TH ST, Austin, TX",
+				    "-lat": "30.2691526",
+				    "-lng": "-97.7457602"
+				  },
+				  {
+				    "-address": " 1300 6TH STREET EAST, Austin, TX",
+				    "-lat": "30.2641192",
+				    "-lng": "-97.7292582"
+				  },
+				  {
+				    "-address": " 2100 GUADALUPE ST, Austin, TX",
+				    "-lat": "30.283956",
+				    "-lng": "-97.7423149"
+				  },
+				  {
+				    "-address": " 400 4TH ST WEST, Austin, TX",
+				    "-lat": "30.2671855",
+				    "-lng": "-97.74702379999997"
+				  },
+				  {
+				    "-address": " 200 W3RD, Austin, TX",
+				    "-lat": "30.2656456",
+				    "-lng": "-97.74520159999997"
+				  },
+				  {
+				    "-address": " 200 W17TH, Austin, TX",
+				    "-lat": "30.27942299999999",
+				    "-lng": "-97.74023999999997"
+				  },
+				  {
+				    "-address": " 400 SABINE ST, Austin, TX",
+				    "-lat": "30.26436829999999",
+				    "-lng": "-97.73677829999997"
+				  },
+				  {
+				    "-address": " 900 2ND ST W, Austin, TX",
+				    "-lat": "30.2671791",
+				    "-lng": "-97.75491269999998"
+				  },
+				  {
+				    "-address": " 1300 RIO GRANDE ST, Austin, TX",
+				    "-lat": "30.2773976",
+				    "-lng": "-97.74673960000001"
+				  },
+				  {
+				    "-address": " 700 7TH ST W, Austin, TX",
+				    "-lat": "30.2708815",
+				    "-lng": "-97.74919599999998"
+				  },
+				  {
+				    "-address": " 300 10TH STREET WEST, Austin, TX",
+				    "-lat": "30.27244719999999",
+				    "-lng": "-97.74383210000002"
+				  },
+				  {
+				    "-address": " 2600 WHITIS AVE, Austin, TX",
+				    "-lat": "30.2898347",
+				    "-lng": "-97.7402449"
+				  },
+				  {
+				    "-address": " MACC LOT, Austin, TX",
+				    "-lat": "30.2581744",
+				    "-lng": "-97.7400399"
+				  },
+				  {
+				    "-address": " 500 8TH ST E, Austin, TX",
+				    "-lat": "30.268881",
+				    "-lng": "-97.73725200000001"
+				  },
+				  {
+				    "-address": " 900 W 5TH ST, Austin, TX",
+				    "-lat": "30.269738",
+				    "-lng": "-97.75317000000001"
+				  },
+				  {
+				    "-address": " 300 10TH ST W, Austin, TX",
+				    "-lat": "30.27244719999999",
+				    "-lng": "-97.74383210000002"
+				  },
+				  {
+				    "-address": " 300 SAN JACINTO BLVD, Austin, TX",
+				    "-lat": "30.2649734",
+				    "-lng": "-97.74147470000003"
+				  },
+				  {
+				    "-address": " 800 DEAN KEETON E, Austin, TX",
+				    "-lat": "30.2895394",
+				    "-lng": "-97.73062649999997"
+				  },
+				  {
+				    "-address": " 1000 WEST AVE, Austin, TX",
+				    "-lat": "30.2742728",
+				    "-lng": "-97.74948919999997"
+				  },
+				  {
+				    "-address": " 500 E 8TH, Austin, TX",
+				    "-lat": "30.268881",
+				    "-lng": "-97.73725200000001"
+				  },
+				  {
+				    "-address": " MACC LOT, Austin, TX",
+				    "-lat": "30.2581744",
+				    "-lng": "-97.7400399"
+				  },
+				  {
+				    "-address": " 600 MEDINA, Austin, TX",
+				    "-lat": "30.2647702",
+				    "-lng": "-97.7315132"
+				  },
+				  {
+				    "-address": " 800 DEAN KEETON E, Austin, TX",
+				    "-lat": "30.2895394",
+				    "-lng": "-97.73062649999997"
+				  },
+				  {
+				    "-address": " 800 DEAN KEETON E, Austin, TX",
+				    "-lat": "30.2895394",
+				    "-lng": "-97.73062649999997"
+				  },
+				  {
+				    "-address": " 200 E 9TH ST, Austin, TX",
+				    "-lat": "30.2704679",
+				    "-lng": "-97.7404151"
+				  },
+				  {
+				    "-address": " 2600 UNIVERSITY AV, Austin, TX",
+				    "-lat": "30.29073",
+				    "-lng": "-97.739012"
+				  },
+				  {
+				    "-address": " 700 WEST AVE, Austin, TX",
+				    "-lat": "30.2713041",
+				    "-lng": "-97.75057549999997"
+				  },
+				  {
+				    "-address": " 800 CONGRESS, Austin, TX",
+				    "-lat": "30.2702192",
+				    "-lng": "-97.74221879999999"
+				  },
+				  {
+				    "-address": " 1500 E 6TH STREET, Austin, TX",
+				    "-lat": "30.2634308",
+				    "-lng": "-97.72726399999999"
+				  },
+				  {
+				    "-address": " 2000 UNIVERSITY AVE, Austin, TX",
+				    "-lat": "30.282718",
+				    "-lng": "-97.74011289999999"
+				  },
+				  {
+				    "-address": " 1500 E 6TH ST, Austin, TX",
+				    "-lat": "30.2634308",
+				    "-lng": "-97.72726399999999"
+				  },
+				  {
+				    "-address": " 1400 SAN ANTONIO, Austin, TX",
+				    "-lat": "30.2772616",
+				    "-lng": "-97.74443730000002"
+				  },
+				  {
+				    "-address": " 600 13 1/2 ST W, Austin, TX",
+				    "-lat": "30.27734389999999",
+				    "-lng": "-97.74676979999998"
+				  },
+				  {
+				    "-address": " 1000 NUECES, Austin, TX",
+				    "-lat": "30.2733861",
+				    "-lng": "-97.74705819999997"
+				  },
+				  {
+				    "-address": " WALSH LANDING, Austin, TX",
+				    "-lat": "30.2972034",
+				    "-lng": "-97.78382529999999"
+				  },
+				  {
+				    "-address": " 600 SAN JACINTO, Austin, TX",
+				    "-lat": "30.2673971",
+				    "-lng": "-97.74040500000001"
+				  },
+				  {
+				    "-address": " 600 E DEAN KEETON, Austin, TX",
+				    "-lat": "30.2895242",
+				    "-lng": "-97.73192640000002"
+				  },
+				  {
+				    "-address": " 600 6TH ST E, Austin, TX",
+				    "-lat": "30.2666026",
+				    "-lng": "-97.73687489999998"
+				  },
+				  {
+				    "-address": " WALSH LANDING, Austin, TX",
+				    "-lat": "30.2972034",
+				    "-lng": "-97.78382529999999"
+				  },
+				  {
+				    "-address": " 400 JOSEPHINE, Austin, TX",
+				    "-lat": "30.2622322",
+				    "-lng": "-97.75861150000003"
+				  },
+				  {
+				    "-address": " 100 5TH ST E, Austin, TX",
+				    "-lat": "30.2671138",
+				    "-lng": "-97.7431176"
+				  },
+				  {
+				    "-address": " 700 NUECES, Austin, TX",
+				    "-lat": "30.270578",
+				    "-lng": "-97.74810709999997"
+				  },
+				  {
+				    "-address": " 300 2ND ST E, Austin, TX",
+				    "-lat": "30.2636389",
+				    "-lng": "-97.74177929999996"
+				  },
+				  {
+				    "-address": " 600 E 6TH STREET, Austin, TX",
+				    "-lat": "30.2666026",
+				    "-lng": "-97.73687489999998"
+				  },
+				  {
+				    "-address": " 700 9TH STREET, Austin, TX",
+				    "-lat": "30.2727461",
+				    "-lng": "-97.74848070000002"
+				  },
+				  {
+				    "-address": " 900 LAVACA ST, Austin, TX",
+				    "-lat": "30.2715275",
+				    "-lng": "-97.74415110000001"
+				  },
+				  {
+				    "-address": " 200 6TH W, Austin, TX",
+				    "-lat": "30.268879",
+				    "-lng": "-97.74456099999998"
+				  },
+				  {
+				    "-address": " 200 4TH ST W, Austin, TX",
+				    "-lat": "30.2665708",
+				    "-lng": "-97.74486719999999"
+				  },
+				  {
+				    "-address": " 700 LAVACA ST, Austin, TX",
+				    "-lat": "30.2702208",
+				    "-lng": "-97.7453625"
+				  },
+				  {
+				    "-address": " 50 RAINEY ST, Austin, TX",
+				    "-lat": "30.2574627",
+				    "-lng": "-97.73946790000002"
+				  },
+				  {
+				    "-address": " 600 SAN ANT. ST, Austin, TX",
+				    "-lat": "30.2693257",
+				    "-lng": "-97.7473622"
+				  },
+				  {
+				    "-address": " 300 8TH, Austin, TX",
+				    "-lat": "30.2693858",
+				    "-lng": "-97.73903919999998"
+				  },
+				  {
+				    "-address": " 2300 GUADALUPE ST, Austin, TX",
+				    "-lat": "30.28663349999999",
+				    "-lng": "-97.7419673"
+				  },
+				  {
+				    "-address": " 300 2ND ST W, Austin, TX",
+				    "-lat": "30.2649851",
+				    "-lng": "-97.74660610000001"
+				  },
+				  {
+				    "-address": " 700 E 7TH ST, Austin, TX",
+				    "-lat": "30.2674769",
+				    "-lng": "-97.73496539999996"
+				  },
+				  {
+				    "-address": " 2200 RIO GRANDE, Austin, TX",
+				    "-lat": "30.2853955",
+				    "-lng": "-97.74511469999999"
+				  },
+				  {
+				    "-address": " 300 12TH ST WEST, Austin, TX",
+				    "-lat": "30.2745868",
+				    "-lng": "-97.74303939999999"
+				  },
+				  {
+				    "-address": " 600 WEST AVENUE, Austin, TX",
+				    "-lat": "30.2702478",
+				    "-lng": "-97.75058589999998"
+				  },
+				  {
+				    "-address": " 200 4TH ST EAST, Austin, TX",
+				    "-lat": "30.2658171",
+				    "-lng": "-97.7421827"
+				  },
+				  {
+				    "-address": " 400 SAN JACINTO BLVD, Austin, TX",
+				    "-lat": "30.265892",
+				    "-lng": "-97.74132800000001"
+				  },
+				  {
+				    "-address": " 400 10TH WEST, Austin, TX",
+				    "-lat": "30.2734",
+				    "-lng": "-97.74532299999998"
+				  },
+				  {
+				    "-address": " 600 6TH ST E, Austin, TX",
+				    "-lat": "30.2666026",
+				    "-lng": "-97.73687489999998"
+				  },
+				  {
+				    "-address": " 800 NUECES, Austin, TX",
+				    "-lat": "30.2715127",
+				    "-lng": "-97.74774839999998"
+				  },
+				  {
+				    "-address": " 1200 SAN ANTONIO W, Austin, TX",
+				    "-lat": "30.2754395",
+				    "-lng": "-97.74534119999998"
+				  },
+				  {
+				    "-address": " 200 TRINITY ST, Austin, TX",
+				    "-lat": "30.263793",
+				    "-lng": "-97.74115700000004"
+				  },
+				  {
+				    "-address": " 600 WEST 28TH, Austin, TX",
+				    "-lat": "30.2935352",
+				    "-lng": "-97.7430071"
+				  },
+				  {
+				    "-address": " 2500 LONGVIEW, Austin, TX",
+				    "-lat": "30.2896694",
+				    "-lng": "-97.75074459999996"
+				  },
+				  {
+				    "-address": " 600 E 10TH STREET, Austin, TX",
+				    "-lat": "30.2702264",
+				    "-lng": "-97.7357685"
+				  },
+				  {
+				    "-address": " 500 NECHES, Austin, TX",
+				    "-lat": "30.2658524",
+				    "-lng": "-97.7385855"
+				  }
+				]
+				}};
+		var meter_data_2017 = {
+			  "markers": {
+			    "marker": [
+			      {
+			        "-address": " 100 WEST 6TH ST., Austin, TX",
+			        "-lat": "30.26806789999999",
+			        "-lng": "-97.74281989999997"
+			      },
+			      {
+			        "-address": " 500 TRINITY, Austin, TX",
+			        "-lat": "30.2661534",
+			        "-lng": "-97.73968079999997"
+			      },
+			      {
+			        "-address": " 600 E DEAN KEETON, Austin, TX",
+			        "-lat": "30.2895242",
+			        "-lng": "-97.73192640000002"
+			      },
+			      {
+			        "-address": " 100 WEST 3 STREET, Austin, TX",
+			        "-lat": "30.2655301",
+			        "-lng": "-97.7442077"
+			      },
+			      {
+			        "-address": " 700 TRINITY STREET, Austin, TX",
+			        "-lat": "30.2682767",
+			        "-lng": "-97.7389498"
+			      },
+			      {
+			        "-address": " 600 SABINE ST, Austin, TX",
+			        "-lat": "30.2663927",
+			        "-lng": "-97.73625959999998"
+			      },
+			      {
+			        "-address": " 40 EAST AVENUE, Austin, TX",
+			        "-lat": "30.2555843",
+			        "-lng": "-97.73881879999999"
+			      },
+			      {
+			        "-address": " 40 EAST AVENUE, Austin, TX",
+			        "-lat": "30.2555843",
+			        "-lng": "-97.73881879999999"
+			      },
+			      {
+			        "-address": " 200 W 8TH STREET, Austin, TX",
+			        "-lat": "30.2707777",
+			        "-lng": "-97.74389830000001"
+			      },
+			      {
+			        "-address": " 1500 EAST 4TH STREET, Austin, TX",
+			        "-lat": "30.2617445",
+			        "-lng": "-97.72813380000002"
+			      },
+			      {
+			        "-address": " 300 EAST 7TH, Austin, TX",
+			        "-lat": "30.2685022",
+			        "-lng": "-97.7395219"
+			      },
+			      {
+			        "-address": " 100 WEST 5TH, Austin, TX",
+			        "-lat": "30.26711929999999",
+			        "-lng": "-97.7431378"
+			      },
+			      {
+			        "-address": " 200 EAST 7TH STREET, Austin, TX",
+			        "-lat": "30.2684857",
+			        "-lng": "-97.74066700000003"
+			      },
+			      {
+			        "-address": " 2300 SAN ANTONIO, Austin, TX",
+			        "-lat": "30.2869314",
+			        "-lng": "-97.74298579999999"
+			      },
+			      {
+			        "-address": " 800 CONGRESS, Austin, TX",
+			        "-lat": "30.2702192",
+			        "-lng": "-97.74221879999999"
+			      },
+			      {
+			        "-address": " 500 COMAL, Austin, TX",
+			        "-lat": "30.2625474",
+			        "-lng": "-97.72700299999997"
+			      },
+			      {
+			        "-address": " 400 WEST 6TH STREET, Austin, TX",
+			        "-lat": "30.2690387",
+			        "-lng": "-97.74631720000002"
+			      },
+			      {
+			        "-address": " 2000 GUADALUPE, Austin, TX",
+			        "-lat": "30.2828415",
+			        "-lng": "-97.74240179999998"
+			      },
+			      {
+			        "-address": " 2000 GUADALUPE, Austin, TX",
+			        "-lat": "30.2828415",
+			        "-lng": "-97.74240179999998"
+			      },
+			      {
+			        "-address": " BUTLER SHORES LOT, Austin, TX",
+			        "-lat": "30.2653872",
+			        "-lng": "-97.76025299999998"
+			      },
+			      {
+			        "-address": " 2400 SETON, Austin, TX",
+			        "-lat": "30.2880745",
+			        "-lng": "-97.7440939"
+			      },
+			      {
+			        "-address": " 800 POWER PLANT, Austin, TX",
+			        "-lat": "30.2664543",
+			        "-lng": "-97.75263330000001"
+			      },
+			      {
+			        "-address": " 800 POWER PLANT, Austin, TX",
+			        "-lat": "30.2664543",
+			        "-lng": "-97.75263330000001"
+			      },
+			      {
+			        "-address": " 1100 WEST 25 STREET, Austin, TX",
+			        "-lat": "30.289723",
+			        "-lng": "-97.749615"
+			      },
+			      {
+			        "-address": " 100 WALTER SEAHOLM, Austin, TX",
+			        "-lat": "30.267764",
+			        "-lng": "-97.75272369999999"
+			      },
+			      {
+			        "-address": " 400 SAN JACINTO, Austin, TX",
+			        "-lat": "30.265892",
+			        "-lng": "-97.74132800000001"
+			      },
+			      {
+			        "-address": " 800 COLORADO, Austin, TX",
+			        "-lat": "30.2703063",
+			        "-lng": "-97.74342530000001"
+			      },
+			      {
+			        "-address": " 400 W 3RD, Austin, TX",
+			        "-lat": "30.2662331",
+			        "-lng": "-97.74733959999998"
+			      },
+			      {
+			        "-address": " 700 E 6TH ST, Austin, TX",
+			        "-lat": "30.2663066",
+			        "-lng": "-97.73586309999996"
+			      },
+			      {
+			        "-address": " 300 W 7TH STREET, Austin, TX",
+			        "-lat": "30.2696583",
+			        "-lng": "-97.7448569"
+			      },
+			      {
+			        "-address": " 400 W 6TH STREET, Austin, TX",
+			        "-lat": "30.2690387",
+			        "-lng": "-97.74631720000002"
+			      },
+			      {
+			        "-address": " 500 W 7TH STREET, Austin, TX",
+			        "-lat": "30.2704487",
+			        "-lng": "-97.74717720000001"
+			      },
+			      {
+			        "-address": " 500 W 7TH STREET, Austin, TX",
+			        "-lat": "30.2704487",
+			        "-lng": "-97.74717720000001"
+			      },
+			      {
+			        "-address": " 700 NUECES, Austin, TX",
+			        "-lat": "30.270578",
+			        "-lng": "-97.74810709999997"
+			      },
+			      {
+			        "-address": " 700 NUECES, Austin, TX",
+			        "-lat": "30.270578",
+			        "-lng": "-97.74810709999997"
+			      },
+			      {
+			        "-address": " 600 W 8TH STREET, Austin, TX",
+			        "-lat": "30.2717702",
+			        "-lng": "-97.74793349999999"
+			      },
+			      {
+			        "-address": " 700 WEST AVENUE, Austin, TX",
+			        "-lat": "30.2713041",
+			        "-lng": "-97.75057549999997"
+			      },
+			      {
+			        "-address": " 700 W 7TH STREET, Austin, TX",
+			        "-lat": "30.2708815",
+			        "-lng": "-97.74919599999998"
+			      },
+			      {
+			        "-address": " 700 W 7TH STREET, Austin, TX",
+			        "-lat": "30.2708815",
+			        "-lng": "-97.74919599999998"
+			      },
+			      {
+			        "-address": " 600 RIVER ST, Austin, TX",
+			        "-lat": "30.2581564",
+			        "-lng": "-97.74004309999998"
+			      },
+			      {
+			        "-address": " 600 RIVER ST, Austin, TX",
+			        "-lat": "30.2581564",
+			        "-lng": "-97.74004309999998"
+			      },
+			      {
+			        "-address": " 600 RIVER ST, Austin, TX",
+			        "-lat": "30.2581564",
+			        "-lng": "-97.74004309999998"
+			      },
+			      {
+			        "-address": " 600 RIVER ST, Austin, TX",
+			        "-lat": "30.2581564",
+			        "-lng": "-97.74004309999998"
+			      },
+			      {
+			        "-address": " 600 RIVER ST, Austin, TX",
+			        "-lat": "30.2581564",
+			        "-lng": "-97.74004309999998"
+			      },
+			      {
+			        "-address": " 600 RIVER ST, Austin, TX",
+			        "-lat": "30.2581564",
+			        "-lng": "-97.74004309999998"
+			      },
+			      {
+			        "-address": " 3700 LAKE AUSTIN BLVD, Austin, TX",
+			        "-lat": "30.29404469999999",
+			        "-lng": "-97.78245509999999"
+			      },
+			      {
+			        "-address": " 600 RIVER ST, Austin, TX",
+			        "-lat": "30.2581564",
+			        "-lng": "-97.74004309999998"
+			      },
+			      {
+			        "-address": " 1600 TOOMEY RD, Austin, TX",
+			        "-lat": "30.2639388",
+			        "-lng": "-97.76074890000001"
+			      },
+			      {
+			        "-address": " 1600 TOOMEY RD, Austin, TX",
+			        "-lat": "30.2639388",
+			        "-lng": "-97.76074890000001"
+			      },
+			      {
+			        "-address": " 1600 TOOMEY RD, Austin, TX",
+			        "-lat": "30.2639388",
+			        "-lng": "-97.76074890000001"
+			      },
+			      {
+			        "-address": " 600 NECHES ST, Austin, TX",
+			        "-lat": "30.2667911",
+			        "-lng": "-97.73824389999999"
+			      },
+			      {
+			        "-address": " 2400 NUECES ST, Austin, TX",
+			        "-lat": "30.2883838",
+			        "-lng": "-97.74343340000001"
+			      },
+			      {
+			        "-address": " 2400 NUECES ST, Austin, TX",
+			        "-lat": "30.2883838",
+			        "-lng": "-97.74343340000001"
+			      },
+			      {
+			        "-address": " 1300 E 5TH ST, Austin, TX",
+			        "-lat": "30.2633143",
+			        "-lng": "-97.72948919999999"
+			      },
+			      {
+			        "-address": " 500 MEDINA, Austin, TX",
+			        "-lat": "30.2643276",
+			        "-lng": "-97.73171400000001"
+			      },
+			      {
+			        "-address": " 200 E 4TH, Austin, TX",
+			        "-lat": "30.2658171",
+			        "-lng": "-97.7421827"
+			      },
+			      {
+			        "-address": " 500 SAN MARCOS, Austin, TX",
+			        "-lat": "30.264584",
+			        "-lng": "-97.73314069999998"
+			      },
+			      {
+			        "-address": " 1000 E 5TH ST, Austin, TX",
+			        "-lat": "30.2640381",
+			        "-lng": "-97.73209689999999"
+			      },
+			      {
+			        "-address": " 500 WALLER, Austin, TX",
+			        "-lat": "30.26352199999999",
+			        "-lng": "-97.7309376"
+			      },
+			      {
+			        "-address": " 1200 E 5TH ST, Austin, TX",
+			        "-lat": "30.2635096",
+			        "-lng": "-97.73093169999999"
+			      },
+			      {
+			        "-address": " 500 NECHES ST, Austin, TX",
+			        "-lat": "30.2658524",
+			        "-lng": "-97.7385855"
+			      },
+			      {
+			        "-address": " 500 COMAL, Austin, TX",
+			        "-lat": "30.2625474",
+			        "-lng": "-97.72700299999997"
+			      },
+			      {
+			        "-address": " 1300 E 6TH ST, Austin, TX",
+			        "-lat": "30.2641192",
+			        "-lng": "-97.7292582"
+			      },
+			      {
+			        "-address": " 1000 E 6TH ST, Austin, TX",
+			        "-lat": "30.2651766",
+			        "-lng": "-97.7322072"
+			      },
+			      {
+			        "-address": " 600 SAN MARCOS, Austin, TX",
+			        "-lat": "30.2651248",
+			        "-lng": "-97.7325232"
+			      },
+			      {
+			        "-address": " BUTLER SHORES, Austin, TX",
+			        "-lat": "30.2653872",
+			        "-lng": "-97.76025299999998"
+			      },
+			      {
+			        "-address": " BUTLER SHORES, Austin, TX",
+			        "-lat": "30.2653872",
+			        "-lng": "-97.76025299999998"
+			      },
+			      {
+			        "-address": " 400 WEST AVE, Austin, TX",
+			        "-lat": "30.2682986",
+			        "-lng": "-97.75132050000002"
+			      },
+			      {
+			        "-address": " 300 WEST AVE, Austin, TX",
+			        "-lat": "30.2682122",
+			        "-lng": "-97.7515009"
+			      },
+			      {
+			        "-address": " 800 WEST 3RD, Austin, TX",
+			        "-lat": "30.2679817",
+			        "-lng": "-97.7519107"
+			      },
+			      {
+			        "-address": " 800 WEST 5TH, Austin, TX",
+			        "-lat": "30.2695977",
+			        "-lng": "-97.75143379999997"
+			      },
+			      {
+			        "-address": " 700 WEST AVE, Austin, TX",
+			        "-lat": "30.2713041",
+			        "-lng": "-97.75057549999997"
+			      },
+			      {
+			        "-address": " 500 RIO GRANDE, Austin, TX",
+			        "-lat": "30.2692032",
+			        "-lng": "-97.749796"
+			      },
+			      {
+			        "-address": " 300 WEST 4TH, Austin, TX",
+			        "-lat": "30.2668709",
+			        "-lng": "-97.74591499999997"
+			      },
+			      {
+			        "-address": " 400 W 4TH ST, Austin, TX",
+			        "-lat": "30.2671855",
+			        "-lng": "-97.74702379999997"
+			      },
+			      {
+			        "-address": " 400 BOWIE, Austin, TX",
+			        "-lat": "30.2694879",
+			        "-lng": "-97.75356959999999"
+			      },
+			      {
+			        "-address": " 900 WEST 5TH, Austin, TX",
+			        "-lat": "30.269738",
+			        "-lng": "-97.75317000000001"
+			      },
+			      {
+			        "-address": " 400 WEST AVE, Austin, TX",
+			        "-lat": "30.2682986",
+			        "-lng": "-97.75132050000002"
+			      },
+			      {
+			        "-address": " 700 WEST 5TH, Austin, TX",
+			        "-lat": "30.272637",
+			        "-lng": "-97.76034329999999"
+			      },
+			      {
+			        "-address": " 200 WEST 2ND, Austin, TX",
+			        "-lat": "30.264954",
+			        "-lng": "-97.74568590000001"
+			      },
+			      {
+			        "-address": " 2400 PEARL, Austin, TX",
+			        "-lat": "30.2884813",
+			        "-lng": "-97.7470601"
+			      },
+			      {
+			        "-address": " 2400 PEARL, Austin, TX",
+			        "-lat": "30.2884813",
+			        "-lng": "-97.7470601"
+			      },
+			      {
+			        "-address": " 2400 PEARL, Austin, TX",
+			        "-lat": "30.2884813",
+			        "-lng": "-97.7470601"
+			      },
+			      {
+			        "-address": " 700 25TH ST WEST, Austin, TX",
+			        "-lat": "30.2892967",
+			        "-lng": "-97.74451920000001"
+			      },
+			      {
+			        "-address": " 700 25TH ST WEST, Austin, TX",
+			        "-lat": "30.2892967",
+			        "-lng": "-97.74451920000001"
+			      },
+			      {
+			        "-address": " 2400 SETON, Austin, TX",
+			        "-lat": "30.2880745",
+			        "-lng": "-97.7440939"
+			      },
+			      {
+			        "-address": " 1200 EAST 6TH STREET, Austin, TX",
+			        "-lat": "30.2645069",
+			        "-lng": "-97.73027660000002"
+			      },
+			      {
+			        "-address": " 400 SAN ANTONIO, Austin, TX",
+			        "-lat": "30.2681589",
+			        "-lng": "-97.74877620000001"
+			      },
+			      {
+			        "-address": " 50 RAINEY ST, Austin, TX",
+			        "-lat": "30.2574627",
+			        "-lng": "-97.73946790000002"
+			      },
+			      {
+			        "-address": " 900 25TH ST WEST, Austin, TX",
+			        "-lat": "30.2894557",
+			        "-lng": "-97.74664559999997"
+			      },
+			      {
+			        "-address": " 700 26TH ST WEST, Austin, TX",
+			        "-lat": "30.29066499999999",
+			        "-lng": "-97.74441480000002"
+			      },
+			      {
+			        "-address": " 700 26TH ST WEST, Austin, TX",
+			        "-lat": "30.29066499999999",
+			        "-lng": "-97.74441480000002"
+			      },
+			      {
+			        "-address": " 700 26TH ST WEST, Austin, TX",
+			        "-lat": "30.29066499999999",
+			        "-lng": "-97.74441480000002"
+			      },
+			      {
+			        "-address": " 1900 SAN ANTONIO, Austin, TX",
+			        "-lat": "30.2820733",
+			        "-lng": "-97.7431987"
+			      },
+			      {
+			        "-address": " 100 EAST 8TH STREET, Austin, TX",
+			        "-lat": "30.2699158",
+			        "-lng": "-97.74209330000002"
+			      },
+			      {
+			        "-address": " 2500 LEON, Austin, TX",
+			        "-lat": "30.289705",
+			        "-lng": "-97.74945810000003"
+			      },
+			      {
+			        "-address": " 2500 LEON, Austin, TX",
+			        "-lat": "30.289705",
+			        "-lng": "-97.74945810000003"
+			      },
+			      {
+			        "-address": " 2500 LEON, Austin, TX",
+			        "-lat": "30.289705",
+			        "-lng": "-97.74945810000003"
+			      },
+			      {
+			        "-address": " 2500 LEON, Austin, TX",
+			        "-lat": "30.289705",
+			        "-lng": "-97.74945810000003"
+			      },
+			      {
+			        "-address": " 500 SAN JACINTO, Austin, TX",
+			        "-lat": "30.2667942",
+			        "-lng": "-97.7409341"
+			      },
+			      {
+			        "-address": " 400 JOSEPHINE, Austin, TX",
+			        "-lat": "30.2622322",
+			        "-lng": "-97.75861150000003"
+			      },
+			      {
+			        "-address": " 200 BRAZOS, Austin, TX",
+			        "-lat": "30.2639381",
+			        "-lng": "-97.742865"
+			      },
+			      {
+			        "-address": " 900 2ND ST WEST, Austin, TX",
+			        "-lat": "30.2671791",
+			        "-lng": "-97.75491269999998"
+			      },
+			      {
+			        "-address": " 2500 LONGVIEW, Austin, TX",
+			        "-lat": "30.2896694",
+			        "-lng": "-97.75074459999996"
+			      },
+			      {
+			        "-address": " 2500 LONGVIEW, Austin, TX",
+			        "-lat": "30.2896694",
+			        "-lng": "-97.75074459999996"
+			      },
+			      {
+			        "-address": " 500 WEST 7TH STREET, Austin, TX",
+			        "-lat": "30.2704487",
+			        "-lng": "-97.74717720000001"
+			      },
+			      {
+			        "-address": " 2500 LONGVIEW, Austin, TX",
+			        "-lat": "30.2896694",
+			        "-lng": "-97.75074459999996"
+			      },
+			      {
+			        "-address": " 1200 WEST 25TH, Austin, TX",
+			        "-lat": "30.2899926",
+			        "-lng": "-97.75118399999997"
+			      },
+			      {
+			        "-address": " 2500 LEON, Austin, TX",
+			        "-lat": "30.289705",
+			        "-lng": "-97.74945810000003"
+			      },
+			      {
+			        "-address": " 2500 LEON, Austin, TX",
+			        "-lat": "30.289705",
+			        "-lng": "-97.74945810000003"
+			      },
+			      {
+			        "-address": " 2500 LEON, Austin, TX",
+			        "-lat": "30.289705",
+			        "-lng": "-97.74945810000003"
+			      },
+			      {
+			        "-address": " 2500 LEON, Austin, TX",
+			        "-lat": "30.289705",
+			        "-lng": "-97.74945810000003"
+			      },
+			      {
+			        "-address": " 1000 WEST 25TH, Austin, TX",
+			        "-lat": "30.289716",
+			        "-lng": "-97.74796200000003"
+			      },
+			      {
+			        "-address": " 1000 WEST 25TH, Austin, TX",
+			        "-lat": "30.289716",
+			        "-lng": "-97.74796200000003"
+			      },
+			      {
+			        "-address": " 100 E 4TH, Austin, TX",
+			        "-lat": "30.2661969",
+			        "-lng": "-97.74347510000001"
+			      },
+			      {
+			        "-address": " 1900 SIMOND, Austin, TX",
+			        "-lat": "30.2969977",
+			        "-lng": "-97.7036407"
+			      },
+			      {
+			        "-address": " 1700 ALDRICH, Austin, TX",
+			        "-lat": "30.2979187",
+			        "-lng": "-97.70889449999999"
+			      },
+			      {
+			        "-address": " 1700 ALDRICH, Austin, TX",
+			        "-lat": "30.2979187",
+			        "-lng": "-97.70889449999999"
+			      },
+			      {
+			        "-address": " 1700 ALDRICH, Austin, TX",
+			        "-lat": "30.2979187",
+			        "-lng": "-97.70889449999999"
+			      },
+			      {
+			        "-address": " 100 E 8TH ST., Austin, TX",
+			        "-lat": "30.2699158",
+			        "-lng": "-97.74209330000002"
+			      },
+			      {
+			        "-address": " 800 BRAZOS, Austin, TX",
+			        "-lat": "30.2699818",
+			        "-lng": "-97.74107609999999"
+			      },
+			      {
+			        "-address": " 500 WALLER, Austin, TX",
+			        "-lat": "30.26352199999999",
+			        "-lng": "-97.7309376"
+			      },
+			      {
+			        "-address": " 600 E 10TH ST., Austin, TX",
+			        "-lat": "30.2702264",
+			        "-lng": "-97.7357685"
+			      },
+			      {
+			        "-address": " 600 E 10TH ST., Austin, TX",
+			        "-lat": "30.2702264",
+			        "-lng": "-97.7357685"
+			      },
+			      {
+			        "-address": " 600 E 10TH ST., Austin, TX",
+			        "-lat": "30.2702264",
+			        "-lng": "-97.7357685"
+			      },
+			      {
+			        "-address": " 700 RED RIVER, Austin, TX",
+			        "-lat": "30.267771",
+			        "-lng": "-97.73695499999997"
+			      },
+			      {
+			        "-address": " 500 RIO GRANDE, Austin, TX",
+			        "-lat": "30.2692032",
+			        "-lng": "-97.749796"
+			      },
+			      {
+			        "-address": " 500 TRINITY, Austin, TX",
+			        "-lat": "30.2661534",
+			        "-lng": "-97.73968079999997"
+			      },
+			      {
+			        "-address": " 500 TRINITY, Austin, TX",
+			        "-lat": "30.2661534",
+			        "-lng": "-97.73968079999997"
+			      },
+			      {
+			        "-address": " 400 E. 5TH, Austin, TX",
+			        "-lat": "30.2661415",
+			        "-lng": "-97.73967399999998"
+			      },
+			      {
+			        "-address": " 500 NECHES, Austin, TX",
+			        "-lat": "30.2658524",
+			        "-lng": "-97.7385855"
+			      },
+			      {
+			        "-address": " 500 E. 5TH, Austin, TX",
+			        "-lat": "30.265959",
+			        "-lng": "-97.738314"
+			      },
+			      {
+			        "-address": " 500 E. 5TH, Austin, TX",
+			        "-lat": "30.265959",
+			        "-lng": "-97.738314"
+			      },
+			      {
+			        "-address": " 500 RED RIVER, Austin, TX",
+			        "-lat": "30.2655649",
+			        "-lng": "-97.73752819999999"
+			      },
+			      {
+			        "-address": " 700 E. 6TH, Austin, TX",
+			        "-lat": "30.2663066",
+			        "-lng": "-97.73586309999996"
+			      },
+			      {
+			        "-address": " 700 E. 6TH, Austin, TX",
+			        "-lat": "30.2663066",
+			        "-lng": "-97.73586309999996"
+			      },
+			      {
+			        "-address": " 700 E. 6TH, Austin, TX",
+			        "-lat": "30.2663066",
+			        "-lng": "-97.73586309999996"
+			      },
+			      {
+			        "-address": " 40 RAINEY ST, Austin, TX",
+			        "-lat": "30.2563723",
+			        "-lng": "-97.74018569999998"
+			      },
+			      {
+			        "-address": " 40 RAINEY ST, Austin, TX",
+			        "-lat": "30.2563723",
+			        "-lng": "-97.74018569999998"
+			      },
+			      {
+			        "-address": " 700 CUMMINGS, Austin, TX",
+			        "-lat": "30.2557719",
+			        "-lng": "-97.73986389999999"
+			      },
+			      {
+			        "-address": " 700 CUMMINGS, Austin, TX",
+			        "-lat": "30.2557719",
+			        "-lng": "-97.73986389999999"
+			      },
+			      {
+			        "-address": " 40 EAST AVE, Austin, TX",
+			        "-lat": "30.2555843",
+			        "-lng": "-97.73881879999999"
+			      },
+			      {
+			        "-address": " 50 EAST AVE, Austin, TX",
+			        "-lat": "30.2567486",
+			        "-lng": "-97.73878689999998"
+			      },
+			      {
+			        "-address": " 50 EAST AVE, Austin, TX",
+			        "-lat": "30.2567486",
+			        "-lng": "-97.73878689999998"
+			      },
+			      {
+			        "-address": " MACC LOT, Austin, TX",
+			        "-lat": "30.2581744",
+			        "-lng": "-97.7400399"
+			      },
+			      {
+			        "-address": " 1900 SIMOND, Austin, TX",
+			        "-lat": "30.2969977",
+			        "-lng": "-97.7036407"
+			      },
+			      {
+			        "-address": " MACC LOT, Austin, TX",
+			        "-lat": "30.2581744",
+			        "-lng": "-97.7400399"
+			      },
+			      {
+			        "-address": " MACC LOT, Austin, TX",
+			        "-lat": "30.2581744",
+			        "-lng": "-97.7400399"
+			      },
+			      {
+			        "-address": " 50 RAINEY ST, Austin, TX",
+			        "-lat": "30.2574627",
+			        "-lng": "-97.73946790000002"
+			      },
+			      {
+			        "-address": " 700 CUMMINGS, Austin, TX",
+			        "-lat": "30.2557719",
+			        "-lng": "-97.73986389999999"
+			      },
+			      {
+			        "-address": " 700 RIVER, Austin, TX",
+			        "-lat": "30.257684",
+			        "-lng": "-97.73853680000002"
+			      },
+			      {
+			        "-address": " BULTER SHORES, Austin, TX",
+			        "-lat": "30.2653872",
+			        "-lng": "-97.76025299999998"
+			      },
+			      {
+			        "-address": " BULTER SHORES, Austin, TX",
+			        "-lat": "30.2653872",
+			        "-lng": "-97.76025299999998"
+			      },
+			      {
+			        "-address": " 2500 NUECES ST, Austin, TX",
+			        "-lat": "30.2893954",
+			        "-lng": "-97.7433466"
+			      },
+			      {
+			        "-address": " 2600 NUECES ST, Austin, TX",
+			        "-lat": "30.2905537",
+			        "-lng": "-97.7428827"
+			      },
+			      {
+			        "-address": " 2700 NUECES ST, Austin, TX",
+			        "-lat": "30.29228489999999",
+			        "-lng": "-97.7433254"
+			      },
+			      {
+			        "-address": " 2700 NUECES ST, Austin, TX",
+			        "-lat": "30.29228489999999",
+			        "-lng": "-97.7433254"
+			      },
+			      {
+			        "-address": " 2800 NUECES ST, Austin, TX",
+			        "-lat": "30.2933234",
+			        "-lng": "-97.7426198"
+			      },
+			      {
+			        "-address": " 300 W 27TH ST, Austin, TX",
+			        "-lat": "30.292281",
+			        "-lng": "-97.7407"
+			      },
+			      {
+			        "-address": " BULTER SHORES, Austin, TX",
+			        "-lat": "30.2653872",
+			        "-lng": "-97.76025299999998"
+			      },
+			      {
+			        "-address": " 200 EAST 4TH STREET, Austin, TX",
+			        "-lat": "30.2658171",
+			        "-lng": "-97.7421827"
+			      },
+			      {
+			        "-address": " 2300 GUADALUPE, Austin, TX",
+			        "-lat": "30.28663349999999",
+			        "-lng": "-97.7419673"
+			      },
+			      {
+			        "-address": " 100 WEST 5 STREET, Austin, TX",
+			        "-lat": "30.26711929999999",
+			        "-lng": "-97.7431378"
+			      },
+			      {
+			        "-address": " 500 MEDINA, Austin, TX",
+			        "-lat": "30.2643276",
+			        "-lng": "-97.73171400000001"
+			      },
+			      {
+			        "-address": " 1100 E 6TH ST, Austin, TX",
+			        "-lat": "30.2648498",
+			        "-lng": "-97.73129489999997"
+			      },
+			      {
+			        "-address": " 1100 E 5TH ST, Austin, TX",
+			        "-lat": "30.2641027",
+			        "-lng": "-97.7315921"
+			      },
+			      {
+			        "-address": " 500 WALLER ST, Austin, TX",
+			        "-lat": "30.26352199999999",
+			        "-lng": "-97.7309376"
+			      },
+			      {
+			        "-address": " 1500 E 6TH ST, Austin, TX",
+			        "-lat": "30.2634308",
+			        "-lng": "-97.72726399999999"
+			      },
+			      {
+			        "-address": " 1400 E 6TH ST, Austin, TX",
+			        "-lat": "30.263888",
+			        "-lng": "-97.72809899999999"
+			      },
+			      {
+			        "-address": " 1000 E 6TH ST, Austin, TX",
+			        "-lat": "30.2651766",
+			        "-lng": "-97.7322072"
+			      },
+			      {
+			        "-address": " 600 SAN MARCOS ST, Austin, TX",
+			        "-lat": "30.2651248",
+			        "-lng": "-97.7325232"
+			      },
+			      {
+			        "-address": " 1100 NUECES, Austin, TX",
+			        "-lat": "30.2745849",
+			        "-lng": "-97.74689619999998"
+			      },
+			      {
+			        "-address": " 1000 NUECES, Austin, TX",
+			        "-lat": "30.2733861",
+			        "-lng": "-97.74705819999997"
+			      },
+			      {
+			        "-address": " 1000 NUECES, Austin, TX",
+			        "-lat": "30.2733861",
+			        "-lng": "-97.74705819999997"
+			      },
+			      {
+			        "-address": " 1000 GUADALUPE, Austin, TX",
+			        "-lat": "30.2734081",
+			        "-lng": "-97.7452351"
+			      },
+			      {
+			        "-address": " 1000 GUADALUPE, Austin, TX",
+			        "-lat": "30.2734081",
+			        "-lng": "-97.7452351"
+			      },
+			      {
+			        "-address": " 800 CONGRESS, Austin, TX",
+			        "-lat": "30.2702192",
+			        "-lng": "-97.74221879999999"
+			      },
+			      {
+			        "-address": " 50 RAINEY, Austin, TX",
+			        "-lat": "30.2574627",
+			        "-lng": "-97.73946790000002"
+			      },
+			      {
+			        "-address": " 700 CUMMINGS, Austin, TX",
+			        "-lat": "30.2557719",
+			        "-lng": "-97.73986389999999"
+			      },
+			      {
+			        "-address": " 700 CUMMINGS, Austin, TX",
+			        "-lat": "30.2557719",
+			        "-lng": "-97.73986389999999"
+			      },
+			      {
+			        "-address": " 40 EAST AVENUE, Austin, TX",
+			        "-lat": "30.2555843",
+			        "-lng": "-97.73881879999999"
+			      },
+			      {
+			        "-address": " 800 BRAZOS, Austin, TX",
+			        "-lat": "30.2699818",
+			        "-lng": "-97.74107609999999"
+			      },
+			      {
+			        "-address": " MACC LOT, Austin, TX",
+			        "-lat": "30.2581744",
+			        "-lng": "-97.7400399"
+			      },
+			      {
+			        "-address": " MACC LOT, Austin, TX",
+			        "-lat": "30.2581744",
+			        "-lng": "-97.7400399"
+			      },
+			      {
+			        "-address": " MACC LOT, Austin, TX",
+			        "-lat": "30.2581744",
+			        "-lng": "-97.7400399"
+			      },
+			      {
+			        "-address": " MACC LOT, Austin, TX",
+			        "-lat": "30.2581744",
+			        "-lng": "-97.7400399"
+			      },
+			      {
+			        "-address": " MACC LOT, Austin, TX",
+			        "-lat": "30.2581744",
+			        "-lng": "-97.7400399"
+			      },
+			      {
+			        "-address": " 50 EAST AVENUE, Austin, TX",
+			        "-lat": "30.2567486",
+			        "-lng": "-97.73878689999998"
+			      },
+			      {
+			        "-address": " 50 EAST AVENUE, Austin, TX",
+			        "-lat": "30.2567486",
+			        "-lng": "-97.73878689999998"
+			      },
+			      {
+			        "-address": " 50 EAST AVENUE, Austin, TX",
+			        "-lat": "30.2567486",
+			        "-lng": "-97.73878689999998"
+			      },
+			      {
+			        "-address": " 700 RIVER, Austin, TX",
+			        "-lat": "30.257684",
+			        "-lng": "-97.73853680000002"
+			      },
+			      {
+			        "-address": " 1900 SIMOND, Austin, TX",
+			        "-lat": "30.2969977",
+			        "-lng": "-97.7036407"
+			      },
+			      {
+			        "-address": " 1900 SIMOND, Austin, TX",
+			        "-lat": "30.2969977",
+			        "-lng": "-97.7036407"
+			      },
+			      {
+			        "-address": " 1900 SIMOND, Austin, TX",
+			        "-lat": "30.2969977",
+			        "-lng": "-97.7036407"
+			      },
+			      {
+			        "-address": " 1800 SIMOND, Austin, TX",
+			        "-lat": "30.2976283",
+			        "-lng": "-97.70553899999999"
+			      },
+			      {
+			        "-address": " 1700 ALDRICH, Austin, TX",
+			        "-lat": "30.2979187",
+			        "-lng": "-97.70889449999999"
+			      },
+			      {
+			        "-address": " 1700 ALDRICH, Austin, TX",
+			        "-lat": "30.2979187",
+			        "-lng": "-97.70889449999999"
+			      },
+			      {
+			        "-address": " 1700 ALDRICH, Austin, TX",
+			        "-lat": "30.2979187",
+			        "-lng": "-97.70889449999999"
+			      },
+			      {
+			        "-address": " 1700 ALDRICH, Austin, TX",
+			        "-lat": "30.2979187",
+			        "-lng": "-97.70889449999999"
+			      },
+			      {
+			        "-address": " 1800 MCBEE, Austin, TX",
+			        "-lat": "30.2980558",
+			        "-lng": "-97.70440859999997"
+			      },
+			      {
+			        "-address": " 700 BRAZOS, Austin, TX",
+			        "-lat": "30.26919659999999",
+			        "-lng": "-97.74134019999997"
+			      },
+			      {
+			        "-address": " 800 BRAZOS, Austin, TX",
+			        "-lat": "30.2699818",
+			        "-lng": "-97.74107609999999"
+			      },
+			      {
+			        "-address": " 400 SAN JACINTO, Austin, TX",
+			        "-lat": "30.265892",
+			        "-lng": "-97.74132800000001"
+			      },
+			      {
+			        "-address": " 300 EAST 8TH ST, Austin, TX",
+			        "-lat": "30.2693858",
+			        "-lng": "-97.73903919999998"
+			      },
+			      {
+			        "-address": " 400 EAST 10TH ST, Austin, TX",
+			        "-lat": "30.2708076",
+			        "-lng": "-97.7379391"
+			      },
+			      {
+			        "-address": " 500 EAST 10TH ST, Austin, TX",
+			        "-lat": "30.270525",
+			        "-lng": "-97.73685209999996"
+			      },
+			      {
+			        "-address": " 600 EAST 10TH ST, Austin, TX",
+			        "-lat": "30.2702264",
+			        "-lng": "-97.7357685"
+			      },
+			      {
+			        "-address": " 600 EAST 10TH ST, Austin, TX",
+			        "-lat": "30.2702264",
+			        "-lng": "-97.7357685"
+			      },
+			      {
+			        "-address": " 600 NECHES, Austin, TX",
+			        "-lat": "30.2667911",
+			        "-lng": "-97.73824389999999"
+			      },
+			      {
+			        "-address": " 600 NECHES, Austin, TX",
+			        "-lat": "30.2667911",
+			        "-lng": "-97.73824389999999"
+			      },
+			      {
+			        "-address": " 300 SAN ANTONIO, Austin, TX",
+			        "-lat": "30.267101",
+			        "-lng": "-97.748558"
+			      },
+			      {
+			        "-address": " 1900 RIO GRANDE, Austin, TX",
+			        "-lat": "30.2830231",
+			        "-lng": "-97.74552419999998"
+			      },
+			      {
+			        "-address": " 700 W 22ND STREET, Austin, TX",
+			        "-lat": "30.285502",
+			        "-lng": "-97.74528499999997"
+			      },
+			      {
+			        "-address": " 600 WEST AVE, Austin, TX",
+			        "-lat": "30.2702478",
+			        "-lng": "-97.75058589999998"
+			      },
+			      {
+			        "-address": " 900 W 22ND STREET, Austin, TX",
+			        "-lat": "30.285616",
+			        "-lng": "-97.74677400000002"
+			      },
+			      {
+			        "-address": " 900 W 22ND STREET, Austin, TX",
+			        "-lat": "30.285616",
+			        "-lng": "-97.74677400000002"
+			      },
+			      {
+			        "-address": " 1900 PEARL ST, Austin, TX",
+			        "-lat": "30.2834473",
+			        "-lng": "-97.7469964"
+			      },
+			      {
+			        "-address": " 700 W 21ST STREET, Austin, TX",
+			        "-lat": "30.2840391",
+			        "-lng": "-97.74507749999998"
+			      },
+			      {
+			        "-address": " 700 W 21ST STREET, Austin, TX",
+			        "-lat": "30.2840391",
+			        "-lng": "-97.74507749999998"
+			      },
+			      {
+			        "-address": " 300 W 4TH ST, Austin, TX",
+			        "-lat": "30.2668709",
+			        "-lng": "-97.74591499999997"
+			      },
+			      {
+			        "-address": " 200 SAN ANTONIO, Austin, TX",
+			        "-lat": "30.2660817",
+			        "-lng": "-97.74859400000003"
+			      },
+			      {
+			        "-address": " 700 W 221/2 STREET, Austin, TX",
+			        "-lat": "30.2646824",
+			        "-lng": "-97.74609570000001"
+			      },
+			      {
+			        "-address": " 100 E 4TH ST, Austin, TX",
+			        "-lat": "30.2661969",
+			        "-lng": "-97.74347510000001"
+			      },
+			      {
+			        "-address": " 900 POPLAR ST, Austin, TX",
+			        "-lat": "30.2913509",
+			        "-lng": "-97.7459839"
+			      },
+			      {
+			        "-address": " 900 POPLAR ST, Austin, TX",
+			        "-lat": "30.2913509",
+			        "-lng": "-97.7459839"
+			      },
+			      {
+			        "-address": " 600 W 28TH STREET, Austin, TX",
+			        "-lat": "30.2935352",
+			        "-lng": "-97.7430071"
+			      },
+			      {
+			        "-address": " 1700 TOOMEY, Austin, TX",
+			        "-lat": "30.2642371",
+			        "-lng": "-97.76030830000002"
+			      },
+			      {
+			        "-address": " 2400 SAN ANTONIO, Austin, TX",
+			        "-lat": "30.2877451",
+			        "-lng": "-97.7423971"
+			      },
+			      {
+			        "-address": " 2400 SAN ANTONIO, Austin, TX",
+			        "-lat": "30.2877451",
+			        "-lng": "-97.7423971"
+			      },
+			      {
+			        "-address": " 700 W. 25TH, Austin, TX",
+			        "-lat": "30.2892967",
+			        "-lng": "-97.74451920000001"
+			      },
+			      {
+			        "-address": " 600 E 5TH STREET, Austin, TX",
+			        "-lat": "30.265553",
+			        "-lng": "-97.73752159999998"
+			      },
+			      {
+			        "-address": " 200 E 4TH STREET, Austin, TX",
+			        "-lat": "30.2658171",
+			        "-lng": "-97.7421827"
+			      },
+			      {
+			        "-address": " 200 E 4TH STREET, Austin, TX",
+			        "-lat": "30.2658171",
+			        "-lng": "-97.7421827"
+			      },
+			      {
+			        "-address": " 200 E 5TH STREET, Austin, TX",
+			        "-lat": "30.266756",
+			        "-lng": "-97.74183690000001"
+			      },
+			      {
+			        "-address": " 600 E 9TH ST., Austin, TX",
+			        "-lat": "30.2692998",
+			        "-lng": "-97.73614250000003"
+			      },
+			      {
+			        "-address": " 500 BRAZOS, Austin, TX",
+			        "-lat": "30.2667619",
+			        "-lng": "-97.7418351"
+			      },
+			      {
+			        "-address": " 200 E 4TH STREET, Austin, TX",
+			        "-lat": "30.2658171",
+			        "-lng": "-97.7421827"
+			      },
+			      {
+			        "-address": " 1900 RIO GRANDE, Austin, TX",
+			        "-lat": "30.2830231",
+			        "-lng": "-97.74552419999998"
+			      },
+			      {
+			        "-address": " 2100 RIO GRANDE, Austin, TX",
+			        "-lat": "30.2842794",
+			        "-lng": "-97.74534890000001"
+			      },
+			      {
+			        "-address": " 2100 RIO GRANDE, Austin, TX",
+			        "-lat": "30.2842794",
+			        "-lng": "-97.74534890000001"
+			      },
+			      {
+			        "-address": " 2100 RIO GRANDE, Austin, TX",
+			        "-lat": "30.2842794",
+			        "-lng": "-97.74534890000001"
+			      },
+			      {
+			        "-address": " 600 W 21ST, Austin, TX",
+			        "-lat": "30.2839548",
+			        "-lng": "-97.74403510000002"
+			      },
+			      {
+			        "-address": " 1900 NUECES, Austin, TX",
+			        "-lat": "30.2823794",
+			        "-lng": "-97.74417699999998"
+			      },
+			      {
+			        "-address": " 1900 NUECES, Austin, TX",
+			        "-lat": "30.2823794",
+			        "-lng": "-97.74417699999998"
+			      },
+			      {
+			        "-address": " 1900 NUECES, Austin, TX",
+			        "-lat": "30.2823794",
+			        "-lng": "-97.74417699999998"
+			      },
+			      {
+			        "-address": " 2100 NUECES, Austin, TX",
+			        "-lat": "30.2841641",
+			        "-lng": "-97.74434389999999"
+			      },
+			      {
+			        "-address": " 200 E. 9TH, Austin, TX",
+			        "-lat": "30.2704679",
+			        "-lng": "-97.7404151"
+			      },
+			      {
+			        "-address": " 700 SAN JACINTO, Austin, TX",
+			        "-lat": "30.2689471",
+			        "-lng": "-97.7403971"
+			      },
+			      {
+			        "-address": " MACC LOTT, Austin, TX",
+			        "-lat": "30.2581744",
+			        "-lng": "-97.7400399"
+			      },
+			      {
+			        "-address": " 2400 SETON, Austin, TX",
+			        "-lat": "30.2880745",
+			        "-lng": "-97.7440939"
+			      },
+			      {
+			        "-address": " 2400 SETON, Austin, TX",
+			        "-lat": "30.2880745",
+			        "-lng": "-97.7440939"
+			      },
+			      {
+			        "-address": " 2400 SETON, Austin, TX",
+			        "-lat": "30.2880745",
+			        "-lng": "-97.7440939"
+			      },
+			      {
+			        "-address": " 2500 SETON, Austin, TX",
+			        "-lat": "30.2892627",
+			        "-lng": "-97.74375550000002"
+			      },
+			      {
+			        "-address": " 2500 SETON, Austin, TX",
+			        "-lat": "30.2892627",
+			        "-lng": "-97.74375550000002"
+			      },
+			      {
+			        "-address": " 2500 SETON, Austin, TX",
+			        "-lat": "30.2892627",
+			        "-lng": "-97.74375550000002"
+			      },
+			      {
+			        "-address": " 2500 SETON, Austin, TX",
+			        "-lat": "30.2892627",
+			        "-lng": "-97.74375550000002"
+			      },
+			      {
+			        "-address": " 2500 SETON, Austin, TX",
+			        "-lat": "30.2892627",
+			        "-lng": "-97.74375550000002"
+			      },
+			      {
+			        "-address": " 2500 SETON, Austin, TX",
+			        "-lat": "30.2892627",
+			        "-lng": "-97.74375550000002"
+			      },
+			      {
+			        "-address": " 2500 SETON, Austin, TX",
+			        "-lat": "30.2892627",
+			        "-lng": "-97.74375550000002"
+			      },
+			      {
+			        "-address": " 900 POPLAR ST, Austin, TX",
+			        "-lat": "30.2913509",
+			        "-lng": "-97.7459839"
+			      },
+			      {
+			        "-address": " 900 POPLAR ST, Austin, TX",
+			        "-lat": "30.2913509",
+			        "-lng": "-97.7459839"
+			      },
+			      {
+			        "-address": " 1300 E 6TH, Austin, TX",
+			        "-lat": "30.2641192",
+			        "-lng": "-97.7292582"
+			      },
+			      {
+			        "-address": " 600 ONION, Austin, TX",
+			        "-lat": "30.2637293",
+			        "-lng": "-97.7275186"
+			      },
+			      {
+			        "-address": " 1900 GUADALUPE, Austin, TX",
+			        "-lat": "30.28214879999999",
+			        "-lng": "-97.74245539999998"
+			      },
+			      {
+			        "-address": " 300 BARTON SPRINGS, Austin, TX",
+			        "-lat": "30.2592463",
+			        "-lng": "-97.74765430000002"
+			      },
+			      {
+			        "-address": " 2400 SAN ANTONIO, Austin, TX",
+			        "-lat": "30.2877451",
+			        "-lng": "-97.7423971"
+			      },
+			      {
+			        "-address": " 400 SABINE, Austin, TX",
+			        "-lat": "30.26436829999999",
+			        "-lng": "-97.73677829999997"
+			      },
+			      {
+			        "-address": " 700 E 6TH ST, Austin, TX",
+			        "-lat": "30.2663066",
+			        "-lng": "-97.73586309999996"
+			      },
+			      {
+			        "-address": " 600 SABINE, Austin, TX",
+			        "-lat": "30.2663927",
+			        "-lng": "-97.73625959999998"
+			      },
+			      {
+			        "-address": " 200 E 5TH ST, Austin, TX",
+			        "-lat": "30.266756",
+			        "-lng": "-97.74183690000001"
+			      },
+			      {
+			        "-address": " 200 E 5TH ST, Austin, TX",
+			        "-lat": "30.266756",
+			        "-lng": "-97.74183690000001"
+			      },
+			      {
+			        "-address": " 200 E 5TH ST, Austin, TX",
+			        "-lat": "30.266756",
+			        "-lng": "-97.74183690000001"
+			      },
+			      {
+			        "-address": " 2400 NUECES ST, Austin, TX",
+			        "-lat": "30.2883838",
+			        "-lng": "-97.74343340000001"
+			      },
+			      {
+			        "-address": " 2500 NUECES ST, Austin, TX",
+			        "-lat": "30.2893954",
+			        "-lng": "-97.7433466"
+			      },
+			      {
+			        "-address": " 2600 NUECES ST, Austin, TX",
+			        "-lat": "30.2905537",
+			        "-lng": "-97.7428827"
+			      },
+			      {
+			        "-address": " 2600 NUECES ST, Austin, TX",
+			        "-lat": "30.2905537",
+			        "-lng": "-97.7428827"
+			      },
+			      {
+			        "-address": " 500 WEST 27TH ST, Austin, TX",
+			        "-lat": "30.2923106",
+			        "-lng": "-97.7419552"
+			      },
+			      {
+			        "-address": " 300 WEST 27TH ST, Austin, TX",
+			        "-lat": "30.292281",
+			        "-lng": "-97.7407"
+			      },
+			      {
+			        "-address": " 100 BRAZOS, Austin, TX",
+			        "-lat": "30.2630231",
+			        "-lng": "-97.74320360000002"
+			      },
+			      {
+			        "-address": " 2600 WITHIS AVE, Austin, TX",
+			        "-lat": "30.2898347",
+			        "-lng": "-97.7402449"
+			      },
+			      {
+			        "-address": " 2600 WITHIS AVE, Austin, TX",
+			        "-lat": "30.2898347",
+			        "-lng": "-97.7402449"
+			      },
+			      {
+			        "-address": " 2600 WITHIS AVE, Austin, TX",
+			        "-lat": "30.2898347",
+			        "-lng": "-97.7402449"
+			      },
+			      {
+			        "-address": " 2600 WITHIS AVE, Austin, TX",
+			        "-lat": "30.2898347",
+			        "-lng": "-97.7402449"
+			      },
+			      {
+			        "-address": " 400 CONGRESS AVE, Austin, TX",
+			        "-lat": "30.2664806",
+			        "-lng": "-97.7438558"
+			      },
+			      {
+			        "-address": " 600 MEDINA ST, Austin, TX",
+			        "-lat": "30.2647702",
+			        "-lng": "-97.7315132"
+			      },
+			      {
+			        "-address": " 600 ATTAYAC ST, Austin, TX",
+			        "-lat": "30.2645163",
+			        "-lng": "-97.7292716"
+			      },
+			      {
+			        "-address": " 1400 EAST 6TH ST, Austin, TX",
+			        "-lat": "30.263888",
+			        "-lng": "-97.72809899999999"
+			      },
+			      {
+			        "-address": " 1500 EAST 6TH ST, Austin, TX",
+			        "-lat": "30.2634308",
+			        "-lng": "-97.72726399999999"
+			      },
+			      {
+			        "-address": " 1000 EAST 5TH ST, Austin, TX",
+			        "-lat": "30.2640381",
+			        "-lng": "-97.73209689999999"
+			      },
+			      {
+			        "-address": " 1100 EAST 5TH ST, Austin, TX",
+			        "-lat": "30.2641027",
+			        "-lng": "-97.7315921"
+			      },
+			      {
+			        "-address": " 500 WALLER ST, Austin, TX",
+			        "-lat": "30.26352199999999",
+			        "-lng": "-97.7309376"
+			      },
+			      {
+			        "-address": " 1200 EAST 5TH ST, Austin, TX",
+			        "-lat": "30.2635096",
+			        "-lng": "-97.73093169999999"
+			      },
+			      {
+			        "-address": " 500 ATTAYAC ST, Austin, TX",
+			        "-lat": "30.263179",
+			        "-lng": "-97.72990779999998"
+			      },
+			      {
+			        "-address": " 700 NECHES, Austin, TX",
+			        "-lat": "30.2677279",
+			        "-lng": "-97.73790889999998"
+			      },
+			      {
+			        "-address": " 400 10 STREET EAST, Austin, TX",
+			        "-lat": "30.2708076",
+			        "-lng": "-97.7379391"
+			      },
+			      {
+			        "-address": " 1500 EAST 5TH ST, Austin, TX",
+			        "-lat": "30.2624883",
+			        "-lng": "-97.72794750000003"
+			      },
+			      {
+			        "-address": " 1500 EAST 5TH ST, Austin, TX",
+			        "-lat": "30.2624883",
+			        "-lng": "-97.72794750000003"
+			      },
+			      {
+			        "-address": " 2300 NUECES, Austin, TX",
+			        "-lat": "30.2870797",
+			        "-lng": "-97.7439602"
+			      },
+			      {
+			        "-address": " 500 COMAL ST, Austin, TX",
+			        "-lat": "30.2625474",
+			        "-lng": "-97.72700299999997"
+			      },
+			      {
+			        "-address": " 1500 EAST 6TH ST, Austin, TX",
+			        "-lat": "30.2634308",
+			        "-lng": "-97.72726399999999"
+			      },
+			      {
+			        "-address": " 1500 EAST 6TH ST, Austin, TX",
+			        "-lat": "30.2634308",
+			        "-lng": "-97.72726399999999"
+			      },
+			      {
+			        "-address": " 1500 EAST 6TH ST, Austin, TX",
+			        "-lat": "30.2634308",
+			        "-lng": "-97.72726399999999"
+			      },
+			      {
+			        "-address": " 1200 EAST 6TH ST, Austin, TX",
+			        "-lat": "30.2645069",
+			        "-lng": "-97.73027660000002"
+			      },
+			      {
+			        "-address": " 2400 LEON STREET, Austin, TX",
+			        "-lat": "30.2885941",
+			        "-lng": "-97.74969149999998"
+			      },
+			      {
+			        "-address": " 2300 NUECES, Austin, TX",
+			        "-lat": "30.2870797",
+			        "-lng": "-97.7439602"
+			      },
+			      {
+			        "-address": " 1000 EAST 6TH ST, Austin, TX",
+			        "-lat": "30.2651766",
+			        "-lng": "-97.7322072"
+			      },
+			      {
+			        "-address": " 2300 NUECES, Austin, TX",
+			        "-lat": "30.2870797",
+			        "-lng": "-97.7439602"
+			      },
+			      {
+			        "-address": " 600 SAN MARCOS ST, Austin, TX",
+			        "-lat": "30.2651248",
+			        "-lng": "-97.7325232"
+			      },
+			      {
+			        "-address": " 400 9TH ST EAST, Austin, TX",
+			        "-lat": "30.269886",
+			        "-lng": "-97.73830020000003"
+			      },
+			      {
+			        "-address": " 500 RIO GRANDE, Austin, TX",
+			        "-lat": "30.2692032",
+			        "-lng": "-97.749796"
+			      },
+			      {
+			        "-address": " 2400 RIO GRANDE, Austin, TX",
+			        "-lat": "30.2882226",
+			        "-lng": "-97.74500169999999"
+			      },
+			      {
+			        "-address": " 800 W. 3D ST, Austin, TX",
+			        "-lat": "30.2679817",
+			        "-lng": "-97.7519107"
+			      },
+			      {
+			        "-address": " 2900 SAN JACINTO, Austin, TX",
+			        "-lat": "30.2909871",
+			        "-lng": "-97.73475769999999"
+			      },
+			      {
+			        "-address": " 600 E 6TH ST, Austin, TX",
+			        "-lat": "30.2666026",
+			        "-lng": "-97.73687489999998"
+			      },
+			      {
+			        "-address": " 300 WEST 14TH, Austin, TX",
+			        "-lat": "30.2766369",
+			        "-lng": "-97.74227839999998"
+			      },
+			      {
+			        "-address": " 2900 SAN JACINTO, Austin, TX",
+			        "-lat": "30.2909871",
+			        "-lng": "-97.73475769999999"
+			      },
+			      {
+			        "-address": " 500 RIO GRANDE, Austin, TX",
+			        "-lat": "30.2692032",
+			        "-lng": "-97.749796"
+			      },
+			      {
+			        "-address": " BUTLER SHORES LOT, Austin, TX",
+			        "-lat": "30.2653872",
+			        "-lng": "-97.76025299999998"
+			      },
+			      {
+			        "-address": " BUTLER SHORES LOT, Austin, TX",
+			        "-lat": "30.2653872",
+			        "-lng": "-97.76025299999998"
+			      },
+			      {
+			        "-address": " 800 POWER PLANT, Austin, TX",
+			        "-lat": "30.2664543",
+			        "-lng": "-97.75263330000001"
+			      },
+			      {
+			        "-address": " 100 WALTER SEAHOLM, Austin, TX",
+			        "-lat": "30.267764",
+			        "-lng": "-97.75272369999999"
+			      },
+			      {
+			        "-address": " 700 CONGRESS, Austin, TX",
+			        "-lat": "30.269273",
+			        "-lng": "-97.74283730000002"
+			      },
+			      {
+			        "-address": " 700 COLORADO, Austin, TX",
+			        "-lat": "30.2700535",
+			        "-lng": "-97.7438017"
+			      },
+			      {
+			        "-address": " 800 COLORADO, Austin, TX",
+			        "-lat": "30.2703063",
+			        "-lng": "-97.74342530000001"
+			      },
+			      {
+			        "-address": " 200 W 8TH, Austin, TX",
+			        "-lat": "30.2707777",
+			        "-lng": "-97.74389830000001"
+			      },
+			      {
+			        "-address": " 700 WEST AVE, Austin, TX",
+			        "-lat": "30.2713041",
+			        "-lng": "-97.75057549999997"
+			      },
+			      {
+			        "-address": " 200 E 4TH, Austin, TX",
+			        "-lat": "30.2658171",
+			        "-lng": "-97.7421827"
+			      },
+			      {
+			        "-address": " 700 GUADALUPE, Austin, TX",
+			        "-lat": "30.2703758",
+			        "-lng": "-97.74614759999997"
+			      },
+			      {
+			        "-address": " 700 WEST AVE, Austin, TX",
+			        "-lat": "30.2713041",
+			        "-lng": "-97.75057549999997"
+			      },
+			      {
+			        "-address": " 500 EAST 9TH STREET, Austin, TX",
+			        "-lat": "30.2695941",
+			        "-lng": "-97.73719440000002"
+			      },
+			      {
+			        "-address": " 500 W 7TH, Austin, TX",
+			        "-lat": "30.2704487",
+			        "-lng": "-97.74717720000001"
+			      },
+			      {
+			        "-address": " 500 W 7TH, Austin, TX",
+			        "-lat": "30.2704487",
+			        "-lng": "-97.74717720000001"
+			      },
+			      {
+			        "-address": " 500 W 7TH, Austin, TX",
+			        "-lat": "30.2704487",
+			        "-lng": "-97.74717720000001"
+			      },
+			      {
+			        "-address": " 700 NUECES, Austin, TX",
+			        "-lat": "30.270578",
+			        "-lng": "-97.74810709999997"
+			      },
+			      {
+			        "-address": " 700 NUECES, Austin, TX",
+			        "-lat": "30.270578",
+			        "-lng": "-97.74810709999997"
+			      },
+			      {
+			        "-address": " 700 NUECES, Austin, TX",
+			        "-lat": "30.270578",
+			        "-lng": "-97.74810709999997"
+			      },
+			      {
+			        "-address": " 800 WEST, Austin, TX",
+			        "-lat": "30.272333",
+			        "-lng": "-97.75062700000001"
+			      },
+			      {
+			        "-address": " 700 WEST AVE, Austin, TX",
+			        "-lat": "30.2713041",
+			        "-lng": "-97.75057549999997"
+			      },
+			      {
+			        "-address": " 100 W 6TH STREET, Austin, TX",
+			        "-lat": "30.26806789999999",
+			        "-lng": "-97.74281989999997"
+			      },
+			      {
+			        "-address": " 100 W 5TH STREET, Austin, TX",
+			        "-lat": "30.26711929999999",
+			        "-lng": "-97.7431378"
+			      },
+			      {
+			        "-address": " 100 W 5TH STREET, Austin, TX",
+			        "-lat": "30.26711929999999",
+			        "-lng": "-97.7431378"
+			      },
+			      {
+			        "-address": " 100 W 5TH STREET, Austin, TX",
+			        "-lat": "30.26711929999999",
+			        "-lng": "-97.7431378"
+			      },
+			      {
+			        "-address": " 100 W 5TH STREET, Austin, TX",
+			        "-lat": "30.26711929999999",
+			        "-lng": "-97.7431378"
+			      },
+			      {
+			        "-address": " 200 W 4TH STREET, Austin, TX",
+			        "-lat": "30.2658171",
+			        "-lng": "-97.7421827"
+			      },
+			      {
+			        "-address": " 500 BAYLOR, Austin, TX",
+			        "-lat": "30.2711819",
+			        "-lng": "-97.75588040000002"
+			      },
+			      {
+			        "-address": " 800 LAMBIE, Austin, TX",
+			        "-lat": "30.2564584",
+			        "-lng": "-97.7380986"
+			      },
+			      {
+			        "-address": " 200 E 5TH STREET, Austin, TX",
+			        "-lat": "30.266756",
+			        "-lng": "-97.74183690000001"
+			      },
+			      {
+			        "-address": " 300 W 4TH STREET, Austin, TX",
+			        "-lat": "30.2655533",
+			        "-lng": "-97.74022739999998"
+			      },
+			      {
+			        "-address": " 700 DEAN KEETON, Austin, TX",
+			        "-lat": "30.2894667",
+			        "-lng": "-97.73131409999996"
+			      },
+			      {
+			        "-address": " 800 W 3RD STREET, Austin, TX",
+			        "-lat": "30.2679817",
+			        "-lng": "-97.7519107"
+			      },
+			      {
+			        "-address": " 800 W 3RD STREET, Austin, TX",
+			        "-lat": "30.2679817",
+			        "-lng": "-97.7519107"
+			      },
+			      {
+			        "-address": " 900 W 3RD STREET, Austin, TX",
+			        "-lat": "30.2689403",
+			        "-lng": "-97.75475540000002"
+			      },
+			      {
+			        "-address": " 300 BOWIE, Austin, TX",
+			        "-lat": "30.2692076",
+			        "-lng": "-97.75414810000001"
+			      },
+			      {
+			        "-address": " 700 DEAN KEETON, Austin, TX",
+			        "-lat": "30.2894667",
+			        "-lng": "-97.73131409999996"
+			      },
+			      {
+			        "-address": " 500 WEST AV, Austin, TX",
+			        "-lat": "30.26932679999999",
+			        "-lng": "-97.75095019999998"
+			      },
+			      {
+			        "-address": " 500 WEST AV, Austin, TX",
+			        "-lat": "30.26932679999999",
+			        "-lng": "-97.75095019999998"
+			      },
+			      {
+			        "-address": " 700 W 5TH STREET, Austin, TX",
+			        "-lat": "30.272637",
+			        "-lng": "-97.76034329999999"
+			      },
+			      {
+			        "-address": " 300 W 2ND STREET, Austin, TX",
+			        "-lat": "30.2649851",
+			        "-lng": "-97.74660610000001"
+			      },
+			      {
+			        "-address": " 200 W 3RD STREET, Austin, TX",
+			        "-lat": "30.2656456",
+			        "-lng": "-97.74520159999997"
+			      },
+			      {
+			        "-address": " 500 WEST 21 STREET, Austin, TX",
+			        "-lat": "30.2838699",
+			        "-lng": "-97.74301860000003"
+			      },
+			      {
+			        "-address": " 100 E 9TH STREET, Austin, TX",
+			        "-lat": "30.2708536",
+			        "-lng": "-97.74175889999998"
+			      },
+			      {
+			        "-address": " 1500 E 6TH STREET, Austin, TX",
+			        "-lat": "30.2634308",
+			        "-lng": "-97.72726399999999"
+			      },
+			      {
+			        "-address": " 900 SAN ANTONIO, Austin, TX",
+			        "-lat": "30.272139",
+			        "-lng": "-97.74633799999998"
+			      },
+			      {
+			        "-address": " 900 NUECES ST, Austin, TX",
+			        "-lat": "30.2724353",
+			        "-lng": "-97.74740639999999"
+			      },
+			      {
+			        "-address": " 500 COMAL, Austin, TX",
+			        "-lat": "30.2625474",
+			        "-lng": "-97.72700299999997"
+			      },
+			      {
+			        "-address": " 500 W 4TH STREET, Austin, TX",
+			        "-lat": "30.2651364",
+			        "-lng": "-97.73819040000001"
+			      },
+			      {
+			        "-address": " 300 NUECES, Austin, TX",
+			        "-lat": "30.2668455",
+			        "-lng": "-97.74948919999997"
+			      },
+			      {
+			        "-address": " 600 W 4TH, Austin, TX",
+			        "-lat": "30.267782",
+			        "-lng": "-97.74916310000003"
+			      },
+			      {
+			        "-address": " 400 W 16TH STREET, Austin, TX",
+			        "-lat": "30.2788514",
+			        "-lng": "-97.74265229999997"
+			      },
+			      {
+			        "-address": " 400 SABINE ST, Austin, TX",
+			        "-lat": "30.26436829999999",
+			        "-lng": "-97.73677829999997"
+			      },
+			      {
+			        "-address": " 1000 GUADALUPE, Austin, TX",
+			        "-lat": "30.2734081",
+			        "-lng": "-97.7452351"
+			      },
+			      {
+			        "-address": " 600 W21ST, Austin, TX",
+			        "-lat": "30.2839548",
+			        "-lng": "-97.74403510000002"
+			      },
+			      {
+			        "-address": " 300 N LAMAR, Austin, TX",
+			        "-lat": "30.2696444",
+			        "-lng": "-97.75584600000002"
+			      },
+			      {
+			        "-address": " 300 WEST 7TH, Austin, TX",
+			        "-lat": "30.2696583",
+			        "-lng": "-97.7448569"
+			      },
+			      {
+			        "-address": " 100 WEST 9TH STREET, Austin, TX",
+			        "-lat": "30.2708597",
+			        "-lng": "-97.74178"
+			      },
+			      {
+			        "-address": " 400 RIO GRANDE, Austin, TX",
+			        "-lat": "30.26811499999999",
+			        "-lng": "-97.75019020000002"
+			      },
+			      {
+			        "-address": " 600 DRISKILL ST, Austin, TX",
+			        "-lat": "30.261196",
+			        "-lng": "-97.7390062"
+			      },
+			      {
+			        "-address": " 1100 ROSE ST, Austin, TX",
+			        "-lat": "30.2706103",
+			        "-lng": "-97.75619460000001"
+			      },
+			      {
+			        "-address": " 600 W 6TH STREET, Austin, TX",
+			        "-lat": "30.2699663",
+			        "-lng": "-97.74852429999999"
+			      },
+			      {
+			        "-address": " 2500 NUECES ST, Austin, TX",
+			        "-lat": "30.2893954",
+			        "-lng": "-97.7433466"
+			      },
+			      {
+			        "-address": " 800 E DEAN KEETON ST, Austin, TX",
+			        "-lat": "30.2895394",
+			        "-lng": "-97.73062649999997"
+			      },
+			      {
+			        "-address": " 1600 W 5TH STREET, Austin, TX",
+			        "-lat": "30.2740802",
+			        "-lng": "-97.76335940000001"
+			      },
+			      {
+			        "-address": " 1100 EAST 6TH ST, Austin, TX",
+			        "-lat": "30.2648498",
+			        "-lng": "-97.73129489999997"
+			      },
+			      {
+			        "-address": " 2500 LEON, Austin, TX",
+			        "-lat": "30.289705",
+			        "-lng": "-97.74945810000003"
+			      },
+			      {
+			        "-address": " 500 E 10TH ST, Austin, TX",
+			        "-lat": "30.270525",
+			        "-lng": "-97.73685209999996"
+			      },
+			      {
+			        "-address": " 1500 EAST 6TH STREET, Austin, TX",
+			        "-lat": "30.2634308",
+			        "-lng": "-97.72726399999999"
+			      },
+			      {
+			        "-address": " 700 GUADALUPE, Austin, TX",
+			        "-lat": "30.2703758",
+			        "-lng": "-97.74614759999997"
+			      },
+			      {
+			        "-address": " 100 E 4TH STREET, Austin, TX",
+			        "-lat": "30.2661969",
+			        "-lng": "-97.74347510000001"
+			      },
+			      {
+			        "-address": " 200 E 7TH ST., Austin, TX",
+			        "-lat": "30.2684857",
+			        "-lng": "-97.74066700000003"
+			      },
+			      {
+			        "-address": " 500 W 25TH STREET, Austin, TX",
+			        "-lat": "30.2891282",
+			        "-lng": "-97.7422573"
+			      },
+			      {
+			        "-address": " 700 WEST AV, Austin, TX",
+			        "-lat": "30.2713041",
+			        "-lng": "-97.75057549999997"
+			      },
+			      {
+			        "-address": " 400 W 2ND ST, Austin, TX",
+			        "-lat": "30.2649521",
+			        "-lng": "-97.74735720000001"
+			      },
+			      {
+			        "-address": " 1900 PEARL, Austin, TX",
+			        "-lat": "30.2834473",
+			        "-lng": "-97.7469964"
+			      },
+			      {
+			        "-address": " 600 MEDINA, Austin, TX",
+			        "-lat": "30.2647702",
+			        "-lng": "-97.7315132"
+			      },
+			      {
+			        "-address": " 500 NAVASOTA, Austin, TX",
+			        "-lat": "30.263251",
+			        "-lng": "-97.72927700000002"
+			      },
+			      {
+			        "-address": " 200 E3RD, Austin, TX",
+			        "-lat": "30.264775",
+			        "-lng": "-97.74167219999998"
+			      },
+			      {
+			        "-address": " MACC LOT, Austin, TX",
+			        "-lat": "30.2581744",
+			        "-lng": "-97.7400399"
+			      },
+			      {
+			        "-address": " 1600 TOOMEY, Austin, TX",
+			        "-lat": "30.2639388",
+			        "-lng": "-97.76074890000001"
+			      },
+			      {
+			        "-address": " 2200 PEARL, Austin, TX",
+			        "-lat": "30.2856355",
+			        "-lng": "-97.7467206"
+			      },
+			      {
+			        "-address": " 3700 LAKE AUSTIN, Austin, TX",
+			        "-lat": "30.29404469999999",
+			        "-lng": "-97.78245509999999"
+			      },
+			      {
+			        "-address": " 3700 LAKE AUSTIN, Austin, TX",
+			        "-lat": "30.29404469999999",
+			        "-lng": "-97.78245509999999"
+			      },
+			      {
+			        "-address": " 1500 E 5TH ST, Austin, TX",
+			        "-lat": "30.2624883",
+			        "-lng": "-97.72794750000003"
+			      },
+			      {
+			        "-address": " 1500 E 5TH ST, Austin, TX",
+			        "-lat": "30.2624883",
+			        "-lng": "-97.72794750000003"
+			      },
+			      {
+			        "-address": " 1600 BUTLER PARK, Austin, TX",
+			        "-lat": "30.262695",
+			        "-lng": "-97.75923949999998"
+			      },
+			      {
+			        "-address": " 800 W 3RD STREET, Austin, TX",
+			        "-lat": "30.2679817",
+			        "-lng": "-97.7519107"
+			      },
+			      {
+			        "-address": " 3700 LAKE AUSTIN BLVD, Austin, TX",
+			        "-lat": "30.29404469999999",
+			        "-lng": "-97.78245509999999"
+			      },
+			      {
+			        "-address": " 1500 E 5TH ST, Austin, TX",
+			        "-lat": "30.2624883",
+			        "-lng": "-97.72794750000003"
+			      },
+			      {
+			        "-address": " 3800 LAKE AUSTIN BLVD, Austin, TX",
+			        "-lat": "30.29507",
+			        "-lng": "-97.78307699999999"
+			      },
+			      {
+			        "-address": " 1600 BUTLER PARK LOT, Austin, TX",
+			        "-lat": "30.262695",
+			        "-lng": "-97.75923949999998"
+			      },
+			      {
+			        "-address": " 3700 WALSH BOAT LANDING LOT, Austin, TX",
+			        "-lat": "30.2972034",
+			        "-lng": "-97.78382529999999"
+			      },
+			      {
+			        "-address": " 3700 BONNIE STREET, Austin, TX",
+			        "-lat": "30.2965101",
+			        "-lng": "-97.78189169999996"
+			      },
+			      {
+			        "-address": " 3700 BONNIE STREET, Austin, TX",
+			        "-lat": "30.2965101",
+			        "-lng": "-97.78189169999996"
+			      },
+			      {
+			        "-address": " 3800 LAKE AUSTIN BLVD, Austin, TX",
+			        "-lat": "30.29507",
+			        "-lng": "-97.78307699999999"
+			      },
+			      {
+			        "-address": " 3800 LAKE AUSTIN BLVD, Austin, TX",
+			        "-lat": "30.29507",
+			        "-lng": "-97.78307699999999"
+			      }
+			    ]
+			  }};
+
+		var meter_15_latlng = [];
+		meter_data_2015.markers.marker.forEach(function(location) {
+			meter_15_latlng.push([eval(location["-lat"]), eval(location["-lng"])]);
+		});
+		// console.log(JSON.stringify(meter_15_latlng));
+		// meter_15_latlng = an array of arrays of the form:
+		// 				     [ [lat,lng], [lat,lng], ..., [lat,lng] ];
+		var meter_17_latlng = [];
+		meter_data_2017.markers.marker.forEach(function(location) {
+			meter_17_latlng.push([eval(location["-lat"]), eval(location["-lng"])]);
+		});
+		// console.log(JSON.stringify(meter_17_latlng));
+		// meter_17_latlng = an array of arrays of the form:
+		// 				     [ [lat,lng], [lat,lng], ..., [lat,lng] ];
+		
+		var map, overlay, canvas, context, geocoder;
+
+		function initMap() {
+			var mapOptions = {
+				center: new google.maps.LatLng(30.27 ,-97.94),
+				zoom: 13.85,
+				center: {lat: 30.276, lng: -97.741},
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+			var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+			overlay = new google.maps.OverlayView();
+			overlay.draw = function(){};
+			overlay.setMap(map);
+
+			canvas = document.createElement('canvas');
+			canvas.style.position = 'absolute';
+			canvas.width = '750';
+			canvas.height = '650';
+			context = canvas.getContext('2d');
+	        
+	        var triangleCoords = [
+          		{lat: 30.261313, lng: -97.736956},
+          		{lat: 30.266577, lng: -97.756054},
+          		{lat: 30.279660, lng: -97.750389},
+          		{lat: 30.278965, lng: -97.747406},
+          		{lat: 30.282819, lng: -97.746054},
+          		{lat: 30.283586, lng: -97.752290},
+          		{lat: 30.286990, lng: -97.753062},
+          		{lat: 30.296058, lng: -97.748960},
+          		{lat: 30.294617, lng: -97.740974},
+          		{lat: 30.291972, lng: -97.741193},
+          		{lat: 30.287929, lng: -97.724402},
+          		{lat: 30.266558, lng: -97.733820},
+          		{lat: 30.262555, lng: -97.722189},
+          		{lat: 30.257198, lng: -97.724764},
+          		{lat: 30.261313, lng: -97.736956},
+        	];
+
+        	var bermudaTriangle = new google.maps.Polygon({
+          		paths: triangleCoords,
+          		strokeColor: '#FF0222',
+          		strokeOpacity: 0.8,
+          		strokeWeight: 1,
+          		fillColor: '#FF0000',
+          		fillOpacity: 0.1
+        	});
+        	bermudaTriangle.setMap(map);
+      }		
+	</script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJraDhNwsouHdU_ixoEKZ4r8ep64oQpC4&callback=initMap"async defer>
+	</script>
+
+
+	<div id="Accessing Data">
+	<h2>All Traffic Violations</h2>
+	<button type="button" 
+			onclick="getData(2015, 'scrolling-text-box', 'display')">
+			Display 2015 Data
+	</button>
+	<button type="button" 
+			onclick="getData(2017, 'scrolling-text-box', 'display')">
+			Display 2017 Data
+	</button>
+	</div>
+
+	<div id="scrolling-text-box">
+	</div> 
+
+	<div id="Parsing Data">
+	<h2>Finding Parking Violations</h2>
+	<button type="button" 
+			onclick="getData(2015, 'Parking Violations 2015', 'count-parking')">
+			Display 2015 Parking Violations
+	</button>
+	<button type="button" 
+		onclick="getData(2017, 'Parking Violations 2017', 'count-parking')">
+		Display 2017 Parking Violations
+	</button>
+
+	<div id="Parking Violations 2015"></div>
+	<div id="Parking Violations 2017"></div>
+
+	<h2>Finding Meter Violations</h2>
+	<button type="button" 
+			onclick="getData(2015, 'Meter Violations 2015', 'count-meter')">
+			Display 2015 Meter Violations
+	</button>
+	<button type="button" 
+		onclick="getData(2017, 'Meter Violations 2017', 'count-meter')">
+		Display 2017 Meter Violations
+	</button>
+
+	<div id="Meter Violations 2015"></div>
+	<div id="Meter Violations 2017"></div>
+
+	<script>
+		function getData(year, displayDivID, task) {
+			console.log("Button clicked");
+			var dataDict = {2015:"https://data.austintexas.gov/resource/t6bu-kybx.json",
+							2017:"https://data.austintexas.gov/resource/y5cf-fbh5.json"};
+		
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var raw_data = this.responseText;
+					var data = eval(this.responseText);
+					if (task=='display'){
+						console.log("display");
+						displayData(raw_data, displayDivID);
+					}
+					else if (task=='count-parking') {  //count parking violations
+						console.log("count-parking");
+						count(data, displayDivID, 'parking');
+					}
+					else if (task=='count-meter') { //count meter violations
+						console.log("count-meter");
+						count(data, displayDivID, 'meter');
+					}
+					else {
+						console.log("Invalid input type");
+					}
+				}
+			};
+			xhttp.open("GET", dataDict[year], true);
+			xhttp.send();
+		}
+
+		function displayData(data, displayDivID) {
+			document.getElementById(displayDivID).innerHTML = data;
+		}
+
+		function count(data, displayDivID, type) {
+			console.log("counting "+type);
+
+			var i = 1;
+			var meter_violation_types = ["parking - expired meter", "parking-expired meter", "expired meter", "parking - pay station receipt not displayed", "parking-pay station receipt not displayed", "pay station receipt not displayed", "parking - expired pay station receipt", "parking-expired pay station receipt", "expired pay station receipt"];
+
+			data.forEach(function(violation) {
+				if (violation.offense_case_type==="PK") {
+					if (type==="parking") {
+						console.log("Parking violation "+i+": "+violation.offense_charge_description);
+						console.log(violation.offense_cross_street, violation.offense_street_name);
+						i++;
+					}
+					if (type==="meter") {
+						if (meter_violation_types.includes(violation.offense_charge_description.toLowerCase())) {
+							console.log("Meter violation "+i+": "+violation.offense_charge_description);
+							console.log(violation.offense_cross_street, violation.offense_street_name);
+							i++;
+						}
+					}
+				}
+
+				var year = displayDivID.slice(-4,);
+				document.getElementById(displayDivID).innerHTML = "Total "+year+" "+type+ " violations = "+i;
+			});
+		}
+	</script>
+</body>
+
+</html>
