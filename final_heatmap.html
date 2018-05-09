@@ -69,6 +69,8 @@
       <button onclick="initMap('None')">Clear</button>
     </div>
 
+    <div id="numbers"></div>
+
     <div id="map"></div>
     <script>
       var meter_data_2015 = {
@@ -3789,8 +3791,8 @@
       function initMap(dataToDisplay="None") {
         var mapOptions = {
           center: new google.maps.LatLng(30.27 ,-97.94), //30.27 ,-97.94
-          zoom: 13.87,
-          center: {lat: 30.270, lng: -97.741}, //{lat: 30.276, lng: -97.741},
+          zoom: 13.85,
+          center: {lat: 30.275, lng: -97.741}, //{lat: 30.276, lng: -97.741},
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -3851,6 +3853,12 @@
           data: getPoints(dataToDisplay),
           map: map
         });
+
+        var reportString = "Total number meter of violations: "+ dataToDisplay.length;
+        document.getElementById("numbers").style.color="blue";
+        document.getElementById("numbers").style.fontSize="large";
+        document.getElementById("numbers").innerHTML = reportString;
+        console.log(reportString);
         }
 
       function displayZone(map) {
