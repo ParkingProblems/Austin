@@ -9,39 +9,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
       #map {
         width:  95%;
         height: 80%;
       }
-
       html, body {
         height: 100%;
         margin: 0;
         padding: 2px;
-      }
-      #floating-panel {
-        position: absolute;
-        top: 50px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-      #floating-panel {
-        background-color: #edaa7d;
-        border: 1px solid #999;
-        left: 15%;
-        padding: 4px;
-        position: absolute;
-        top: 10px;
-        z-index: 5;
       }
     </style>
   </head>
@@ -51,14 +26,7 @@
       <h2>Parking Meter Violations: Before and After Pay-by-App</h2>
       <h4>Team TBD - Jocelyn Lorrey and Deanna Delgado</h4>
     </div>
-<!--     <div class="btn-group">
-      <button type="button" class="btn btn-primary" 
-        button onclick="initMap('None')">Clear</button>
-      <button type="button" class="btn btn-primary" 
-        button onclick="initMap(meter_15_latlng)">2015 Meter Violations</button>
-      <button type="button" class="btn btn-primary" 
-        button onclick="initMap(meter_17_latlng)">2017 Meter Violations</button>
-    </div> -->
+
     <div id = "Buttons" >
       <button onclick="initMap(meter_15_latlng)">Show heatmap 2015</button>
       <button onclick="initMap(meter_17_latlng)">Show heatmap 2017</button>
@@ -3801,8 +3769,14 @@
 
         if (dataToDisplay==="None") {
           console.log("No heatmap data to display");
+          document.getElementById("numbers").innerHTML = '';
         }
         else {
+          var reportString = "Total number meter of violations: "+ dataToDisplay.length;
+          document.getElementById("numbers").style.color="blue";
+          document.getElementById("numbers").style.fontSize="large";
+          document.getElementById("numbers").innerHTML = reportString;
+          
           makeHeatmap(map, dataToDisplay);
           changeGradient();
           changeRadius();
@@ -3853,13 +3827,7 @@
           data: getPoints(dataToDisplay),
           map: map
         });
-
-        var reportString = "Total number meter of violations: "+ dataToDisplay.length;
-        document.getElementById("numbers").style.color="blue";
-        document.getElementById("numbers").style.fontSize="large";
-        document.getElementById("numbers").innerHTML = reportString;
-        console.log(reportString);
-        }
+      }
 
       function displayZone(map) {
         overlay = new google.maps.OverlayView();
